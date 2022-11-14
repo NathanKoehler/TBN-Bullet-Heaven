@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://qhxcb3r5q55r"]
+
+[node name="Magic Bullet" type="Node2D"]
+
+[node name="Sprite2d" type="Sprite2D" parent="."]
+
+[node name="Area2d" type="Area2D" parent="."]
+
+[node name="CollisionShape2d" type="CollisionShape2D" parent="Area2d"]

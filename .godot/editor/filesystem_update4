@@ -1,3 +1,7 @@
-res://bullethaven.tscn
-res://enemies/enemy.tscn
 res://player/player.tscn
+res://enemies/enemy.tscn
+res://enemies/enemy.gd
+res://bullethaven.tscn
+res://magic_bullet.tscn
+res://player/CharacterBody2d.gd
+res://enemies/Hitbox.gd

@@ -84,7 +84,7 @@ current = true
 zoom = Vector2(1.5, 1.5)
 
 [node name="enemy" parent="." instance=ExtResource("5_jgsrr")]
-visible = false
+position = Vector2(-67, -17)
 
 [node name="Enemy Spawn Timer" type="Timer" parent="."]
 wait_time = 1.5

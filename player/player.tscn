@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bs330o7j6hvvw"]
+[gd_scene load_steps=13 format=3 uid="uid://bs330o7j6hvvw"]
 
 [ext_resource type="Script" path="res://player/CharacterBody2d.gd" id="2_j4x2b"]
 [ext_resource type="Texture2D" uid="uid://dvgjvcmwosjji" path="res://player/wizzard_f_idle_anim_f0.png" id="2_n70f6"]
@@ -23,10 +23,41 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ar4q"]
+size = Vector2(17, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wx0xk"]
+
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("2_j4x2b")
 
 [node name="AnimatedSprite2d" type="AnimatedSprite2D" parent="."]
 frames = SubResource("SpriteFrames_3nn0t")
 animation = &"idle"
 playing = true
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2d" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-0.5, 4.5)
+shape = SubResource("RectangleShape2D_1ar4q")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape2d" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-0.5, 4.5)
+shape = SubResource("RectangleShape2D_1ar4q")
+
+[node name="CollisionShape2d" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_wx0xk")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

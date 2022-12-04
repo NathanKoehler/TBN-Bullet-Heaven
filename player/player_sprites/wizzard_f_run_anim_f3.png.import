@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5a614v0wevk1"
-path="res://.godot/imported/wizzard_f_run_anim_f2.png-ad501e178f93c127969bd72f53000f39.ctex"
+uid="uid://dgy5gca8kok2m"
+path="res://.godot/imported/wizzard_f_run_anim_f3.png-38eb5e88b12cb39afda1ded101a7ac57.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/wizzard_f_run_anim_f2.png"
-dest_files=["res://.godot/imported/wizzard_f_run_anim_f2.png-ad501e178f93c127969bd72f53000f39.ctex"]
+source_file="res://player/player_sprites/wizzard_f_run_anim_f3.png"
+dest_files=["res://.godot/imported/wizzard_f_run_anim_f3.png-38eb5e88b12cb39afda1ded101a7ac57.ctex"]
 
 [params]
 

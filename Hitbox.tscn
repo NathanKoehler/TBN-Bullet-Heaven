@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dklg66lqw2ckt"]
+
+[ext_resource type="Script" path="res://enemies/Hitbox.gd" id="1_748on"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lpn0c"]
+size = Vector2(20, 8)
+
+[node name="Hitbox" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+monitoring = false
+script = ExtResource("1_748on")
+
+[node name="CollisionShape2d" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lpn0c")

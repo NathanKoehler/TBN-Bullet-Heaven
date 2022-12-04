@@ -1,13 +1,43 @@
 extends CharacterBody2D
 
+signal hp_changed(new_hp)
+signal died
 
-@export var speed = 100
+
+@export var speed = 100 : 
+	set(value):
+		speed = value 
+	get:
+		return speed
 @export var currPosition = position
-@export var hp_max = 100
-@export var hp = 100
-@export var defense = 5
-var level = 0
-var xp = 0
+@export var hp_max = 100 : 
+	set(value):
+		hp_max = value
+	get:
+		return hp_max
+@export var hp = 100 : 
+	set(value):
+		if value != hp:
+			hp = clamp(value, 0, hp_max)
+			emit_signal("hp_changed", hp)
+			if hp == 0:
+				emit_signal("died")
+	get:
+		return hp
+@export var defense = 5 : 
+	set(value):
+		defense = value
+	get:
+		return defense
+@export var level = 0 : 
+	set(value):
+		level = value
+	get:
+		return level
+@export var xp = 0
+
+#Spell references
+@export var magic_bullet = preload("res://player/player_spells/magic_bullet.tscn")
 
 
 
@@ -47,3 +77,24 @@ func receive_damage(base_damage):
 
 func _on_hurtbox_area_entered(hitbox):
 	receive_damage(hitbox.damage)
+
+
+
+func _on_player_died():
+	print("player has died")
+	
+
+# spell functions
+func shoot_magic_bullet():
+	if magic_bullet:
+		var mb = magic_bullet.instantiate()
+		get_tree().current_scene.add_child(mb)
+		#add_child(mb)
+		mb.global_position = self.global_position
+		
+		var mb_rotation = self.global_position.direction_to(get_global_mouse_position()).angle()
+		mb.rotation = mb_rotation
+
+
+func _on_magic_bullet_timer_timeout():
+	shoot_magic_bullet()

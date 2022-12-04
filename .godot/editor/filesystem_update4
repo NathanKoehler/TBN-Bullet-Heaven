@@ -1,7 +1,10 @@
 res://player/player.tscn
+res://magic_bullet.gd
+res://level/bullethaven.tscn
 res://enemies/enemy.tscn
-res://enemies/enemy.gd
-res://bullethaven.tscn
-res://magic_bullet.tscn
+res://player/player_spells/magic_bullet.tscn
 res://player/CharacterBody2d.gd
+res://Hitbox.tscn
+res://player/player_spells/magic_bullet.gd
+res://enemies/enemy.gd
 res://enemies/Hitbox.gd

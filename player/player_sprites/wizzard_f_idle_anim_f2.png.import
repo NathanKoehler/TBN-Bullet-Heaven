@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ca3fmfv5t7xh7"
-path="res://.godot/imported/wizzard_f_idle_anim_f1.png-be6755397ca92fc6dcf7799e95bba78c.ctex"
+uid="uid://ljuh5fbpfn8b"
+path="res://.godot/imported/wizzard_f_idle_anim_f2.png-0deac695537dfb70dc67c1299b861403.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/wizzard_f_idle_anim_f1.png"
-dest_files=["res://.godot/imported/wizzard_f_idle_anim_f1.png-be6755397ca92fc6dcf7799e95bba78c.ctex"]
+source_file="res://player/player_sprites/wizzard_f_idle_anim_f2.png"
+dest_files=["res://.godot/imported/wizzard_f_idle_anim_f2.png-0deac695537dfb70dc67c1299b861403.ctex"]
 
 [params]
 

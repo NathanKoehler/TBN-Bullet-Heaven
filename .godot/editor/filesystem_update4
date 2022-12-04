@@ -8,3 +8,4 @@ res://Hitbox.tscn
 res://player/player_spells/magic_bullet.gd
 res://enemies/enemy.gd
 res://enemies/Hitbox.gd
+res://level/arena.gd

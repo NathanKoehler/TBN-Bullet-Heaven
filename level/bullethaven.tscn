@@ -82,8 +82,8 @@ layer_0/tile_data = PackedInt32Array(-786464, 131072, 5, -720928, 131072, 5, -65
 current = true
 zoom = Vector2(1.5, 1.5)
 
-[node name="Enemy Spawn Timer" type="Timer" parent="."]
-wait_time = 1.5
+[node name="Skeleton Spawn Timer" type="Timer" parent="."]
+wait_time = 2.0
 autostart = true
 
-[connection signal="timeout" from="Enemy Spawn Timer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="Skeleton Spawn Timer" to="." method="_on_skeleton_spawn_timer_timeout"]

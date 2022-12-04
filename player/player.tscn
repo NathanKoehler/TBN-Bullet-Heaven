@@ -63,7 +63,6 @@ visible = false
 shape = SubResource("RectangleShape2D_wx0xk")
 
 [node name="magic_bullet_timer" type="Timer" parent="."]
-wait_time = 0.5
 autostart = true
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

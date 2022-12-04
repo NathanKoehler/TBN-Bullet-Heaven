@@ -2,7 +2,7 @@ extends Node2D
 
 var rng = RandomNumberGenerator.new()
 var camera2d
-var instance
+
 var skeletons = preload("res://enemies/enemy.tscn")
 const x = 400
 const y = 400
@@ -23,22 +23,24 @@ func _process(delta):
 
 
 
-func _on_enemy_spawn_timer_timeout():
-	instance = skeletons.instantiate()
-	add_child(instance)
+func _on_skeleton_spawn_timer_timeout():
+	var skeles = skeletons.instantiate()
+	add_child(skeles)
 	var center = camera2d.get_target_position()
-	instance.position = center
+	skeles.position = center
 	var direction = rng.randi_range(0,3)
 	if direction == 0: # up
-		instance.position.x += rng.randf_range(-x, x)
-		instance.position.y -= y
+		skeles.position.x += rng.randf_range(-x, x)
+		skeles.position.y -= y
 	elif direction == 1: # down
-		instance.position.x += rng.randf_range(-x, x)
-		instance.position.y += y
+		skeles.position.x += rng.randf_range(-x, x)
+		skeles.position.y += y
 	elif direction == 2: # left
-		instance.position.x -= x
-		instance.position.y += rng.randf_range(-y, y)
+		skeles.position.x -= x
+		skeles.position.y += rng.randf_range(-y, y)
 	elif direction == 3: # right
-		instance.position.x += x
-		instance.position.y += rng.randf_range(-y, y)
+		skeles.position.x += x
+		skeles.position.y += rng.randf_range(-y, y)
 	
+
+

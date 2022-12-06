@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwk0mgy4spdda"]
+
+[ext_resource type="Script" path="res://SoundPlayer.gd" id="1_o7bo8"]
+[ext_resource type="AudioStream" uid="uid://b3ovbonj5auxs" path="res://sounds/effects/Retro-8-bit-damage.mp3" id="2_ts4d3"]
+
+[node name="SoundPlayer" type="Node2D"]
+script = ExtResource("1_o7bo8")
+
+[node name="AudioPlayers" type="Node2D" parent="."]
+
+[node name="EnemyHitSound" type="AudioStreamPlayer" parent="AudioPlayers"]
+stream = ExtResource("2_ts4d3")
+volume_db = -30.532
+max_polyphony = 20

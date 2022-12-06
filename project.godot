@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.0", "Vulkan Clustered")
 [autoload]
 
 Global="*res://global.gd"
+SoundPlayer="*res://sounds/sound_player.tscn"
 
 [layer_names]
 

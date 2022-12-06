@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dojd5t8ah3nrv"]
+[gd_scene load_steps=9 format=3 uid="uid://dtsrhhlwucwp3"]
 
 [ext_resource type="Script" path="res://level/arena.gd" id="1_ypp58"]
 [ext_resource type="Texture2D" uid="uid://bb1uch5uhk5b4" path="res://tilesets/plains.png" id="2_q35ud"]
 [ext_resource type="Texture2D" uid="uid://64fp72xepc58" path="res://tilesets/decor_16x16.png" id="3_7lbng"]
 [ext_resource type="PackedScene" uid="uid://cbq55pc77wj7h" path="res://player/player.tscn" id="4_x0qla"]
+[ext_resource type="AudioStream" uid="uid://due4erwxmvf56" path="res://sounds/music/ES_8-bit Sheriff - Wave Saver.mp3" id="5_b0c8w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5wfrw"]
 texture = ExtResource("2_q35ud")
@@ -85,5 +86,10 @@ zoom = Vector2(1.5, 1.5)
 [node name="Skeleton Spawn Timer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_b0c8w")
+volume_db = -40.0
+autoplay = true
 
 [connection signal="timeout" from="Skeleton Spawn Timer" to="." method="_on_skeleton_spawn_timer_timeout"]

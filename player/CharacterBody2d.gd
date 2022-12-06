@@ -36,7 +36,9 @@ signal died
 		return level
 @export var xp = 0
 
-#Spell references
+#Scene references
+@export var effect_hit = preload("res://effects/hit_effect.tscn")
+@export var effect_death = preload("res://effects/death_effect.tscn")
 @export var magic_bullet = preload("res://player/player_spells/magic_bullet.tscn")
 
 
@@ -98,3 +100,9 @@ func shoot_magic_bullet():
 
 func _on_magic_bullet_timer_timeout():
 	shoot_magic_bullet()
+
+func spawn_effect(EFFECT: PackedScene, effect_pos: Vector2 = global_position):
+	if EFFECT:
+		var effect = EFFECT.instantiate()
+		get_tree().current_scene.add_child(effect)
+		effect.global_position = effect_pos

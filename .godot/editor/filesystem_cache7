@@ -1,13 +1,18 @@
 0b7126e0c6e86d3ec295a72f5aa6e0bd
-::res://::1670131347
+::res://::1670361739
 global.gd::GDScript::-1::1667718013::0::1::::<>Node<>::
-Hitbox.tscn::PackedScene::7884279950296068199::1670130638::0::1::::<><>::res://enemies/Hitbox.gd
-magic_bullet.gd::GDScript::-1::1670131331::0::1::::<>Node2D<>::
+Hitbox.tscn::PackedScene::7884279950296068199::1670131563::0::1::::<><>::res://enemies/Hitbox.gd
 README.md::TextFile::-1::1667172791::0::1::::<><>::
-::res://enemies/::1670131466
-enemy.gd::GDScript::-1::1670114775::0::1::::<>CharacterBody2D<>::
-enemy.tscn::PackedScene::3944356665291485470::1670131466::0::1::::<><>::res://enemies/enemy.gd<>uid://da05rodc622k8<>uid://5hfqbq5cm5bp<>uid://bifxpjxfcpk0e<>uid://cskry3n62bl0k<>uid://dklg66lqw2ckt
-Hitbox.gd::GDScript::-1::1670128985::0::1::::<>Area2D<>::
+::res://effects/::1670362119
+death_effect.tscn::PackedScene::3682392392432334252::1670362119::0::1::::<><>::
+hit_effect.tscn::PackedScene::2241549135972627641::1670362119::0::1::::<><>::uid://dc1m4ibrxcr1x
+::res://effects/effect sprites/::1670344655
+enemy_afterdead_explosion_anim_spritesheet.png::CompressedTexture2D::8356828785969212150::1670344620::1670344620::1::::<><>::
+hit_effect_anim_spritesheet.png::CompressedTexture2D::7354094374432204335::1670344620::1670344655::1::::<><>::
+::res://enemies/::1670362119
+enemy.gd::GDScript::-1::1670362119::0::1::::<>CharacterBody2D<>::
+enemy.tscn::PackedScene::3944356665291485470::1670362119::0::1::::<><>::res://enemies/enemy.gd<>uid://da05rodc622k8<>uid://5hfqbq5cm5bp<>uid://bifxpjxfcpk0e<>uid://cskry3n62bl0k<>uid://dklg66lqw2ckt<>uid://b3ovbonj5auxs
+Hitbox.gd::GDScript::-1::1670132243::0::1::::<>Area2D<>::
 spawner.gd::GDScript::-1::1667718013::0::1::::<>Node2D<>::
 spawner.tscn::PackedScene::7923861925315639289::1665689611::0::1::::<><>::res://enemies/spawner.gd
 ::res://enemies/skeleton/::1665372271
@@ -15,14 +20,15 @@ skelet_run_anim_f0.png::CompressedTexture2D::7212724103304880041::1665372264::16
 skelet_run_anim_f1.png::CompressedTexture2D::2120448189692163177::1665372264::1665372271::1::::<><>::
 skelet_run_anim_f2.png::CompressedTexture2D::2959677107780965750::1665372264::1665372271::1::::<><>::
 skelet_run_anim_f3.png::CompressedTexture2D::6057960870523023712::1665372264::1665372271::1::::<><>::
-::res://level/::1670131466
-arena.gd::GDScript::-1::1667796799::0::1::::<>Node2D<>::
-bullethaven.tscn::PackedScene::8160722035526409755::1670131466::0::1::::<><>::res://level/arena.gd<>uid://bb1uch5uhk5b4<>uid://64fp72xepc58<>uid://cbq55pc77wj7h
-::res://player/::1670131466
-CharacterBody2d.gd::GDScript::-1::1670131435::0::1::::<>CharacterBody2D<>::
-player.tscn::PackedScene::4877936131126765211::1670131466::0::1::::<><>::res://player/CharacterBody2d.gd<>uid://dvgjvcmwosjji<>uid://ca3fmfv5t7xh7<>uid://ljuh5fbpfn8b<>uid://da7jlqqkkqipq<>uid://dvf6k75rnnfve<>uid://fti43gditrpu<>uid://b5a614v0wevk1<>uid://dgy5gca8kok2m
-::res://player/player_spells/::1670131466
-magic_bullet.tscn::PackedScene::4675991263876704138::1670131554::0::1::::<><>::uid://dklg66lqw2ckt<>res://magic_bullet.gd<>uid://4i64c1sshwj4
+::res://level/::1670362119
+arena.gd::GDScript::-1::1670360597::0::1::::<>Node2D<>::
+bullethaven.tscn::PackedScene::8531053954892068802::1670362119::0::1::::<><>::res://level/arena.gd<>uid://bb1uch5uhk5b4<>uid://64fp72xepc58<>uid://cbq55pc77wj7h<>uid://due4erwxmvf56
+::res://player/::1670362119
+CharacterBody2d.gd::GDScript::-1::1670351117::0::1::::<>CharacterBody2D<>::
+player.tscn::PackedScene::4877936131126765211::1670362119::0::1::::<><>::res://player/CharacterBody2d.gd<>uid://dvgjvcmwosjji<>uid://ca3fmfv5t7xh7<>uid://ljuh5fbpfn8b<>uid://da7jlqqkkqipq<>uid://dvf6k75rnnfve<>uid://fti43gditrpu<>uid://b5a614v0wevk1<>uid://dgy5gca8kok2m
+::res://player/player_spells/::1670362119
+magic_bullet.gd::GDScript::-1::1670362064::0::1::::<>Area2D<>::
+magic_bullet.tscn::PackedScene::5989979626001472566::1670362119::0::1::::<><>::uid://dklg66lqw2ckt<>res://player/player_spells/magic_bullet.gd<>uid://4i64c1sshwj4
 ::res://player/player_sprites/::1670131331
 wizzard_f_idle_anim_f0.png::CompressedTexture2D::8646198113212602382::1665364033::1670131331::1::::<><>::
 wizzard_f_idle_anim_f1.png::CompressedTexture2D::4830969255437948058::1665364033::1670131331::1::::<><>::
@@ -51,6 +57,11 @@ Shine.png::CompressedTexture2D::5213716000823242120::1668677784::1668677784::1::
 ::res://projectiles/Spell Pack/Ice/::1668677784
 Ball of ice.png::CompressedTexture2D::8152598285335388264::1668677784::1668677784::1::::<><>::
 Burst of ice.png::CompressedTexture2D::8340781461600245069::1668677784::1668677784::1::::<><>::
+::res://sounds/::1670359030
+::res://sounds/effects/::1670359056
+Retro-8-bit-damage.mp3::AudioStreamMP3::4381887192615237552::1670359056::1670362278::1::::<><>::
+::res://sounds/music/::1670359021
+ES_8-bit Sheriff - Wave Saver.mp3::AudioStreamMP3::8573065298766569591::1670358068::1670359021::1::::<><>::
 ::res://tilesets/::1665359422
 decor_8x8.png::CompressedTexture2D::7042135229262758961::1665357290::1665357290::1::::<><>::
 decor_16x16.png::CompressedTexture2D::2236053203027020029::1665357290::1665357290::1::::<><>::

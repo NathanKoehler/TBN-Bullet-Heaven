@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bsp1p2gseuclo"]
+
+[node name="HitEffect" type="Sprite2D" groups=["Effects"]]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

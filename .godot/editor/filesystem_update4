@@ -8,3 +8,5 @@ res://effects/death_effect.tscn
 res://effects/hit_effect.tscn
 res://SoundPlayer.gd
 res://sounds/sound_player.tscn
+res://level/arena.gd
+res://enemies/zombie/zombie.tscn

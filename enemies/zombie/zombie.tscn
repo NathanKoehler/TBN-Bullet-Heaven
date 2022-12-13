@@ -1,3 +1,51 @@
-[gd_scene format=3 uid="uid://nbhpwwwasgih"]
+[gd_scene load_steps=10 format=3 uid="uid://nbhpwwwasgih"]
 
-[node name="zombie" type="CharacterBody2D"]
+[ext_resource type="Script" path="res://enemies/zombie/zombie.gd" id="1_h5y5c"]
+[ext_resource type="Texture2D" uid="uid://cevxfgswdfxk4" path="res://enemies/zombie/big_zombie_run_anim_f0.png" id="2_7nofm"]
+[ext_resource type="Texture2D" uid="uid://b87a38sikan5" path="res://enemies/zombie/big_zombie_run_anim_f1.png" id="3_5feyk"]
+[ext_resource type="Texture2D" uid="uid://ck0ptfr5j4qxf" path="res://enemies/zombie/big_zombie_run_anim_f2.png" id="4_6gc3m"]
+[ext_resource type="Texture2D" uid="uid://dih8es6v3mjy5" path="res://enemies/zombie/big_zombie_run_anim_f3.png" id="5_3v7om"]
+[ext_resource type="PackedScene" uid="uid://dklg66lqw2ckt" path="res://Hitbox.tscn" id="6_wb6ao"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bwf6w"]
+animations = [{
+"frames": [ExtResource("2_7nofm"), ExtResource("3_5feyk"), ExtResource("4_6gc3m"), ExtResource("5_3v7om")],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d2h6b"]
+size = Vector2(25, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oqgsc"]
+
+[node name="zombie" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_h5y5c")
+
+[node name="AnimatedSprite2d" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, -5)
+frames = SubResource("SpriteFrames_bwf6w")
+playing = true
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape2d" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-1, -4)
+shape = SubResource("RectangleShape2D_d2h6b")
+
+[node name="CollisionShape2d" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_oqgsc")
+
+[node name="Hitbox" parent="." instance=ExtResource("6_wb6ao")]
+position = Vector2(-1, 2)
+
+[node name="notifier" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

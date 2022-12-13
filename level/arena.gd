@@ -4,6 +4,7 @@ var rng = RandomNumberGenerator.new()
 var camera2d
 
 var skeletons = preload("res://enemies/enemy.tscn")
+var zombies = preload("res://enemies/zombie/zombie.tscn")
 const x = 400
 const y = 400
 
@@ -44,3 +45,24 @@ func _on_skeleton_spawn_timer_timeout():
 	
 
 
+
+
+func _on_zombie_spawn_timer_timeout():
+	var zomb = zombies.instantiate()
+	add_child(zomb)
+	var center = camera2d.get_target_position()
+	zomb.position = center
+	var direction = rng.randi_range(0,3)
+	if direction == 0: # up
+		zomb.position.x += rng.randf_range(-x, x)
+		zomb.position.y -= y
+	elif direction == 1: # down
+		zomb.position.x += rng.randf_range(-x, x)
+		zomb.position.y += y
+	elif direction == 2: # left
+		zomb.position.x -= x
+		zomb.position.y += rng.randf_range(-y, y)
+	elif direction == 3: # right
+		zomb.position.x += x
+		zomb.position.y += rng.randf_range(-y, y)
+	

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dih8es6v3mjy5"
-path="res://.godot/imported/big_zombie_run_anim_f3.png-7ffd5e748ffc95c71c1271b0636d60a4.ctex"
+uid="uid://cj064q0xjip1b"
+path="res://.godot/imported/Holy VFX 02.png-b93fec6936c5c0d52248948c75cef55a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemies/big_zombie_run_anim_f3.png"
-dest_files=["res://.godot/imported/big_zombie_run_anim_f3.png-7ffd5e748ffc95c71c1271b0636d60a4.ctex"]
+source_file="res://projectiles/Spell Pack/Holy VFX 02.png"
+dest_files=["res://.godot/imported/Holy VFX 02.png-b93fec6936c5c0d52248948c75cef55a.ctex"]
 
 [params]
 

@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 
-@export var hp = 10
-@export var hp_max = 10
+@export var hp = 20
+@export var hp_max = 20
 @export var defense = 0
 @export var level = 0
 @export var speed = .5
@@ -61,6 +61,7 @@ func receive_knockback(damage_source_pos: Vector2, received_damage: int):
 
 
 func _on_hurtbox_area_entered(hitbox):
+	print("hit")
 	var actual_damage = receive_damage(hitbox.damage)
 	
 	

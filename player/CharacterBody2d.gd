@@ -40,12 +40,15 @@ signal died
 @export var effect_hit = preload("res://effects/hit_effect.tscn")
 @export var effect_death = preload("res://effects/death_effect.tscn")
 @export var magic_bullet = preload("res://player/player_spells/magic_bullet.tscn")
+@export var lightning = preload("res://player/player_spells/lightning.tscn")
 
+#general vars
+var rng = RandomNumberGenerator.new()
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	rng.randomize()
 
 
 func _process(delta):
@@ -106,3 +109,19 @@ func spawn_effect(EFFECT: PackedScene, effect_pos: Vector2 = global_position):
 		var effect = EFFECT.instantiate()
 		get_tree().current_scene.add_child(effect)
 		effect.global_position = effect_pos
+
+func shoot_lightning(enemy_array):
+	if lightning:
+		for enemy in enemy_array:
+			if enemy.get_node("notifier").is_on_screen():
+				var bolt = lightning.instantiate()
+				get_tree().current_scene.add_child(bolt)
+				bolt.global_position = enemy.global_position
+				break
+		
+		
+
+func _on_lightning_timer_timeout():
+	var enemy_array = get_tree().get_nodes_in_group("enemy")
+	if enemy_array.size() > 0:
+		shoot_lightning(enemy_array)

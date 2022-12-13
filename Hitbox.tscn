@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://enemies/Hitbox.gd" id="1_748on"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lpn0c"]
-size = Vector2(20, 8)
+size = Vector2(6, 5.5)
 
 [node name="Hitbox" type="Area2D"]
 collision_layer = 4
@@ -12,4 +12,5 @@ monitoring = false
 script = ExtResource("1_748on")
 
 [node name="CollisionShape2d" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_lpn0c")

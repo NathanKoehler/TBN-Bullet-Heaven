@@ -1,9 +1,7 @@
-res://Lightning.gd
-res://player/CharacterBody2d.gd
-res://player/player.tscn
-res://player/player_spells/magic_bullet.gd
 res://level/bullethaven.tscn
+res://player/player_spells/magic_bullet.gd
 res://enemies/enemy.tscn
+res://player/player.tscn
 res://player/player_spells/lightning.tscn
 res://player/player_spells/magic_bullet.tscn
 res://effects/death_effect.tscn
@@ -11,3 +9,7 @@ res://effects/hit_effect.tscn
 res://sounds/sound_player.tscn
 res://enemies/zombie/zombie.tscn
 res://Hitbox.tscn
+res://enemies/zombie/zombie.gdshader
+res://enemies/zombie/zombie.gd
+res://enemies/enemy.gdshader
+res://enemies/enemy.gd

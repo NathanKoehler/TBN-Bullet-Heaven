@@ -14,6 +14,9 @@ extends CharacterBody2D
 @export var effect_hit = preload("res://effects/hit_effect.tscn")
 @export var effect_death = preload("res://effects/death_effect.tscn")
 
+#Node references
+@onready var hitflash = $AnimationPlayer
+
 
 var rng = RandomNumberGenerator.new()
 var spawn_position
@@ -34,7 +37,7 @@ func _physics_process(delta):
 	
 
 func receive_damage(base_damage):
-	
+	hitflash.play("hitflash")
 	var actual_damage = base_damage
 	#subtracts dmg from defense
 	actual_damage -= defense

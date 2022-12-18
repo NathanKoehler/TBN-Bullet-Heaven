@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cbq55pc77wj7h"]
+[gd_scene load_steps=14 format=3 uid="uid://cbq55pc77wj7h"]
 
 [ext_resource type="Script" path="res://player/CharacterBody2d.gd" id="2_j4x2b"]
 [ext_resource type="Texture2D" uid="uid://dvgjvcmwosjji" path="res://player/player_sprites/wizzard_f_idle_anim_f0.png" id="2_n70f6"]
@@ -27,6 +27,9 @@ animations = [{
 size = Vector2(17, 21)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wx0xk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dks3r"]
+size = Vector2(19, 20)
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(0, -6)
@@ -69,6 +72,15 @@ autostart = true
 wait_time = 3.0
 autostart = true
 
+[node name="Collectionbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 16
+
+[node name="CollisionShape2d" type="CollisionShape2D" parent="Collectionbox"]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_dks3r")
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="magic_bullet_timer" to="." method="_on_magic_bullet_timer_timeout"]
 [connection signal="timeout" from="lightning_timer" to="." method="_on_lightning_timer_timeout"]
+[connection signal="area_entered" from="Collectionbox" to="." method="_on_collectionbox_area_entered"]

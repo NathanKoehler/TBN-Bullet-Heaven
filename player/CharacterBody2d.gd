@@ -35,6 +35,7 @@ signal died
 	get:
 		return level
 @export var xp = 0
+@export var xp_max = 5
 
 #Scene references
 @export var effect_hit = preload("res://effects/hit_effect.tscn")
@@ -125,3 +126,20 @@ func _on_lightning_timer_timeout():
 	var enemy_array = get_tree().get_nodes_in_group("enemy")
 	if enemy_array.size() > 0:
 		shoot_lightning(enemy_array)
+
+
+func _on_collectionbox_area_entered(hitbox):
+	receive_xp(hitbox)
+
+
+func receive_xp(hitbox):
+	if hitbox.is_in_group("xp"):
+		hitbox.queue_free()
+		xp += 1
+		print(xp)
+		if xp == xp_max:
+			level_up()
+
+
+func level_up():
+	pass

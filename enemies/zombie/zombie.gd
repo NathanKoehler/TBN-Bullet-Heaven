@@ -13,6 +13,7 @@ extends CharacterBody2D
 #Scene references
 @export var effect_hit = preload("res://effects/hit_effect.tscn")
 @export var effect_death = preload("res://effects/death_effect.tscn")
+@export var xp = preload("res://xp/xp.tscn")
 
 #Node references
 @onready var hitflash = $AnimationPlayer
@@ -25,6 +26,7 @@ func _ready():
 
 
 func die():
+	drop_xp()
 	spawn_effect(effect_death)
 	queue_free()
 
@@ -63,7 +65,6 @@ func receive_knockback(damage_source_pos: Vector2, received_damage: int):
 
 
 func _on_hurtbox_area_entered(hitbox):
-	print("hit")
 	var actual_damage = receive_damage(hitbox.damage)
 	
 	
@@ -73,6 +74,10 @@ func _on_hurtbox_area_entered(hitbox):
 	receive_knockback(hitbox.global_position, actual_damage)
 	spawn_effect(effect_hit)
 	
+func drop_xp():
+	var xp_drop = xp.instantiate()
+	get_tree().current_scene.add_child(xp_drop)
+	xp_drop.global_position = self.global_position
 	
 func spawn_effect(EFFECT: PackedScene, effect_pos: Vector2 = global_position):
 	if EFFECT:

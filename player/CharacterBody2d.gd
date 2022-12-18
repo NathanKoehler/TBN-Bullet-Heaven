@@ -123,9 +123,10 @@ func shoot_lightning(enemy_array):
 		
 
 func _on_lightning_timer_timeout():
-	var enemy_array = get_tree().get_nodes_in_group("enemy")
-	if enemy_array.size() > 0:
-		shoot_lightning(enemy_array)
+	if level >= 1:
+		var enemy_array = get_tree().get_nodes_in_group("enemy")
+		if enemy_array.size() > 0:
+			shoot_lightning(enemy_array)
 
 
 func _on_collectionbox_area_entered(hitbox):
@@ -133,13 +134,23 @@ func _on_collectionbox_area_entered(hitbox):
 
 
 func receive_xp(hitbox):
+	#checks if the collected item is in the xp group (honestly should always be
+	#becaue of collision layers but just to make sure)
 	if hitbox.is_in_group("xp"):
+		#deletes the node from the tree
 		hitbox.queue_free()
+		#increases xp
 		xp += 1
 		print(xp)
+		#checks if ready to level up
 		if xp == xp_max:
 			level_up()
 
 
 func level_up():
-	pass
+	#increases level
+	level += 1
+	xp = 0
+	xp_max += 5
+	print("LEVEL UP!")
+	

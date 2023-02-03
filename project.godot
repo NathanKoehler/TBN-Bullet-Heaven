@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Bullet Heaven TBN"
 run/main_scene="res://level/bullethaven.tscn"
-config/features=PackedStringArray("4.0", "Vulkan Clustered")
+config/features=PackedStringArray("4.0")
 
 [autoload]
 

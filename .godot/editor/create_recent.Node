@@ -1,7 +1,8 @@
-CollisionShape2D
-Area2D
 Sprite2D
 AnimationPlayer
+CanvasLayer
+CollisionShape2D
+Area2D
 VisibleOnScreenNotifier2D
 Timer
 AnimationTree

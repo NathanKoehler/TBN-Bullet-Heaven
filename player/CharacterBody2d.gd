@@ -3,37 +3,55 @@ extends CharacterBody2D
 signal hp_changed(new_hp)
 signal died
 
+#child node references
+var heartUIFull = get_node("HealthUI/HeartFull")
+var heartUIEmpty = get_node("HealthUI/HeartEmpty")
+var heartUIHalf = get_node("HealthUI/HeartHalf")
 
 @export var speed = 100 : 
 	set(value):
 		speed = value 
 	get:
 		return speed
+
 @export var currPosition = position
-@export var hp_max = 100 : 
+
+@export var hp_max = 3 : 
 	set(value):
 		hp_max = value
+		if heartUIEmpty != null:
+			heartUIEmpty.rect_size.x = hp_max * 12
 	get:
 		return hp_max
-@export var hp = 100 : 
+
+
+@export var hp = 3 : 
 	set(value):
 		if value != hp:
 			hp = clamp(value, 0, hp_max)
 			emit_signal("hp_changed", hp)
 			if hp == 0:
 				emit_signal("died")
+		heartUIFull.rect_size.x = hp_max * 12
+		print(hp_max*12)
 	get:
 		return hp
-@export var defense = 5 : 
+
+
+@export var defense = 0 : 
 	set(value):
 		defense = value
 	get:
 		return defense
+
+
 @export var level = 0 : 
 	set(value):
 		level = value
 	get:
 		return level
+
+
 @export var xp = 0
 @export var xp_max = 5
 
@@ -135,7 +153,7 @@ func _on_collectionbox_area_entered(hitbox):
 
 func receive_xp(hitbox):
 	#checks if the collected item is in the xp group (honestly should always be
-	#becaue of collision layers but just to make sure)
+	#because of collision layers but just to make sure)
 	if hitbox.is_in_group("xp"):
 		#deletes the node from the tree
 		hitbox.queue_free()

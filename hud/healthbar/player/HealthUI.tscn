@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://qiw5rmrb20me"]
+
+[ext_resource type="Texture2D" uid="uid://ccwxt68r24jfk" path="res://hud/healthbar/player/Heart_Empty.png" id="1_f85xm"]
+[ext_resource type="Texture2D" uid="uid://bydemx5kveajt" path="res://hud/healthbar/player/Heart_Half.png" id="2_ys4r3"]
+[ext_resource type="Texture2D" uid="uid://cfyjkdude30fd" path="res://hud/healthbar/player/Heart_Full.png" id="3_383to"]
+
+[node name="HealthUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 70.0
+offset_bottom = 16.0
+
+[node name="HeartEmpty" type="TextureRect" parent="."]
+offset_right = 35.0
+offset_bottom = 8.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_f85xm")
+stretch_mode = 1
+
+[node name="HeartHalf" type="TextureRect" parent="."]
+offset_right = 35.0
+offset_bottom = 8.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_ys4r3")
+stretch_mode = 1
+
+[node name="HeartFull" type="TextureRect" parent="."]
+offset_right = 35.0
+offset_bottom = 8.0
+scale = Vector2(2, 2)
+texture = ExtResource("3_383to")
+stretch_mode = 1

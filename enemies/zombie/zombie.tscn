@@ -83,6 +83,7 @@ shape = SubResource("RectangleShape2D_ssdpc")
 
 [node name="Hitbox" parent="." instance=ExtResource("6_wb6ao")]
 position = Vector2(-1, 2)
+damage = 1
 
 [node name="notifier" type="VisibleOnScreenNotifier2D" parent="."]
 

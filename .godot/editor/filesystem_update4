@@ -11,3 +11,7 @@ res://xp/xp.tscn
 res://player/player_spells/magic_bullet.tscn
 res://hud/HUD.tscn
 res://player/player.tscn
+res://player/CharacterBody2d.gd
+res://enemies/Hitbox.gd
+res://hud/healthbar/player/HealthUI.tscn
+res://hud/healthbar/player/HealthUI.gd

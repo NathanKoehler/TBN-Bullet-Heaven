@@ -1,13 +1,13 @@
 res://level/bullethaven.tscn
+res://enemies/enemy.gdshader
 res://enemies/zombie/zombie.gd
 res://player/player_spells/magic_bullet.gd
-res://enemies/enemy.gdshader
 res://enemies/enemy.tscn
 res://enemies/zombie/zombie.tscn
-res://player/player.tscn
 res://effects/hit_effect.tscn
 res://sounds/sound_player.tscn
 res://Hitbox.tscn
 res://xp/xp.tscn
 res://player/player_spells/magic_bullet.tscn
 res://hud/HUD.tscn
+res://player/player.tscn

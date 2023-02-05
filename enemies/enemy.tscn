@@ -13,21 +13,9 @@ resource_local_to_scene = true
 shader = ExtResource("2_madkr")
 shader_parameter/hit_opacity = 0.0
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_wfw7q"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_kn74h"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_6sb2h")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_lfs4o")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_plaad")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_2i5in")
-}],
+"frames": [ExtResource("3_6sb2h"), ExtResource("4_lfs4o"), ExtResource("5_plaad"), ExtResource("6_2i5in")],
 "loop": true,
 "name": &"default",
 "speed": 5.0
@@ -77,8 +65,8 @@ speed = 0.75
 
 [node name="AnimatedSprite2d" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_etf8h")
-sprite_frames = SubResource("SpriteFrames_wfw7q")
-autoplay = "default"
+frames = SubResource("SpriteFrames_kn74h")
+playing = true
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 4

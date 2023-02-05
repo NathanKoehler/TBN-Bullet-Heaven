@@ -6,21 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://b5a614v0wevk1" path="res://player/player_sprites/wizzard_f_run_anim_f2.png" id="4_2gkfx"]
 [ext_resource type="Texture2D" uid="uid://dgy5gca8kok2m" path="res://player/player_sprites/wizzard_f_run_anim_f3.png" id="5_nw6x2"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_lsl2r"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_jox0r"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_j2e52")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_7t8iq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_2gkfx")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_nw6x2")
-}],
+"frames": [ExtResource("2_j2e52"), ExtResource("3_7t8iq"), ExtResource("4_2gkfx"), ExtResource("5_nw6x2")],
 "loop": true,
 "name": &"default",
 "speed": 5.0
@@ -42,9 +30,8 @@ script = ExtResource("2_j4x2b")
 hp = 50
 
 [node name="AnimatedSprite2d" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_lsl2r")
-autoplay = "default"
-frame_progress = 0.714837
+frames = SubResource("SpriteFrames_jox0r")
+playing = true
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2

@@ -81,7 +81,6 @@ visible = false
 shape = SubResource("RectangleShape2D_bwp5w")
 
 [node name="Hitbox" parent="." instance=ExtResource("6_tml30")]
-damage = 1
 
 [node name="notifier" type="VisibleOnScreenNotifier2D" parent="."]
 

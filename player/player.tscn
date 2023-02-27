@@ -1,11 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cbq55pc77wj7h"]
+[gd_scene load_steps=12 format=3 uid="uid://cbq55pc77wj7h"]
 
 [ext_resource type="Texture2D" uid="uid://dvf6k75rnnfve" path="res://player/player_sprites/wizzard_f_run_anim_f0.png" id="2_j2e52"]
 [ext_resource type="Script" path="res://player/CharacterBody2d.gd" id="2_j4x2b"]
 [ext_resource type="Texture2D" uid="uid://fti43gditrpu" path="res://player/player_sprites/wizzard_f_run_anim_f1.png" id="3_7t8iq"]
 [ext_resource type="Texture2D" uid="uid://b5a614v0wevk1" path="res://player/player_sprites/wizzard_f_run_anim_f2.png" id="4_2gkfx"]
 [ext_resource type="Texture2D" uid="uid://dgy5gca8kok2m" path="res://player/player_sprites/wizzard_f_run_anim_f3.png" id="5_nw6x2"]
-[ext_resource type="PackedScene" uid="uid://qiw5rmrb20me" path="res://hud/healthbar/player/HealthUI.tscn" id="6_si0ct"]
+[ext_resource type="PackedScene" uid="uid://bxkmj8qbv55sv" path="res://hud/healthbar/player/PlayerHealthBar.tscn" id="6_ltucd"]
+[ext_resource type="PackedScene" uid="uid://bfbmf4lkslhli" path="res://hud/PauseMenu.tscn" id="7_sa7uw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jox0r"]
 animations = [{
@@ -28,7 +29,6 @@ position = Vector2(0, -6)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("2_j4x2b")
-hp = 50
 
 [node name="AnimatedSprite2d" type="AnimatedSprite2D" parent="."]
 frames = SubResource("SpriteFrames_jox0r")
@@ -71,11 +71,20 @@ collision_mask = 16
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_dks3r")
 
-[node name="HealthUI" parent="." instance=ExtResource("6_si0ct")]
-offset_left = -365.0
-offset_top = -208.0
-offset_right = -295.0
-offset_bottom = -192.0
+[node name="PlayerHealthBar" parent="." instance=ExtResource("6_ltucd")]
+visible = false
+offset_left = -12.0
+offset_top = -19.0
+offset_right = 22.0
+offset_bottom = 14.0
+
+[node name="PauseMenu" parent="." instance=ExtResource("7_sa7uw")]
+process_mode = 3
+offset_left = -198.0
+offset_top = -111.0
+offset_right = 2.0
+offset_bottom = 9.0
+scale = Vector2(2, 2)
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="magic_bullet_timer" to="." method="_on_magic_bullet_timer_timeout"]

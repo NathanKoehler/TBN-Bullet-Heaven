@@ -4,53 +4,81 @@ signal hp_changed(new_hp)
 signal died
 
 
+
+@onready var healthBar = $PlayerHealthBar
+
 @export var speed = 100 : 
 	set(value):
 		speed = value 
 	get:
 		return speed
+
 @export var currPosition = position
+
 @export var hp_max = 100 : 
 	set(value):
-		hp_max = value
+		if value != hp_max:
+			hp_max = max(0, value)
+			emit_signal("hp_max_changed", hp_max)
+			healthBar.max_value = hp_max
+			self.hp = hp
 	get:
 		return hp_max
+
+
 @export var hp = 100 : 
 	set(value):
 		if value != hp:
 			hp = clamp(value, 0, hp_max)
 			emit_signal("hp_changed", hp)
+			healthBar.value = hp
 			if hp == 0:
 				emit_signal("died")
+			elif hp != hp_max:
+				healthBar.show()
 	get:
 		return hp
-@export var defense = 5 : 
+
+
+@export var defense = 0 : 
 	set(value):
 		defense = value
 	get:
 		return defense
+
+
 @export var level = 0 : 
 	set(value):
 		level = value
 	get:
 		return level
+
+
 @export var xp = 0
 @export var xp_max = 5
 
-#Scene references
+# Scene references
 @export var effect_hit = preload("res://effects/hit_effect.tscn")
 @export var effect_death = preload("res://effects/death_effect.tscn")
 @export var magic_bullet = preload("res://player/player_spells/magic_bullet.tscn")
 @export var lightning = preload("res://player/player_spells/lightning.tscn")
 
-#general vars
+# Node references
+@onready var pause_menu = $PauseMenu
+
+# general vars
 var rng = RandomNumberGenerator.new()
+var is_paused = false
+
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rng.randomize()
+	pause_menu.hide()
 
+
+	
 
 func _process(delta):
 	handle_input()
@@ -66,6 +94,13 @@ func handle_input():
 		velocity.x -= 1 * speed
 	elif Input.is_key_pressed(KEY_D):
 		velocity.x += 1 * speed
+	if Input.is_key_pressed(KEY_ESCAPE): #Controls the pause menu
+		if is_paused == false:
+			is_paused = true
+			pause_menu.pause()
+		else:
+			is_paused = false
+			pause_menu.unpause()
 	
 	velocity.normalized()
 	move_and_slide()
@@ -135,7 +170,7 @@ func _on_collectionbox_area_entered(hitbox):
 
 func receive_xp(hitbox):
 	#checks if the collected item is in the xp group (honestly should always be
-	#becaue of collision layers but just to make sure)
+	#because of collision layers but just to make sure)
 	if hitbox.is_in_group("xp"):
 		#deletes the node from the tree
 		hitbox.queue_free()

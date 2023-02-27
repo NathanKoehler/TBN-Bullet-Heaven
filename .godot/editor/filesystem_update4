@@ -6,8 +6,12 @@ res://enemies/enemy.tscn
 res://enemies/zombie/zombie.tscn
 res://effects/hit_effect.tscn
 res://sounds/sound_player.tscn
-res://Hitbox.tscn
 res://xp/xp.tscn
 res://player/player_spells/magic_bullet.tscn
 res://hud/HUD.tscn
 res://player/player.tscn
+res://Hitbox.tscn
+res://hud/healthbar/player/PlayerHealthBar.tscn
+res://hud/PauseMenu.tscn
+res://hud/PauseMenu.gd
+res://player/CharacterBody2d.gd

@@ -10,8 +10,6 @@ res://xp/xp.tscn
 res://player/player_spells/magic_bullet.tscn
 res://hud/HUD.tscn
 res://player/player.tscn
-res://Hitbox.tscn
-res://hud/healthbar/player/PlayerHealthBar.tscn
 res://hud/PauseMenu.tscn
-res://hud/PauseMenu.gd
-res://player/CharacterBody2d.gd
+res://menus/mainmenu.tscn
+res://hud/healthbar/player/PlayerHealthBar.tscn

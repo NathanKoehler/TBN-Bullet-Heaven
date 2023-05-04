@@ -8,28 +8,40 @@
 [ext_resource type="Texture2D" uid="uid://dih8es6v3mjy5" path="res://enemies/zombie/big_zombie_run_anim_f3.png" id="6_1rhpg"]
 [ext_resource type="PackedScene" uid="uid://dklg66lqw2ckt" path="res://Hitbox.tscn" id="6_wb6ao"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6c46j"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xdpm6"]
 resource_local_to_scene = true
 shader = ExtResource("2_nrjke")
 shader_parameter/hit_opacity = 0.0
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_3m422"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_so2m0"]
 animations = [{
-"frames": [ExtResource("3_5i22f"), ExtResource("4_je76c"), ExtResource("5_y7qjr"), ExtResource("6_1rhpg")],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5i22f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_je76c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_y7qjr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_1rhpg")
+}],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1o4a"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rudlt"]
 size = Vector2(25, 36)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ssdpc"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ng636"]
 
-[sub_resource type="Animation" id="Animation_jwdju"]
+[sub_resource type="Animation" id="Animation_poiyr"]
 length = 0.001
 
-[sub_resource type="Animation" id="Animation_k5ogi"]
+[sub_resource type="Animation" id="Animation_ic7u6"]
 resource_name = "hitflash"
 length = 0.3
 tracks/0/type = "value"
@@ -45,14 +57,14 @@ tracks/0/keys = {
 "values": [1.0, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_i6ccx"]
+[sub_resource type="Animation" id="Animation_g83kt"]
 resource_name = "rest"
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2ys8n"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fbfga"]
 _data = {
-"RESET": SubResource("Animation_jwdju"),
-"hitflash": SubResource("Animation_k5ogi"),
-"rest": SubResource("Animation_i6ccx")
+"RESET": SubResource("Animation_poiyr"),
+"hitflash": SubResource("Animation_ic7u6"),
+"rest": SubResource("Animation_g83kt")
 }
 
 [node name="zombie" type="CharacterBody2D" groups=["enemy"]]
@@ -63,10 +75,9 @@ hp = 30
 hp_max = 30
 
 [node name="AnimatedSprite2d" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_6c46j")
+material = SubResource("ShaderMaterial_xdpm6")
 position = Vector2(-1, -5)
-frames = SubResource("SpriteFrames_3m422")
-playing = true
+sprite_frames = SubResource("SpriteFrames_so2m0")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 4
@@ -75,11 +86,11 @@ monitorable = false
 
 [node name="CollisionShape2d" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(-1, -4)
-shape = SubResource("RectangleShape2D_f1o4a")
+shape = SubResource("RectangleShape2D_rudlt")
 
 [node name="CollisionShape2d" type="CollisionShape2D" parent="."]
 visible = false
-shape = SubResource("RectangleShape2D_ssdpc")
+shape = SubResource("RectangleShape2D_ng636")
 
 [node name="Hitbox" parent="." instance=ExtResource("6_wb6ao")]
 position = Vector2(-1, 2)
@@ -88,7 +99,7 @@ position = Vector2(-1, 2)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_2ys8n")
+"": SubResource("AnimationLibrary_fbfga")
 }
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

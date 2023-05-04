@@ -1,0 +1,100 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqmeotsgpmaq5"]
+
+[ext_resource type="Script" path="res://menus/UpgradeMenu.gd" id="1_feus4"]
+[ext_resource type="Texture2D" uid="uid://blcncoj16sfcm" path="res://menus/UpgradeItems/Bonetooth.png" id="2_gs1lf"]
+[ext_resource type="Texture2D" uid="uid://dpqrsqakymgxm" path="res://menus/UpgradeItems/IceBlast.png" id="2_qhrlq"]
+
+[node name="UpgradeMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_feus4")
+metadata/_edit_use_anchors_ = true
+
+[node name="Text" type="RichTextLabel" parent="."]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 544.0
+offset_top = 218.0
+offset_right = 1044.0
+offset_bottom = 322.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Level : 0"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 199.0
+offset_top = 116.0
+offset_right = 231.0
+offset_bottom = 148.0
+
+[node name="ItemImage1" type="TextureRect" parent="HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("2_qhrlq")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 390.0
+offset_top = 249.0
+offset_right = 726.0
+offset_bottom = 353.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VBoxItemImages" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="ItemImage1" type="TextureRect" parent="HBoxContainer/VBoxItemImages"]
+layout_mode = 2
+texture = ExtResource("2_gs1lf")
+stretch_mode = 5
+
+[node name="ItemImage2" type="TextureRect" parent="HBoxContainer/VBoxItemImages"]
+layout_mode = 2
+texture = ExtResource("2_gs1lf")
+stretch_mode = 5
+
+[node name="ItemImage3" type="TextureRect" parent="HBoxContainer/VBoxItemImages"]
+layout_mode = 2
+texture = ExtResource("2_gs1lf")
+stretch_mode = 5
+
+[node name="VBoxItemButtons" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(300, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Item1" type="Button" parent="HBoxContainer/VBoxItemButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Option 1"
+
+[node name="Item2" type="Button" parent="HBoxContainer/VBoxItemButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Option 2"
+
+[node name="Item3" type="Button" parent="HBoxContainer/VBoxItemButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Option 3"
+
+[connection signal="pressed" from="HBoxContainer/VBoxItemButtons/Item1" to="." method="_on_item_1_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxItemButtons/Item2" to="." method="_on_item_2_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxItemButtons/Item3" to="." method="_on_item_3_pressed"]

@@ -7,6 +7,8 @@ signal died
 
 @onready var healthBar = $PlayerHealthBar
 
+@onready var upgradeMenu = $UpgradeMenu
+
 @export var speed = 100 : 
 	set(value):
 		speed = value 
@@ -65,6 +67,7 @@ signal died
 
 # Node references
 @onready var pause_menu = $PauseMenu
+@onready var upgrade_menu = $UpgradeMenu
 
 # general vars
 var rng = RandomNumberGenerator.new()
@@ -111,10 +114,10 @@ func get_position():
 
 func receive_damage(base_damage):
 	var actual_damage = base_damage
-	actual_damage -= defense
+	actual_damage = clamp(actual_damage - defense, 0, actual_damage)
 	hp -= actual_damage
 	print(hp)
-	print(str(name) + " received " + str(actual_damage) + " damage")
+	print(str(name) + " with " + str(defense) + " defense received " + str(actual_damage) + " damage")
 
 func _on_hurtbox_area_entered(hitbox):
 	receive_damage(hitbox.damage)
@@ -178,7 +181,7 @@ func receive_xp(hitbox):
 		xp += 1
 		print(xp)
 		#checks if ready to level up
-		if xp == xp_max:
+		if xp == 1:
 			level_up()
 
 
@@ -188,4 +191,33 @@ func level_up():
 	xp = 0
 	xp_max += 5
 	print("LEVEL UP!")
+	$UpgradeMenu.open(level)
 	
+	
+
+func health_boost(amount):
+	hp += amount
+	
+func improve_weapon(name):
+	print("Upgraded weapon: " + name)
+
+func _on_upgrade_menu_upgrade(item):
+	print("recieved a " + item.name)
+	match (item.name):
+		"Health":
+			health_boost(50)
+		"Lightning":
+			improve_weapon(item.name)
+		"Ice Blast":
+			improve_weapon(item.name)
+		"Speed":
+			speed *= 1.5
+		"Bronze Plate":
+			defense += 1
+		"Bone Tooth":
+			hp_max += 50
+		"Giant Tooth":
+			hp_max += 150
+		_:
+			hp -= 2
+

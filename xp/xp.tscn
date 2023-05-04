@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dn53acgdhyhgi" path="res://xp/sprite/gem_01c.png" id="1_op3yr"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_opk3q"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n18oh"]
 size = Vector2(8.5, 8.25)
 
 [node name="Area2d" type="Area2D" groups=["xp"]]
@@ -17,4 +17,4 @@ texture = ExtResource("1_op3yr")
 
 [node name="CollisionShape2d" type="CollisionShape2D" parent="."]
 position = Vector2(-0.25, -0.875)
-shape = SubResource("RectangleShape2D_opk3q")
+shape = SubResource("RectangleShape2D_n18oh")

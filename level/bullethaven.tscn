@@ -80,7 +80,6 @@ layer_0/tile_data = PackedInt32Array(-786464, 131072, 5, -720928, 131072, 5, -65
 [node name="Player" parent="." instance=ExtResource("4_x0qla")]
 
 [node name="Camera2d" type="Camera2D" parent="Player"]
-current = true
 zoom = Vector2(1.5, 1.5)
 
 [node name="Skeleton Spawn Timer" type="Timer" parent="."]

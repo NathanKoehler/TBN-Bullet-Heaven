@@ -11,13 +11,17 @@ config_version=5
 [application]
 
 config/name="Bullet Heaven TBN"
-run/main_scene="res://menus/mainmenu.tscn"
+run/main_scene="res://menus/MainMenu/mainmenu.tscn"
 config/features=PackedStringArray("4.0")
 
 [autoload]
 
 Global="*res://global.gd"
 SoundPlayer="*res://sounds/sound_player.tscn"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [layer_names]
 

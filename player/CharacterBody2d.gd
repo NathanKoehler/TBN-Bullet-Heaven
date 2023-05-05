@@ -6,17 +6,13 @@ signal died
 
 
 @onready var healthBar = $PlayerHealthBar
-
 @onready var upgradeMenu = $UpgradeMenu
-
 @export var speed = 100 : 
 	set(value):
 		speed = value 
 	get:
 		return speed
-
 @export var currPosition = position
-
 @export var hp_max = 100 : 
 	set(value):
 		if value != hp_max:
@@ -26,8 +22,6 @@ signal died
 			self.hp = hp
 	get:
 		return hp_max
-
-
 @export var hp = 100 : 
 	set(value):
 		if value != hp:
@@ -40,30 +34,30 @@ signal died
 				healthBar.show()
 	get:
 		return hp
-
-
 @export var defense = 0 : 
 	set(value):
 		defense = value
 	get:
 		return defense
-
-
 @export var level = 0 : 
 	set(value):
 		level = value
 	get:
 		return level
-
-
 @export var xp = 0
 @export var xp_max = 5
+
+# Skill enablers
+var lightning_enabled = false
+var spikeskin_enabled = false
+var windslash_enabled = true
 
 # Scene references
 @export var effect_hit = preload("res://effects/hit_effect.tscn")
 @export var effect_death = preload("res://effects/death_effect.tscn")
-@export var magic_bullet = preload("res://player/player_spells/magic_bullet.tscn")
-@export var lightning = preload("res://player/player_spells/lightning.tscn")
+@export var magic_bullet = preload("res://player/player_spells/magic_bullet/magic_bullet.tscn")
+@export var lightning = preload("res://player/player_spells/lightning/lightning.tscn")
+@export var wind_slash = preload("res://player/player_spells/wind_slash/wind_slash.tscn")
 
 # Node references
 @onready var pause_menu = $PauseMenu
@@ -85,6 +79,7 @@ func _ready():
 
 func _process(delta):
 	handle_input()
+	$ShotPosition.look_at(get_global_mouse_position())
 	
 func handle_input():
 	velocity = Vector2()
@@ -134,11 +129,11 @@ func shoot_magic_bullet():
 		var mb = magic_bullet.instantiate()
 		get_tree().current_scene.add_child(mb)
 		#add_child(mb)
-		mb.global_position = self.global_position
-		
-		var mb_rotation = self.global_position.direction_to(get_global_mouse_position()).angle()
-		mb.rotation = mb_rotation
+		mb.position = $ShotPosition/Marker2d.global_position
 
+		var mb_rotation = $ShotPosition.global_position.direction_to(get_global_mouse_position()).angle()
+		mb.rotation = mb_rotation
+		mb.look_at(get_global_mouse_position())
 
 func _on_magic_bullet_timer_timeout():
 	shoot_magic_bullet()
@@ -157,16 +152,25 @@ func shoot_lightning(enemy_array):
 				get_tree().current_scene.add_child(bolt)
 				bolt.global_position = enemy.global_position
 				break
-		
-		
 
 func _on_lightning_timer_timeout():
-	if level >= 1:
+	if lightning_enabled:
 		var enemy_array = get_tree().get_nodes_in_group("enemy")
 		if enemy_array.size() > 0:
 			shoot_lightning(enemy_array)
 
+func _on_wind_slash_timer_timeout():
+	if windslash_enabled:
+		print("enabled")
+		var ws = wind_slash.instantiate()
+		get_tree().current_scene.add_child(ws)
+		#add_child(mb)
+		ws.position = $ShotPosition/Marker2d.global_position
 
+		var ws_rotation = $ShotPosition.global_position.direction_to(get_global_mouse_position()).angle()
+		ws.rotation = ws_rotation
+		ws.look_at(get_global_mouse_position())
+	
 func _on_collectionbox_area_entered(hitbox):
 	receive_xp(hitbox)
 
@@ -191,6 +195,7 @@ func level_up():
 	xp = 0
 	xp_max += 5
 	print("LEVEL UP!")
+
 	$UpgradeMenu.open(level)
 	
 	
@@ -207,6 +212,8 @@ func _on_upgrade_menu_upgrade(item):
 		"Health":
 			health_boost(50)
 		"Lightning":
+			if !lightning_enabled:
+				lightning_enabled = true
 			improve_weapon(item.name)
 		"Ice Blast":
 			improve_weapon(item.name)
@@ -218,6 +225,12 @@ func _on_upgrade_menu_upgrade(item):
 			hp_max += 50
 		"Giant Tooth":
 			hp_max += 150
+		"Spike Skin":
+			if !spikeskin_enabled:
+				spikeskin_enabled = true
 		_:
 			hp -= 2
+
+
+
 

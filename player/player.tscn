@@ -1,29 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://cbq55pc77wj7h"]
+[gd_scene load_steps=13 format=3 uid="uid://dih2x81ekfxh8"]
 
 [ext_resource type="Texture2D" uid="uid://dvf6k75rnnfve" path="res://player/player_sprites/wizzard_f_run_anim_f0.png" id="2_j2e52"]
 [ext_resource type="Script" path="res://player/CharacterBody2d.gd" id="2_j4x2b"]
 [ext_resource type="Texture2D" uid="uid://fti43gditrpu" path="res://player/player_sprites/wizzard_f_run_anim_f1.png" id="3_7t8iq"]
 [ext_resource type="Texture2D" uid="uid://b5a614v0wevk1" path="res://player/player_sprites/wizzard_f_run_anim_f2.png" id="4_2gkfx"]
 [ext_resource type="Texture2D" uid="uid://dgy5gca8kok2m" path="res://player/player_sprites/wizzard_f_run_anim_f3.png" id="5_nw6x2"]
-[ext_resource type="PackedScene" uid="uid://bxkmj8qbv55sv" path="res://hud/healthbar/player/PlayerHealthBar.tscn" id="6_ltucd"]
-[ext_resource type="PackedScene" uid="uid://bfbmf4lkslhli" path="res://hud/PauseMenu.tscn" id="7_sa7uw"]
+[ext_resource type="PackedScene" uid="uid://s58lmw02rvoq" path="res://UI/healthbar/player/PlayerHealthBar.tscn" id="6_ltucd"]
+[ext_resource type="PackedScene" uid="uid://clh54yag1piil" path="res://UI/PauseMenu/PauseMenu.tscn" id="7_sa7uw"]
 [ext_resource type="PackedScene" uid="uid://dqmeotsgpmaq5" path="res://menus/UpgradeMenu.tscn" id="8_wdxye"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_jox0r"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_bgnfc"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_j2e52")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_7t8iq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_2gkfx")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_nw6x2")
-}],
+"frames": [ExtResource("2_j2e52"), ExtResource("3_7t8iq"), ExtResource("4_2gkfx"), ExtResource("5_nw6x2")],
 "loop": true,
 "name": &"default",
 "speed": 5.0
@@ -38,13 +26,13 @@ size = Vector2(17, 21)
 size = Vector2(19, 20)
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(0, -6)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("2_j4x2b")
 
 [node name="AnimatedSprite2d" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_jox0r")
+frames = SubResource("SpriteFrames_bgnfc")
+playing = true
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2
@@ -58,7 +46,7 @@ shape = SubResource("RectangleShape2D_1ar4q")
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 0
-monitorable = false
+monitoring = false
 
 [node name="CollisionShape2d" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(-0.5, 4.5)
@@ -68,13 +56,6 @@ shape = SubResource("RectangleShape2D_1ar4q")
 visible = false
 shape = SubResource("RectangleShape2D_wx0xk")
 
-[node name="magic_bullet_timer" type="Timer" parent="."]
-autostart = true
-
-[node name="lightning_timer" type="Timer" parent="."]
-wait_time = 3.0
-autostart = true
-
 [node name="Collectionbox" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 16
@@ -82,6 +63,11 @@ collision_mask = 16
 [node name="CollisionShape2d" type="CollisionShape2D" parent="Collectionbox"]
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_dks3r")
+
+[node name="ShotPosition" type="Node2D" parent="."]
+
+[node name="Marker2d" type="Marker2D" parent="ShotPosition"]
+position = Vector2(22, 0)
 
 [node name="PlayerHealthBar" parent="." instance=ExtResource("6_ltucd")]
 visible = false
@@ -101,8 +87,20 @@ scale = Vector2(2, 2)
 
 [node name="UpgradeMenu" parent="." groups=["Upgrades"] instance=ExtResource("8_wdxye")]
 
+[node name="wind_slash_timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="lightning_timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="magic_bullet_timer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
-[connection signal="timeout" from="magic_bullet_timer" to="." method="_on_magic_bullet_timer_timeout"]
-[connection signal="timeout" from="lightning_timer" to="." method="_on_lightning_timer_timeout"]
 [connection signal="area_entered" from="Collectionbox" to="." method="_on_collectionbox_area_entered"]
 [connection signal="upgrade" from="UpgradeMenu" to="." method="_on_upgrade_menu_upgrade"]
+[connection signal="timeout" from="wind_slash_timer" to="." method="_on_wind_slash_timer_timeout"]
+[connection signal="timeout" from="lightning_timer" to="." method="_on_lightning_timer_timeout"]
+[connection signal="timeout" from="magic_bullet_timer" to="." method="_on_magic_bullet_timer_timeout"]

@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcek1bobsbm1o"]
+
+[ext_resource type="Script" path="res://menus/MainMenu/mainmenu.gd" id="1_1cekj"]
+[ext_resource type="Texture2D" uid="uid://dayt3hxv1i8ew" path="res://menus/MainMenu/arcade-game-world-pixel-scene_24640-45908.jpg" id="2_14brh"]
+[ext_resource type="Theme" uid="uid://do3kk0x7114o" path="res://menus/MainMenu/GUI/mainmenu.tres" id="3_nc0ok"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1cekj")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1165.0
+offset_bottom = 713.0
+texture = ExtResource("2_14brh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -48.5
+offset_right = 119.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+offset_right = 238.0
+offset_bottom = 34.0
+theme = ExtResource("3_nc0ok")
+theme_override_font_sizes/font_size = 28
+text = "START"
+
+[node name="OptionButton" type="Button" parent="VBoxContainer"]
+offset_top = 44.0
+offset_right = 238.0
+offset_bottom = 78.0
+theme = ExtResource("3_nc0ok")
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+offset_top = 88.0
+offset_right = 238.0
+offset_bottom = 122.0
+theme = ExtResource("3_nc0ok")
+text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

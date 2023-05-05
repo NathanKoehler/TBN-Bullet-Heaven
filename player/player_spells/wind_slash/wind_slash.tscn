@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://cumfcs6corgn8"]
+
+[ext_resource type="PackedScene" uid="uid://dklg66lqw2ckt" path="res://Hitbox.tscn" id="1_6b2an"]
+[ext_resource type="Script" path="res://player/player_spells/wind_slash/wind_slash.gd" id="2_au8tl"]
+[ext_resource type="Texture2D" uid="uid://c8yiowk3qwe1g" path="res://player/player_spells/wind_slash/Wind Projectile.png" id="2_gyxj0"]
+
+[sub_resource type="Animation" id="Animation_pgfau"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2d:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_uusjk"]
+resource_name = "default"
+length = 0.75
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2d:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ig47h"]
+_data = {
+"RESET": SubResource("Animation_pgfau"),
+"default": SubResource("Animation_uusjk")
+}
+
+[node name="Hitbox" instance=ExtResource("1_6b2an")]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("2_au8tl")
+speed = 300
+
+[node name="CollisionShape2d" parent="." index="0"]
+position = Vector2(0, 0)
+
+[node name="Sprite2d" type="Sprite2D" parent="." index="1"]
+position = Vector2(9.53674e-07, 0)
+scale = Vector2(1.375, 1.375)
+texture = ExtResource("2_gyxj0")
+hframes = 3
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_ig47h")
+}

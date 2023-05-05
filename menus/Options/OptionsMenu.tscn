@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd8doapic75ib"]
+
+[ext_resource type="Script" path="res://menus/Options/Options.gd" id="1_bunp4"]
+[ext_resource type="Texture2D" uid="uid://dayt3hxv1i8ew" path="res://menus/MainMenu/arcade-game-world-pixel-scene_24640-45908.jpg" id="2_jm0xv"]
+[ext_resource type="Theme" uid="uid://do3kk0x7114o" path="res://menus/MainMenu/GUI/mainmenu.tres" id="3_utl8m"]
+
+[node name="Resolution" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_bunp4")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 704.0
+texture = ExtResource("2_jm0xv")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 444.0
+offset_top = 258.0
+offset_right = 666.0
+offset_bottom = 346.0
+alignment = 1
+
+[node name="Resolution" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+offset_top = 28.0
+offset_right = 110.0
+offset_bottom = 60.0
+theme = ExtResource("3_utl8m")
+text = "Resolution"
+
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+offset_left = 114.0
+offset_top = 34.0
+offset_right = 222.0
+offset_bottom = 54.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 1
+icon_alignment = 1
+
+[connection signal="item_selected" from="HBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]

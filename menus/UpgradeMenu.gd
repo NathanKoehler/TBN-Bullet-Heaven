@@ -22,6 +22,7 @@ var offered = []
 func _ready():
 	$HBoxContainer.hide()
 	
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -66,6 +67,7 @@ func close():
 	$HBoxContainer.hide()
 	
 func open(level):
+	
 	$HBoxContainer.show()
 	$Text.text = "Level : " + str(level)
 	# get_tree().paused = true
@@ -74,11 +76,12 @@ func open(level):
 	var loaded = 0
 	offered.clear()
 	for num in rand_dict:
+		print(num)
 		offered.append(items[num])
 		$HBoxContainer/VBoxItemImages.get_child(loaded).texture = offered[loaded].texture
 		$HBoxContainer/VBoxItemButtons.get_child(loaded).text = offered[loaded].name
 		loaded += 1
-	
+
 func unpause():
 	get_tree().paused = false
 	

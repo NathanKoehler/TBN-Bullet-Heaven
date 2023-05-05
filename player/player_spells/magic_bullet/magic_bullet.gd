@@ -1,7 +1,7 @@
 extends "res://enemies/Hitbox.gd"
 
 
-@export var speed = 100
+@export var speed = 200
 @onready var animation_player = $AnimationPlayer
 
 

@@ -1,0 +1,13 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://do3kk0x7114o"]
+
+[ext_resource type="FontFile" uid="uid://bvu37k6b6qphi" path="res://menus/MainMenu/GUI/VT323-Regular.ttf" id="1_kwc2p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_svudj"]
+bg_color = Color(0.392157, 0.388235, 0.388235, 1)
+border_width_bottom = 5
+
+[resource]
+default_font = ExtResource("1_kwc2p")
+default_font_size = 28
+Button/fonts/font = ExtResource("1_kwc2p")
+Button/styles/normal = SubResource("StyleBoxFlat_svudj")

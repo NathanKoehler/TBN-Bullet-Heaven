@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://thsw6ofe5xxv"
-path="res://.godot/imported/healthbar_full.png-74eaefd9dcee912e71edcbef24f3515f.ctex"
+uid="uid://dayt3hxv1i8ew"
+path="res://.godot/imported/arcade-game-world-pixel-scene_24640-45908.jpg-68ea0ae60ba98642e9342b0b6cf71264.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://hud/healthbar/player/healthbar_full.png"
-dest_files=["res://.godot/imported/healthbar_full.png-74eaefd9dcee912e71edcbef24f3515f.ctex"]
+source_file="res://menus/MainMenu/arcade-game-world-pixel-scene_24640-45908.jpg"
+dest_files=["res://.godot/imported/arcade-game-world-pixel-scene_24640-45908.jpg-68ea0ae60ba98642e9342b0b6cf71264.ctex"]
 
 [params]
 

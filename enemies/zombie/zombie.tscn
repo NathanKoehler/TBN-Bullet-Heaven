@@ -13,21 +13,9 @@ resource_local_to_scene = true
 shader = ExtResource("2_nrjke")
 shader_parameter/hit_opacity = 0.0
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_so2m0"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_24rgv"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_5i22f")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_je76c")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_y7qjr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_1rhpg")
-}],
+"frames": [ExtResource("3_5i22f"), ExtResource("4_je76c"), ExtResource("5_y7qjr"), ExtResource("6_1rhpg")],
 "loop": true,
 "name": &"default",
 "speed": 5.0
@@ -77,7 +65,8 @@ hp_max = 30
 [node name="AnimatedSprite2d" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_xdpm6")
 position = Vector2(-1, -5)
-sprite_frames = SubResource("SpriteFrames_so2m0")
+frames = SubResource("SpriteFrames_24rgv")
+playing = true
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 4

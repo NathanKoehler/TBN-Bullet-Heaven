@@ -1,4 +1,5 @@
 res://menus/MainMenu/GUI
+res://effects
 res://player/player_spells/wind_slash
 res://menus/UpgradeItems
 res://menus
@@ -6,5 +7,4 @@ res://
 res://player/player_spells
 res://sounds
 res://enemies
-res://effects
 res://player

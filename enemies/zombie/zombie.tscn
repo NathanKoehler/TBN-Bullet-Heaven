@@ -1,35 +1,41 @@
-[gd_scene load_steps=16 format=3 uid="uid://nbhpwwwasgih"]
+[gd_scene load_steps=14 format=3 uid="uid://nbhpwwwasgih"]
 
 [ext_resource type="Script" path="res://enemies/zombie/zombie.gd" id="1_h5y5c"]
-[ext_resource type="Shader" path="res://enemies/enemy.gdshader" id="2_nrjke"]
 [ext_resource type="Texture2D" uid="uid://cevxfgswdfxk4" path="res://enemies/zombie/big_zombie_run_anim_f0.png" id="3_5i22f"]
 [ext_resource type="Texture2D" uid="uid://b87a38sikan5" path="res://enemies/zombie/big_zombie_run_anim_f1.png" id="4_je76c"]
 [ext_resource type="Texture2D" uid="uid://ck0ptfr5j4qxf" path="res://enemies/zombie/big_zombie_run_anim_f2.png" id="5_y7qjr"]
 [ext_resource type="Texture2D" uid="uid://dih8es6v3mjy5" path="res://enemies/zombie/big_zombie_run_anim_f3.png" id="6_1rhpg"]
 [ext_resource type="PackedScene" uid="uid://dklg66lqw2ckt" path="res://Hitbox.tscn" id="6_wb6ao"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xdpm6"]
-resource_local_to_scene = true
-shader = ExtResource("2_nrjke")
-shader_parameter/hit_opacity = 0.0
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_24rgv"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_x3rfs"]
 animations = [{
-"frames": [ExtResource("3_5i22f"), ExtResource("4_je76c"), ExtResource("5_y7qjr"), ExtResource("6_1rhpg")],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5i22f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_je76c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_y7qjr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_1rhpg")
+}],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rudlt"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ck08h"]
 size = Vector2(25, 36)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ng636"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5cbsu"]
 
-[sub_resource type="Animation" id="Animation_poiyr"]
+[sub_resource type="Animation" id="Animation_yk41x"]
 length = 0.001
 
-[sub_resource type="Animation" id="Animation_ic7u6"]
+[sub_resource type="Animation" id="Animation_g8k62"]
 resource_name = "hitflash"
 length = 0.3
 tracks/0/type = "value"
@@ -45,14 +51,14 @@ tracks/0/keys = {
 "values": [1.0, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_g83kt"]
+[sub_resource type="Animation" id="Animation_ioq2k"]
 resource_name = "rest"
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fbfga"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qf2sn"]
 _data = {
-"RESET": SubResource("Animation_poiyr"),
-"hitflash": SubResource("Animation_ic7u6"),
-"rest": SubResource("Animation_g83kt")
+"RESET": SubResource("Animation_yk41x"),
+"hitflash": SubResource("Animation_g8k62"),
+"rest": SubResource("Animation_ioq2k")
 }
 
 [node name="zombie" type="CharacterBody2D" groups=["enemy"]]
@@ -63,32 +69,34 @@ hp = 30
 hp_max = 30
 
 [node name="AnimatedSprite2d" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_xdpm6")
 position = Vector2(-1, -5)
-frames = SubResource("SpriteFrames_24rgv")
-playing = true
+sprite_frames = SubResource("SpriteFrames_x3rfs")
+autoplay = "default"
+frame = 3
+frame_progress = 0.897279
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." groups=["enemy"]]
 collision_layer = 4
 collision_mask = 8
 monitorable = false
 
 [node name="CollisionShape2d" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(-1, -4)
-shape = SubResource("RectangleShape2D_rudlt")
+shape = SubResource("RectangleShape2D_ck08h")
 
 [node name="CollisionShape2d" type="CollisionShape2D" parent="."]
 visible = false
-shape = SubResource("RectangleShape2D_ng636")
+shape = SubResource("RectangleShape2D_5cbsu")
 
-[node name="Hitbox" parent="." instance=ExtResource("6_wb6ao")]
+[node name="Hitbox" parent="." groups=["enemy"] instance=ExtResource("6_wb6ao")]
 position = Vector2(-1, 2)
 
 [node name="notifier" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_fbfga")
+"": SubResource("AnimationLibrary_qf2sn")
 }
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/plains.png-5c97ae94abe1e3b27a0c7688645c0586.c
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false

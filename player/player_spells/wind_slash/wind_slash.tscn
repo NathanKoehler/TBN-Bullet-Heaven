@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://player/player_spells/wind_slash/wind_slash.gd" id="2_au8tl"]
 [ext_resource type="Texture2D" uid="uid://c8yiowk3qwe1g" path="res://player/player_spells/wind_slash/Wind Projectile.png" id="2_gyxj0"]
 
-[sub_resource type="Animation" id="Animation_pgfau"]
+[sub_resource type="Animation" id="Animation_avsgd"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -19,7 +19,7 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_uusjk"]
+[sub_resource type="Animation" id="Animation_hyb6n"]
 resource_name = "default"
 length = 0.75
 loop_mode = 1
@@ -36,10 +36,10 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ig47h"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p7axs"]
 _data = {
-"RESET": SubResource("Animation_pgfau"),
-"default": SubResource("Animation_uusjk")
+"RESET": SubResource("Animation_avsgd"),
+"default": SubResource("Animation_hyb6n")
 }
 
 [node name="Hitbox" instance=ExtResource("1_6b2an")]
@@ -60,5 +60,5 @@ vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
 libraries = {
-"": SubResource("AnimationLibrary_ig47h")
+"": SubResource("AnimationLibrary_p7axs")
 }

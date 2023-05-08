@@ -9,6 +9,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_bunp4")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -27,19 +29,12 @@ alignment = 1
 
 [node name="Resolution" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-offset_top = 28.0
-offset_right = 110.0
-offset_bottom = 60.0
 theme = ExtResource("3_utl8m")
 text = "Resolution"
 
 [node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
 layout_direction = 2
 layout_mode = 2
-offset_left = 114.0
-offset_top = 34.0
-offset_right = 222.0
-offset_bottom = 54.0
 size_flags_horizontal = 3
 size_flags_vertical = 4
 alignment = 1

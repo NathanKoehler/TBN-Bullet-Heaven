@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dc1m4ibrxcr1x" path="res://effects/effect sprites/hit_effect_anim_spritesheet.png" id="1_x6c6a"]
 
-[sub_resource type="Animation" id="Animation_2onyr"]
+[sub_resource type="Animation" id="Animation_fqm8u"]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -17,7 +17,7 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_ta03m"]
+[sub_resource type="Animation" id="Animation_d2phj"]
 resource_name = "default"
 length = 0.3
 tracks/0/type = "value"
@@ -47,10 +47,10 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ucuvn"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yyg28"]
 _data = {
-"RESET": SubResource("Animation_2onyr"),
-"default": SubResource("Animation_ta03m")
+"RESET": SubResource("Animation_fqm8u"),
+"default": SubResource("Animation_d2phj")
 }
 
 [node name="HitEffect" type="Sprite2D" groups=["Effects"]]
@@ -60,5 +60,5 @@ hframes = 3
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "default"
 libraries = {
-"": SubResource("AnimationLibrary_ucuvn")
+"": SubResource("AnimationLibrary_yyg28")
 }

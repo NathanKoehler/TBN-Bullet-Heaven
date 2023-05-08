@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dih2x81ekfxh8"]
+[gd_scene load_steps=21 format=3 uid="uid://dih2x81ekfxh8"]
 
 [ext_resource type="Texture2D" uid="uid://dvf6k75rnnfve" path="res://player/player_sprites/wizzard_f_run_anim_f0.png" id="2_j2e52"]
 [ext_resource type="Script" path="res://player/CharacterBody2d.gd" id="2_j4x2b"]
@@ -6,12 +6,24 @@
 [ext_resource type="Texture2D" uid="uid://b5a614v0wevk1" path="res://player/player_sprites/wizzard_f_run_anim_f2.png" id="4_2gkfx"]
 [ext_resource type="Texture2D" uid="uid://dgy5gca8kok2m" path="res://player/player_sprites/wizzard_f_run_anim_f3.png" id="5_nw6x2"]
 [ext_resource type="PackedScene" uid="uid://s58lmw02rvoq" path="res://UI/healthbar/player/PlayerHealthBar.tscn" id="6_ltucd"]
-[ext_resource type="PackedScene" uid="uid://clh54yag1piil" path="res://UI/PauseMenu/PauseMenu.tscn" id="7_sa7uw"]
+[ext_resource type="PackedScene" uid="uid://1p2fjq8tpo64" path="res://UI/PauseMenu/PauseMenu.tscn" id="7_sa7uw"]
 [ext_resource type="PackedScene" uid="uid://dqmeotsgpmaq5" path="res://menus/UpgradeMenu.tscn" id="8_wdxye"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bgnfc"]
 animations = [{
-"frames": [ExtResource("2_j2e52"), ExtResource("3_7t8iq"), ExtResource("4_2gkfx"), ExtResource("5_nw6x2")],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_j2e52")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7t8iq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_2gkfx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_nw6x2")
+}],
 "loop": true,
 "name": &"default",
 "speed": 5.0
@@ -25,16 +37,46 @@ size = Vector2(17, 21)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dks3r"]
 size = Vector2(19, 20)
 
+[sub_resource type="Gradient" id="Gradient_d5cgb"]
+colors = PackedColorArray(5.0056e-06, 0.577101, 0.77446, 1, 0, 0.384314, 0.890196, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2rprf"]
+gradient = SubResource("Gradient_d5cgb")
+width = 32
+
+[sub_resource type="SystemFont" id="SystemFont_shfhv"]
+font_weight = 200
+font_stretch = 75
+
+[sub_resource type="LabelSettings" id="LabelSettings_ljhii"]
+line_spacing = 2.0
+font = SubResource("SystemFont_shfhv")
+font_size = 8
+
+[sub_resource type="Gradient" id="Gradient_6j68d"]
+colors = PackedColorArray(0, 0, 0, 0.0901961, 0, 0, 0, 0.0901961)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4qmwt"]
+gradient = SubResource("Gradient_6j68d")
+
+[sub_resource type="Gradient" id="Gradient_8pcxi"]
+offsets = PackedFloat32Array(0, 0.995708, 1)
+colors = PackedColorArray(1.39579e-06, 0.399536, 0.526939, 1, 0.308895, 0.773608, 0.951273, 1, 0.344366, 0.816563, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0oqyp"]
+gradient = SubResource("Gradient_8pcxi")
+width = 32
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("2_j4x2b")
 
 [node name="AnimatedSprite2d" type="AnimatedSprite2D" parent="."]
-frames = SubResource("SpriteFrames_bgnfc")
-playing = true
+sprite_frames = SubResource("SpriteFrames_bgnfc")
+autoplay = "default"
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." groups=["Player"]]
 collision_layer = 2
 collision_mask = 4
 monitorable = false
@@ -43,7 +85,7 @@ monitorable = false
 position = Vector2(-0.5, 4.5)
 shape = SubResource("RectangleShape2D_1ar4q")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." groups=["Player"]]
 collision_layer = 0
 collision_mask = 0
 monitoring = false
@@ -69,12 +111,42 @@ shape = SubResource("RectangleShape2D_dks3r")
 [node name="Marker2d" type="Marker2D" parent="ShotPosition"]
 position = Vector2(22, 0)
 
+[node name="PlayerShieldBar" parent="." instance=ExtResource("6_ltucd")]
+visible = false
+offset_left = -13.0
+offset_top = -34.0
+offset_right = 20.0
+offset_bottom = -22.0
+value = 15.0
+nine_patch_stretch = true
+texture_under = null
+texture_progress = SubResource("GradientTexture1D_2rprf")
+
+[node name="Label" type="Label" parent="PlayerShieldBar"]
+layout_mode = 0
+offset_top = -12.0
+offset_right = 33.0
+offset_bottom = 2.0
+text = "1"
+label_settings = SubResource("LabelSettings_ljhii")
+horizontal_alignment = 1
+
 [node name="PlayerHealthBar" parent="." instance=ExtResource("6_ltucd")]
 visible = false
-offset_left = -12.0
+offset_left = -13.0
 offset_top = -19.0
-offset_right = 22.0
-offset_bottom = 14.0
+offset_right = 20.0
+offset_bottom = -7.0
+nine_patch_stretch = true
+
+[node name="Label" type="Label" parent="PlayerHealthBar"]
+layout_mode = 0
+offset_top = -12.0
+offset_right = 33.0
+offset_bottom = 2.0
+text = "1"
+label_settings = SubResource("LabelSettings_ljhii")
+horizontal_alignment = 1
 
 [node name="PauseMenu" parent="." instance=ExtResource("7_sa7uw")]
 process_mode = 3
@@ -87,6 +159,23 @@ scale = Vector2(2, 2)
 
 [node name="UpgradeMenu" parent="." groups=["Upgrades"] instance=ExtResource("8_wdxye")]
 
+[node name="PlayerLevelBar" parent="." instance=ExtResource("6_ltucd")]
+anchors_preset = 0
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = -126.0
+offset_top = 176.0
+offset_right = 126.0
+offset_bottom = 186.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1)
+max_value = 1.0
+nine_patch_stretch = true
+texture_under = null
+texture_over = SubResource("GradientTexture1D_4qmwt")
+texture_progress = SubResource("GradientTexture1D_0oqyp")
+
 [node name="wind_slash_timer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
@@ -98,6 +187,7 @@ autostart = true
 [node name="magic_bullet_timer" type="Timer" parent="."]
 autostart = true
 
+[connection signal="died" from="." to="." method="_on_player_died"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="area_entered" from="Collectionbox" to="." method="_on_collectionbox_area_entered"]
 [connection signal="upgrade" from="UpgradeMenu" to="." method="_on_upgrade_menu_upgrade"]

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://player/player_spells/magic_bullet/magic_bullet.gd" id="2_go4mn"]
 [ext_resource type="Texture2D" uid="uid://4i64c1sshwj4" path="res://projectiles/Spell Pack/Energy ball/EnergyBall.png" id="3_xg4nw"]
 
-[sub_resource type="Animation" id="Animation_byht4"]
+[sub_resource type="Animation" id="Animation_0dm7o"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -19,7 +19,7 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_778ns"]
+[sub_resource type="Animation" id="Animation_cjflr"]
 resource_name = "shoot"
 length = 0.82
 tracks/0/type = "value"
@@ -35,10 +35,10 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_diu8p"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qpkpp"]
 _data = {
-"RESET": SubResource("Animation_byht4"),
-"shoot": SubResource("Animation_778ns")
+"RESET": SubResource("Animation_0dm7o"),
+"shoot": SubResource("Animation_cjflr")
 }
 
 [node name="magic_bullet" groups=["Projectile"] instance=ExtResource("1_hw1ry")]
@@ -46,6 +46,7 @@ collision_layer = 8
 collision_mask = 4
 script = ExtResource("2_go4mn")
 speed = 200
+damage = 3
 
 [node name="CollisionShape2d" parent="." index="0"]
 position = Vector2(-1, 0)
@@ -58,5 +59,5 @@ hframes = 9
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
 libraries = {
-"": SubResource("AnimationLibrary_diu8p")
+"": SubResource("AnimationLibrary_qpkpp")
 }

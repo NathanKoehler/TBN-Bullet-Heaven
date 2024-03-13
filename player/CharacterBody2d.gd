@@ -164,8 +164,8 @@ func handle_input():
 	velocity.normalized()
 	move_and_slide()
 
-func get_position():
-	return position
+#func get_position():
+	#return position
 
 
 func receive_damage(base_damage):

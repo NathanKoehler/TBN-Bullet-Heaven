@@ -47,6 +47,7 @@ width = 32
 [sub_resource type="SystemFont" id="SystemFont_shfhv"]
 font_weight = 200
 font_stretch = 75
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_ljhii"]
 line_spacing = 2.0

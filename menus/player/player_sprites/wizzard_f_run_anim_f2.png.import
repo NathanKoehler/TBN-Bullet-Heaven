@@ -2,23 +2,23 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8yiowk3qwe1g"
-path="res://.godot/imported/Wind Projectile.png-22779ae70c3ff5b1cf4556d3e47bfb8e.ctex"
+uid="uid://b5a614v0wevk1"
+path="res://.godot/imported/wizzard_f_run_anim_f2.png-fd472a6a9f62cf54037e721c90294b85.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/player_spells/wind_slash/Wind Projectile.png"
-dest_files=["res://.godot/imported/Wind Projectile.png-22779ae70c3ff5b1cf4556d3e47bfb8e.ctex"]
+source_file="res://menus/player/player_sprites/wizzard_f_run_anim_f2.png"
+dest_files=["res://.godot/imported/wizzard_f_run_anim_f2.png-fd472a6a9f62cf54037e721c90294b85.ctex"]
 
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false

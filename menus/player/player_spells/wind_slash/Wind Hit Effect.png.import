@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvf6k75rnnfve"
-path="res://.godot/imported/wizzard_f_run_anim_f0.png-b63c699c81d02f00fce016c418543238.ctex"
+uid="uid://654x1t5asjfh"
+path="res://.godot/imported/Wind Hit Effect.png-db778ab060a4ac3887cba653e728a78d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/player_sprites/wizzard_f_run_anim_f0.png"
-dest_files=["res://.godot/imported/wizzard_f_run_anim_f0.png-b63c699c81d02f00fce016c418543238.ctex"]
+source_file="res://menus/player/player_spells/wind_slash/Wind Hit Effect.png"
+dest_files=["res://.godot/imported/Wind Hit Effect.png-db778ab060a4ac3887cba653e728a78d.ctex"]
 
 [params]
 

@@ -1,8 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://cumfcs6corgn8"]
 
 [ext_resource type="PackedScene" uid="uid://dklg66lqw2ckt" path="res://Hitbox.tscn" id="1_6b2an"]
-[ext_resource type="Script" path="res://player/player_spells/wind_slash/wind_slash.gd" id="2_au8tl"]
-[ext_resource type="Texture2D" uid="uid://c8yiowk3qwe1g" path="res://player/player_spells/wind_slash/Wind Projectile.png" id="2_gyxj0"]
+[ext_resource type="Script" path="res://menus/player/player_spells/wind_slash/wind_slash.gd" id="2_au8tl"]
+[ext_resource type="Texture2D" uid="uid://c8yiowk3qwe1g" path="res://menus/player/player_spells/wind_slash/Wind Projectile.png" id="2_gyxj0"]
+
 
 [sub_resource type="Animation" id="Animation_avsgd"]
 length = 0.001

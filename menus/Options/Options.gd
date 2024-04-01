@@ -19,3 +19,6 @@ func _on_option_button_item_selected(index):
 	var size = Resolutions.get(ResOptionButton.get_item_text(index))
 	DisplayServer.window_set_size(size)
 	
+func _on_back_button_pressed():
+	get_tree().change_scene_to_file("res://menus/MainMenu/mainmenu.tscn")
+

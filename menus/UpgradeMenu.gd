@@ -99,7 +99,7 @@ func close():
 func open(level):
 	
 	$HBoxContainer.show()
-	$Text.text = "Level : " + str(level)
+	$LevelText.text = "Level : " + str(level)
 	paused = 1
 	
 	$HBoxContainer/Items/Item1.grab_focus()

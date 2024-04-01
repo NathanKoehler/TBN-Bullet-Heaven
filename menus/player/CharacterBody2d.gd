@@ -7,6 +7,7 @@ signal died
 @onready var shieldBar = $PlayerShieldBar
 @onready var healthBar = $PlayerHealthBar
 @onready var upgradeMenu = $UpgradeMenu
+@onready var playerLevelBar = $UpgradeMenu/PlayerLevelBar
 @export var speed = 100 : 
 	set(value):
 		speed = value 
@@ -107,9 +108,9 @@ var windslash_enabled = false
 # Scene references
 @export var effect_hit = preload("res://effects/hit_effect.tscn")
 @export var effect_death = preload("res://effects/death_effect.tscn")
-@export var magic_bullet = preload("res://player/player_spells/magic_bullet/magic_bullet.tscn")
-@export var lightning = preload("res://player/player_spells/lightning/lightning.tscn")
-@export var wind_slash = preload("res://player/player_spells/wind_slash/wind_slash.tscn")
+@export var magic_bullet = preload("res://menus/player/player_spells/magic_bullet/magic_bullet.tscn")
+@export var lightning = preload("res://menus/player/player_spells/lightning/lightning.tscn")
+@export var wind_slash = preload("res://menus/player/player_spells/wind_slash/wind_slash.tscn")
 
 # Node references
 @onready var pause_menu = $PauseMenu
@@ -310,7 +311,7 @@ func receive_xp(hitbox):
 		hitbox.queue_free()
 		#increases xp
 		xp += 1
-		$PlayerLevelBar.value = xp
+		playerLevelBar.value = xp
 		print(xp)
 		#checks if ready to level up
 		if xp == xp_max:
@@ -322,8 +323,8 @@ func level_up():
 	level += 1
 	xp = 0
 	xp_max += 2
-	$PlayerLevelBar.max_value = xp_max
-	$PlayerLevelBar.value = xp
+	playerLevelBar.max_value = xp_max
+	playerLevelBar.value = xp
 	print("LEVEL UP!")
 
 	$UpgradeMenu.open(level)

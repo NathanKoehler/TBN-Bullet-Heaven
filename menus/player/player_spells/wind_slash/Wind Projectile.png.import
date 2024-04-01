@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5a614v0wevk1"
-path="res://.godot/imported/wizzard_f_run_anim_f2.png-948d44c12daaec2b536e8684787e6523.ctex"
+uid="uid://c8yiowk3qwe1g"
+path="res://.godot/imported/Wind Projectile.png-42d8e82ee38b9a2079759db4d50649ca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/player_sprites/wizzard_f_run_anim_f2.png"
-dest_files=["res://.godot/imported/wizzard_f_run_anim_f2.png-948d44c12daaec2b536e8684787e6523.ctex"]
+source_file="res://menus/player/player_spells/wind_slash/Wind Projectile.png"
+dest_files=["res://.godot/imported/Wind Projectile.png-42d8e82ee38b9a2079759db4d50649ca.ctex"]
 
 [params]
 

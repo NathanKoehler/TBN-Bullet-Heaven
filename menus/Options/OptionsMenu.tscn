@@ -40,4 +40,10 @@ size_flags_vertical = 4
 alignment = 1
 icon_alignment = 1
 
+[node name="BackButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_utl8m")
+text = "Back"
+
 [connection signal="item_selected" from="HBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

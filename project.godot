@@ -23,6 +23,10 @@ SoundPlayer="*res://sounds/sound_player.tscn"
 
 window/stretch/mode="canvas_items"
 
+[dotnet]
+
+project/assembly_name="Bullet Heaven TBN"
+
 [layer_names]
 
 2d_physics/layer_1="Environment"

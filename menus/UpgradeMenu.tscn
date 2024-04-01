@@ -49,6 +49,7 @@ grow_vertical = 2
 color = Color(0.662745, 0.937255, 0.964706, 0.0705882)
 
 [node name="ExampleHBoxContainer" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -200,32 +201,24 @@ fit_content = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PlayerLevelBar" parent="." instance=ExtResource("5_blmtq")]
-layout_mode = 1
-anchor_left = 0.2
-anchor_top = 0.848765
-anchor_right = 0.8
-anchor_bottom = 0.891975
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
+offset_top = -91.0
 grow_horizontal = 2
 grow_vertical = 0
-scale = Vector2(1, 1)
+
+[node name="PlayerLevelBar" parent="VBoxContainer" instance=ExtResource("5_blmtq")]
+custom_minimum_size = Vector2(1000, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 max_value = 1.0
 nine_patch_stretch = true
 texture_under = null
 texture_over = SubResource("GradientTexture1D_56c7o")
 texture_progress = SubResource("GradientTexture1D_y7v0x")
-metadata/_edit_use_anchors_ = true
 
 [node name="LevelText" type="RichTextLabel" parent="."]
 clip_contents = false

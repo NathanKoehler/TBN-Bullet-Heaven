@@ -146,14 +146,12 @@ func _process(delta):
 func handle_input():
 	velocity = Vector2()
 	
-	if Input.is_key_pressed(KEY_W):
-		velocity.y -= 1 * speed
-	elif Input.is_key_pressed(KEY_S):
-		velocity.y += 1 * speed
-	if Input.is_key_pressed(KEY_A):
-		velocity.x -= 1 * speed
-	elif Input.is_key_pressed(KEY_D):
-		velocity.x += 1 * speed
+	var horizontal_dir := Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	var vertical_dir := Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+
+	velocity.x = horizontal_dir * speed
+	velocity.y = vertical_dir * speed
+		
 	if Input.is_key_pressed(KEY_ESCAPE): #Controls the pause menu
 		if is_paused == false:
 			is_paused = true
@@ -161,6 +159,8 @@ func handle_input():
 		else:
 			is_paused = false
 			pause_menu.unpause()
+	
+	
 	
 	velocity.normalized()
 	move_and_slide()

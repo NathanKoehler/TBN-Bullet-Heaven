@@ -1,21 +1,31 @@
 extends Node2D
 
-var rng = RandomNumberGenerator.new()
-var camera2d
+# References Library
 
 var skeletons = preload("res://enemies/enemy.tscn")
 var zombies = preload("res://enemies/zombie/zombie.tscn")
-const x = 400
-const y = 400
 
-#var spawn_position = get_node("Player").position + Vector2(100, 0).rotated(rng.randf_range(0, 2*PI))
 
-# Called when the node enters the scene tree for the first time.
+@onready var players := {
+	"1": {
+		
+	},
+	"2": {
+		
+	}
+}
+
+
+var rng = RandomNumberGenerator.new()
+var camera2d
+
+const x_spawn_distance = 800
+const y_spawn_distance = 600
+
+
 func _ready():
 	rng.randomize()
 	camera2d = get_node("Player/Camera2d")
-	print(get_node("Player").position)
-	print(get_node("Player").get_child(1))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,17 +41,17 @@ func _on_skeleton_spawn_timer_timeout():
 	skeles.position = center
 	var direction = rng.randi_range(0,3)
 	if direction == 0: # up
-		skeles.position.x += rng.randf_range(-x, x)
-		skeles.position.y -= y
+		skeles.position.x += rng.randf_range(-x_spawn_distance, x_spawn_distance)
+		skeles.position.y -= y_spawn_distance
 	elif direction == 1: # down
-		skeles.position.x += rng.randf_range(-x, x)
-		skeles.position.y += y
+		skeles.position.x += rng.randf_range(-x_spawn_distance, x_spawn_distance)
+		skeles.position.y += y_spawn_distance
 	elif direction == 2: # left
-		skeles.position.x -= x
-		skeles.position.y += rng.randf_range(-y, y)
+		skeles.position.x -= x_spawn_distance
+		skeles.position.y += rng.randf_range(-y_spawn_distance, y_spawn_distance)
 	elif direction == 3: # right
-		skeles.position.x += x
-		skeles.position.y += rng.randf_range(-y, y)
+		skeles.position.x += x_spawn_distance
+		skeles.position.y += rng.randf_range(-y_spawn_distance, y_spawn_distance)
 	
 
 
@@ -54,15 +64,15 @@ func _on_zombie_spawn_timer_timeout():
 	zomb.position = center
 	var direction = rng.randi_range(0,3)
 	if direction == 0: # up
-		zomb.position.x += rng.randf_range(-x, x)
-		zomb.position.y -= y
+		zomb.position.x += rng.randf_range(-x_spawn_distance, x_spawn_distance)
+		zomb.position.y -= y_spawn_distance
 	elif direction == 1: # down
-		zomb.position.x += rng.randf_range(-x, x)
-		zomb.position.y += y
+		zomb.position.x += rng.randf_range(-x_spawn_distance, x_spawn_distance)
+		zomb.position.y += y_spawn_distance
 	elif direction == 2: # left
-		zomb.position.x -= x
-		zomb.position.y += rng.randf_range(-y, y)
+		zomb.position.x -= x_spawn_distance
+		zomb.position.y += rng.randf_range(-y_spawn_distance, y_spawn_distance)
 	elif direction == 3: # right
-		zomb.position.x += x
-		zomb.position.y += rng.randf_range(-y, y)
+		zomb.position.x += x_spawn_distance
+		zomb.position.y += rng.randf_range(-y_spawn_distance, y_spawn_distance)
 	

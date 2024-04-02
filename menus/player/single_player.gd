@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@export var controls: Resource = null
+
 signal hp_changed(new_hp)
 signal died
 
@@ -125,6 +127,9 @@ var _shield_timer := Timer.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if not controls:
+		set_physics_process(false)
+	
 	rng.randomize()
 	pause_menu.hide()
 	
@@ -138,16 +143,19 @@ func _ready():
 	_shield_timer.connect("timeout", Callable(self, "_on_shield_timer_timeout"))
 	_shield_timer.set_wait_time(0.2)
 	_shield_timer.set_one_shot(false) # Make sure it loops
+	
+	
 
 func _process(delta):
-	handle_input()
 	$ShotPosition.look_at(get_global_mouse_position())
 	
-func handle_input():
+	
+	
+func _physics_process(delta: float) -> void:
 	velocity = Vector2()
 	
-	var horizontal_dir := Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	var vertical_dir := Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+	var horizontal_dir := Input.get_action_strength(controls.move_right) - Input.get_action_strength(controls.move_left)
+	var vertical_dir := Input.get_action_strength(controls.move_down) - Input.get_action_strength(controls.move_up)
 
 	velocity.x = horizontal_dir * speed
 	velocity.y = vertical_dir * speed

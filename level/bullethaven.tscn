@@ -82,6 +82,16 @@ position = Vector2(-12, 45)
 
 [node name="Camera2d" type="Camera2D" parent="Player"]
 
+[node name="Player1" parent="." instance=ExtResource("4_x0qla")]
+position = Vector2(-12, 45)
+
+[node name="Camera2d" type="Camera2D" parent="Player1"]
+
+[node name="Player2" parent="." instance=ExtResource("4_x0qla")]
+position = Vector2(-24, 90)
+
+[node name="Camera2d" type="Camera2D" parent="Player2"]
+
 [node name="Skeleton Spawn Timer" type="Timer" parent="."]
 wait_time = 1.8
 autostart = true

@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://dih2x81ekfxh8"]
 
+[ext_resource type="Script" path="res://menus/player/single_player.gd" id="1_g5o5o"]
 [ext_resource type="Texture2D" uid="uid://dvf6k75rnnfve" path="res://menus/player/player_sprites/wizzard_f_run_anim_f0.png" id="2_j2e52"]
-[ext_resource type="Script" path="res://menus/player/CharacterBody2d.gd" id="2_j4x2b"]
 [ext_resource type="Texture2D" uid="uid://fti43gditrpu" path="res://menus/player/player_sprites/wizzard_f_run_anim_f1.png" id="3_7t8iq"]
 [ext_resource type="Texture2D" uid="uid://b5a614v0wevk1" path="res://menus/player/player_sprites/wizzard_f_run_anim_f2.png" id="4_2gkfx"]
 [ext_resource type="Texture2D" uid="uid://dgy5gca8kok2m" path="res://menus/player/player_sprites/wizzard_f_run_anim_f3.png" id="5_nw6x2"]
@@ -57,7 +57,7 @@ font_size = 8
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 3
-script = ExtResource("2_j4x2b")
+script = ExtResource("1_g5o5o")
 
 [node name="AnimatedSprite2d" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_bgnfc")

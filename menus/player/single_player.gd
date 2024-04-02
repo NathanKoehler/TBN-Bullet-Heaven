@@ -7,7 +7,7 @@ signal died
 @onready var shieldBar = $PlayerShieldBar
 @onready var healthBar = $PlayerHealthBar
 @onready var upgradeMenu = $UpgradeMenu
-@onready var playerLevelBar = $UpgradeMenu/PlayerLevelBar
+@onready var playerLevelBar = $UpgradeMenu/LevelBarHolder/PlayerLevelBar
 @export var speed = 100 : 
 	set(value):
 		speed = value 

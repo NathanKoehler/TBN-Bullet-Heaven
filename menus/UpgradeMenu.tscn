@@ -199,7 +199,7 @@ theme = ExtResource("4_22rbx")
 text = "description "
 fit_content = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="LevelBarHolder" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -209,7 +209,7 @@ offset_top = -91.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="PlayerLevelBar" parent="VBoxContainer" instance=ExtResource("5_blmtq")]
+[node name="PlayerLevelBar" parent="LevelBarHolder" instance=ExtResource("5_blmtq")]
 custom_minimum_size = Vector2(1000, 30)
 layout_mode = 2
 size_flags_horizontal = 4

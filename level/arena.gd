@@ -6,16 +6,6 @@ var skeletons = preload("res://enemies/enemy.tscn")
 var zombies = preload("res://enemies/zombie/zombie.tscn")
 
 
-@onready var players := {
-	"1": {
-		
-	},
-	"2": {
-		
-	}
-}
-
-
 var rng = RandomNumberGenerator.new()
 var camera2d
 

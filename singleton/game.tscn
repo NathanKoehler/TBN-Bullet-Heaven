@@ -1,7 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://bm6i76d5ro807"]
+[gd_scene load_steps=8 format=3 uid="uid://bm6i76d5ro807"]
 
 [ext_resource type="Script" path="res://singleton/game.gd" id="1_gxq1j"]
 [ext_resource type="PackedScene" uid="uid://dtsrhhlwucwp3" path="res://level/bullethaven.tscn" id="1_ln1ln"]
+[ext_resource type="PackedScene" uid="uid://s58lmw02rvoq" path="res://UI/healthbar/player/PlayerHealthBar.tscn" id="3_w37tk"]
+
+[sub_resource type="Gradient" id="Gradient_6j68d"]
+colors = PackedColorArray(0, 0, 0, 0.0901961, 0, 0, 0, 0.0901961)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_m73fa"]
+gradient = SubResource("Gradient_6j68d")
+
+[sub_resource type="Gradient" id="Gradient_8pcxi"]
+offsets = PackedFloat32Array(0, 0.995708, 1)
+colors = PackedColorArray(1.39579e-06, 0.399536, 0.526939, 1, 0.308895, 0.773608, 0.951273, 1, 0.344366, 0.816563, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fevro"]
+gradient = SubResource("Gradient_8pcxi")
+width = 32
 
 [node name="Game" type="Node"]
 script = ExtResource("1_gxq1j")
@@ -55,3 +70,65 @@ size = Vector2i(574, 648)
 render_target_update_mode = 4
 
 [node name="Camera2D" type="Camera2D" parent="Control/HBoxContainer/SubViewportContainer2/SubViewport"]
+
+[node name="HUDMargin" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="P2Level" type="VBoxContainer" parent="Control/HUDMargin"]
+clip_contents = true
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+alignment = 2
+
+[node name="P2LevelText" type="RichTextLabel" parent="Control/HUDMargin/P2Level"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Level: NaN"
+text_direction = 2
+
+[node name="P2LevelXPBar" parent="Control/HUDMargin/P2Level" instance=ExtResource("3_w37tk")]
+custom_minimum_size = Vector2(250, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 1.0
+nine_patch_stretch = true
+texture_under = null
+texture_over = SubResource("GradientTexture1D_m73fa")
+texture_progress = SubResource("GradientTexture1D_fevro")
+
+[node name="P1Level" type="VBoxContainer" parent="Control/HUDMargin"]
+clip_contents = true
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="P1LevelText" type="RichTextLabel" parent="Control/HUDMargin/P1Level"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Level: NaN
+"
+
+[node name="P1LevelXPBar" parent="Control/HUDMargin/P1Level" instance=ExtResource("3_w37tk")]
+custom_minimum_size = Vector2(250, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 1.0
+nine_patch_stretch = true
+texture_under = null
+texture_over = SubResource("GradientTexture1D_m73fa")
+texture_progress = SubResource("GradientTexture1D_fevro")

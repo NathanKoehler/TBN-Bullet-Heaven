@@ -87,11 +87,11 @@ controls = ExtResource("5_3uys6")
 [node name="Camera2d" type="Camera2D" parent="Player"]
 
 [node name="Player1" parent="." instance=ExtResource("4_x0qla")]
-position = Vector2(-12, 45)
+position = Vector2(108, 4)
 controls = ExtResource("5_3uys6")
 
 [node name="Player2" parent="." instance=ExtResource("4_x0qla")]
-position = Vector2(-12, 45)
+position = Vector2(196, 4)
 controls = ExtResource("6_7bqjg")
 
 [node name="Skeleton Spawn Timer" type="Timer" parent="."]

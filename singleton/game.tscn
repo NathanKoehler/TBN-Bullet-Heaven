@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bm6i76d5ro807"]
+[gd_scene load_steps=12 format=3 uid="uid://bm6i76d5ro807"]
 
 [ext_resource type="Script" path="res://singleton/game.gd" id="1_gxq1j"]
 [ext_resource type="PackedScene" uid="uid://dtsrhhlwucwp3" path="res://level/bullethaven.tscn" id="1_ln1ln"]
 [ext_resource type="PackedScene" uid="uid://s58lmw02rvoq" path="res://UI/healthbar/player/PlayerHealthBar.tscn" id="3_w37tk"]
+[ext_resource type="Texture2D" uid="uid://dpqrsqakymgxm" path="res://menus/UpgradeItems/IceBlast.png" id="4_md7sm"]
+[ext_resource type="Texture2D" uid="uid://blcncoj16sfcm" path="res://Bonetooth.png" id="5_vffhe"]
+[ext_resource type="Theme" uid="uid://0fxkf7mur6ad" path="res://menus/MainMenu/GUI/description.tres" id="6_t3c38"]
 
 [sub_resource type="Gradient" id="Gradient_6j68d"]
 colors = PackedColorArray(0, 0, 0, 0.0901961, 0, 0, 0, 0.0901961)
@@ -17,6 +20,10 @@ colors = PackedColorArray(1.39579e-06, 0.399536, 0.526939, 1, 0.308895, 0.773608
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_fevro"]
 gradient = SubResource("Gradient_8pcxi")
 width = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_n6e7i"]
+font_size = 8
+shadow_size = 0
 
 [node name="Game" type="Node"]
 script = ExtResource("1_gxq1j")
@@ -83,22 +90,224 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="P2Level" type="VBoxContainer" parent="Control/HUDMargin"]
+[node name="PlayerSeperator" type="HBoxContainer" parent="Control/HUDMargin"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Control/HUDMargin/PlayerSeperator"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="P1Level" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control"]
 clip_contents = true
 custom_minimum_size = Vector2(200, 60)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -60.0
+offset_right = 250.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="P1LevelText" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Control/P1Level"]
 layout_mode = 2
+size_flags_vertical = 3
+text = "Level: 0
+"
+
+[node name="P1LevelXPBar" parent="Control/HUDMargin/PlayerSeperator/Control/P1Level" instance=ExtResource("3_w37tk")]
+custom_minimum_size = Vector2(250, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 1.0
+nine_patch_stretch = true
+texture_under = null
+texture_over = SubResource("GradientTexture1D_m73fa")
+texture_progress = SubResource("GradientTexture1D_fevro")
+
+[node name="P1ItemsExample" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ExampleContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control/P1ItemsExample"]
+layout_mode = 2
+
+[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control/P1ItemsExample/ExampleContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+texture = ExtResource("4_md7sm")
+
+[node name="Label" type="Label" parent="Control/HUDMargin/PlayerSeperator/Control/P1ItemsExample/ExampleContainer"]
+modulate = Color(0.596078, 0.85098, 0.898039, 0.843137)
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_n6e7i")
+horizontal_alignment = 1
+
+[node name="ExampleGrid" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control/P1ItemsExample"]
+layout_mode = 2
+
+[node name="ImageGrid" type="GridContainer" parent="Control/HUDMargin/PlayerSeperator/Control/P1ItemsExample/ExampleGrid"]
+layout_mode = 2
+columns = 2
+
+[node name="ItemImage1" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control/P1ItemsExample/ExampleGrid/ImageGrid"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("4_md7sm")
+expand_mode = 4
+
+[node name="ItemImage2" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control/P1ItemsExample/ExampleGrid/ImageGrid"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("4_md7sm")
+expand_mode = 4
+
+[node name="Label" type="Label" parent="Control/HUDMargin/PlayerSeperator/Control/P1ItemsExample/ExampleGrid"]
+modulate = Color(0.596078, 0.85098, 0.898039, 0.843137)
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_n6e7i")
+horizontal_alignment = 1
+
+[node name="P1ItemBar" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="P1UpgradeMenu" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Items" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu"]
+custom_minimum_size = Vector2(300, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Item1" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item1"]
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("5_vffhe")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Item_1" type="Button" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item1/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Option 1"
+
+[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item1/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+theme = ExtResource("6_t3c38")
+text = "description "
+fit_content = true
+
+[node name="Item2" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item2"]
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("5_vffhe")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Item_2" type="Button" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Option 1"
+
+[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item2/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+theme = ExtResource("6_t3c38")
+text = "description "
+fit_content = true
+
+[node name="Item3" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item3"]
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("5_vffhe")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Item_3" type="Button" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item3/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Option 1"
+
+[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item3/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+theme = ExtResource("6_t3c38")
+text = "description "
+fit_content = true
+
+[node name="Control2" type="Control" parent="Control/HUDMargin/PlayerSeperator"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="P2Level" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2"]
+clip_contents = true
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -60.0
+grow_horizontal = 0
+grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
 alignment = 2
 
-[node name="P2LevelText" type="RichTextLabel" parent="Control/HUDMargin/P2Level"]
+[node name="P2LevelText" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Control2/P2Level"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Level: NaN"
+text = "Level: 0"
 text_direction = 2
 
-[node name="P2LevelXPBar" parent="Control/HUDMargin/P2Level" instance=ExtResource("3_w37tk")]
+[node name="P2LevelXPBar" parent="Control/HUDMargin/PlayerSeperator/Control2/P2Level" instance=ExtResource("3_w37tk")]
 custom_minimum_size = Vector2(250, 20)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -109,26 +318,154 @@ texture_under = null
 texture_over = SubResource("GradientTexture1D_m73fa")
 texture_progress = SubResource("GradientTexture1D_fevro")
 
-[node name="P1Level" type="VBoxContainer" parent="Control/HUDMargin"]
-clip_contents = true
-custom_minimum_size = Vector2(200, 60)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
+[node name="P2ItemsExample" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="P1LevelText" type="RichTextLabel" parent="Control/HUDMargin/P1Level"]
+[node name="ExampleContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2/P2ItemsExample"]
+layout_mode = 2
+
+[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control2/P2ItemsExample/ExampleContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+texture = ExtResource("4_md7sm")
+
+[node name="Label" type="Label" parent="Control/HUDMargin/PlayerSeperator/Control2/P2ItemsExample/ExampleContainer"]
+modulate = Color(0.596078, 0.85098, 0.898039, 0.843137)
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_n6e7i")
+horizontal_alignment = 1
+
+[node name="ExampleGrid" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2/P2ItemsExample"]
+layout_mode = 2
+
+[node name="ImageGrid" type="GridContainer" parent="Control/HUDMargin/PlayerSeperator/Control2/P2ItemsExample/ExampleGrid"]
+layout_mode = 2
+columns = 2
+
+[node name="ItemImage1" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control2/P2ItemsExample/ExampleGrid/ImageGrid"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("4_md7sm")
+expand_mode = 4
+
+[node name="ItemImage2" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control2/P2ItemsExample/ExampleGrid/ImageGrid"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("4_md7sm")
+expand_mode = 4
+
+[node name="Label" type="Label" parent="Control/HUDMargin/PlayerSeperator/Control2/P2ItemsExample/ExampleGrid"]
+modulate = Color(0.596078, 0.85098, 0.898039, 0.843137)
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_n6e7i")
+horizontal_alignment = 1
+
+[node name="P2ItemBar" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="P2UpgradeMenu" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Items" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu"]
+custom_minimum_size = Vector2(300, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Item1" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item1"]
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("5_vffhe")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Item_1" type="Button" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item1/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Level: NaN
-"
+text = "Option 1"
 
-[node name="P1LevelXPBar" parent="Control/HUDMargin/P1Level" instance=ExtResource("3_w37tk")]
-custom_minimum_size = Vector2(250, 20)
+[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item1/VBoxContainer"]
+clip_contents = false
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-max_value = 1.0
-nine_patch_stretch = true
-texture_under = null
-texture_over = SubResource("GradientTexture1D_m73fa")
-texture_progress = SubResource("GradientTexture1D_fevro")
+theme = ExtResource("6_t3c38")
+text = "description "
+fit_content = true
+
+[node name="Item2" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item2"]
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("5_vffhe")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Item_2" type="Button" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Option 1"
+
+[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item2/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+theme = ExtResource("6_t3c38")
+text = "description "
+fit_content = true
+
+[node name="Item3" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item3"]
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("5_vffhe")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Item_3" type="Button" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item3/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Option 1"
+
+[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item3/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+theme = ExtResource("6_t3c38")
+text = "description "
+fit_content = true

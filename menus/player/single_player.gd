@@ -217,7 +217,7 @@ func _on_hurtbox_area_entered(hitbox):
 
 func _on_player_died():
 	#get_tree().quit()
-	get_tree().change_scene_to_file("res://menus/MainMenu/mainmenu.tscn")
+	get_tree().change_scene_to_file("res://menus/MainMenu/DeathScreen.tscn")
 	print("player has died")
 	
 

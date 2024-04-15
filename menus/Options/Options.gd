@@ -1,6 +1,6 @@
 extends Control
 
-@onready var ResOptionButton = $HBoxContainer/OptionButton
+@onready var ResOptionButton = $VBoxContainer/OptionButton
 
 var Resolutions: Dictionary = {"1152x648":Vector2(1152, 648),
 								"1280x720":Vector2(1280, 720),
@@ -22,4 +22,3 @@ func _on_option_button_item_selected(index):
 	
 func _on_back_button_pressed():
 	get_tree().change_scene_to_file("res://menus/MainMenu/mainmenu.tscn")
-

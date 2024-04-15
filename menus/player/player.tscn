@@ -37,21 +37,21 @@ size = Vector2(17, 21)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dks3r"]
 size = Vector2(19, 20)
 
-[sub_resource type="Gradient" id="Gradient_d5cgb"]
+[sub_resource type="Gradient" id="Gradient_0nccs"]
 colors = PackedColorArray(5.0056e-06, 0.577101, 0.77446, 1, 0, 0.384314, 0.890196, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_2rprf"]
-gradient = SubResource("Gradient_d5cgb")
+gradient = SubResource("Gradient_0nccs")
 width = 32
 
-[sub_resource type="SystemFont" id="SystemFont_shfhv"]
+[sub_resource type="SystemFont" id="SystemFont_htapy"]
 font_weight = 200
 font_stretch = 75
 subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_ljhii"]
 line_spacing = 2.0
-font = SubResource("SystemFont_shfhv")
+font = SubResource("SystemFont_htapy")
 font_size = 8
 
 [node name="Player" type="CharacterBody2D"]

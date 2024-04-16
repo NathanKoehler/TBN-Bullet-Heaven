@@ -10,6 +10,7 @@ extends Node
 		upgradeMenu = $Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu,
 		itemBar = $Control/HUDMargin/PlayerSeperator/Control/P1ItemBar,
 		items = items,
+		lives = $Control/HUDMargin/PlayerSeperator/Control/P1Lives,
 	},
 	"2": {
 		viewport = $Control/HBoxContainer/SubViewportContainer2/SubViewport,

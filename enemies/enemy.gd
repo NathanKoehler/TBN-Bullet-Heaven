@@ -21,11 +21,16 @@ extends CharacterBody2D
 @onready var hitflash = $AnimationPlayer
 
 
+
 var rng = RandomNumberGenerator.new()
 var spawn_position
+var game_controller
+var player_list
 
 func _ready():
-	pass
+	var root = get_tree().root
+	game_controller = root.get_child(root.get_child_count() - 1)
+	player_list = game_controller.get_player_list()
 
 
 func die():
@@ -35,9 +40,15 @@ func die():
 
 
 func _physics_process(delta):
-	var player = get_parent().get_node("Player")
-	if player.hp > 0:
-		position += (player.position - position).normalized() * speed
+	if game_controller.lives > 0:
+		var central_position = player_list.reduce(
+			func(acc, player): 
+				if acc != Vector2.ZERO:
+					acc = (acc + player.playerNode.position) / 2
+				else:
+					acc = player.playerNode.position
+		, Vector2.ZERO)
+		position += (central_position - position).normalized() * speed
 	
 
 func receive_damage(base_damage):
@@ -69,7 +80,6 @@ func receive_knockback(damage_source_pos: Vector2, received_damage: int):
 
 func _on_hurtbox_area_entered(hitbox):
 	var actual_damage = receive_damage(hitbox.damage)
-	
 	
 	if hitbox.is_in_group("Projectile"):
 		hitbox.destroy()

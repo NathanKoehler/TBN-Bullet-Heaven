@@ -7,7 +7,7 @@ var zombies = preload("res://enemies/zombie/zombie.tscn")
 
 
 var rng = RandomNumberGenerator.new()
-var camera2d
+var player
 
 const x_spawn_distance = 800
 const y_spawn_distance = 600
@@ -15,7 +15,7 @@ const y_spawn_distance = 600
 
 func _ready():
 	rng.randomize()
-	camera2d = get_node("Player/Camera2d")
+	player = get_node("Multiplayer1")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,7 +27,7 @@ func _process(delta):
 func _on_skeleton_spawn_timer_timeout():
 	var skeles = skeletons.instantiate()
 	add_child(skeles)
-	var center = camera2d.get_target_position()
+	var center = player.get_position()
 	skeles.position = center
 	var direction = rng.randi_range(0,3)
 	if direction == 0: # up
@@ -50,7 +50,7 @@ func _on_skeleton_spawn_timer_timeout():
 func _on_zombie_spawn_timer_timeout():
 	var zomb = zombies.instantiate()
 	add_child(zomb)
-	var center = camera2d.get_target_position()
+	var center = player.get_position()
 	zomb.position = center
 	var direction = rng.randi_range(0,3)
 	if direction == 0: # up

@@ -1,12 +1,14 @@
 extends Node
 
+@export var lives = 0
+
 @onready var arena := $Control/ArenaSubViewport/Arena
 
-@onready var player1HUD := $Control/HUDMargin/PlayerSeperator/Player1HUD
-@onready var player1SVP := $Control/MultiplayerSVPContainer/Player1SVPContainer/SubViewport
+@onready var players1HUD := $Control/HUDMargin/PlayerSeperator/Player1HUD
+@onready var players1SVP := $Control/MultiplayerSVPContainer/Player1SVPContainer/SubViewport
 
-@onready var player2HUD := $Control/HUDMargin/PlayerSeperator/Player2HUD
-@onready var player2SVP := $Control/MultiplayerSVPContainer/Player2SVPContainer/SubViewport
+@onready var players2HUD := $Control/HUDMargin/PlayerSeperator/Player2HUD
+@onready var players2SVP := $Control/MultiplayerSVPContainer/Player2SVPContainer/SubViewport
 
 @export var items = [
 	{name = "Bone Tooth", count = 0, texture = load("res://menus/UpgradeItems/Bonetooth.png"), description = "Slightly increases health of the hero"},
@@ -35,32 +37,40 @@ extends Node
 
 @onready var players := {
 	"1": {
-		viewport = player1SVP,
-		camera = player1SVP.get_node("Camera2D"),
-		player = arena.get_node("Player1"),
-		levelText = player1HUD.get_node("P1Level/P1LevelText"),
-		levelXPBar = player1HUD.get_node("P1Level/P1LevelXPBar"),
-		upgradeMenu = player1HUD.get_node("P1UpgradeMenu"),
-		itemBar = player1HUD.get_node("P1ItemBar"),
+		viewport = players1SVP,
+		camera = players1SVP.get_node("Camera2D"),
+		playerNode = arena.get_node("Multiplayer1"),
+		levelText = players1HUD.get_node("P1Level/P1LevelText"),
+		levelXPBar = players1HUD.get_node("P1Level/P1LevelXPBar"),
+		upgradeMenu = players1HUD.get_node("P1UpgradeMenu"),
+		itemBar = players1HUD.get_node("P1ItemBar"),
 		items = items,
+		active = true,
 	},
 	"2": {
-		viewport = player2SVP,
-		camera = player2SVP.get_node("Camera2D"),
-		player = arena.get_node("Player2"),
-		levelText = player2HUD.get_node("P2Level/P2LevelText"),
-		levelXPBar = player2HUD.get_node("P2Level/P2LevelXPBar"),
-		upgradeMenu = player2HUD.get_node("P2UpgradeMenu"),
-		itemBar = player2HUD.get_node("P2ItemBar"),
+		viewport = players2SVP,
+		camera = players2SVP.get_node("Camera2D"),
+		playerNode = arena.get_node("Multiplayer2"),
+		levelText = players2HUD.get_node("P2Level/P2LevelText"),
+		levelXPBar = players2HUD.get_node("P2Level/P2LevelXPBar"),
+		upgradeMenu = players2HUD.get_node("P2UpgradeMenu"),
+		itemBar = players2HUD.get_node("P2ItemBar"),
 		items = items,
+		active = true,
 	}
 }
 
+func get_arena():
+	return arena
+
+func get_player_list():
+	return players.values().filter(func(player): return player.active) 
+
 func _ready() -> void:
-	for node in players.values():
-		node.viewport.get_viewport().world_2d = arena.get_world_2d()
+	for player in players.values():
+		player.viewport.get_viewport().world_2d = arena.get_world_2d()
 		var remote_transform := RemoteTransform2D.new()
-		remote_transform.remote_path = node.camera.get_path()
-		node.player.add_child(remote_transform)
+		remote_transform.remote_path = player.camera.get_path()
+		player.playerNode.add_child(remote_transform)
 		
 		

@@ -5,13 +5,7 @@ extends CharacterBody2D
 signal hp_changed(new_hp)
 signal died
 
-const LEFT = -1
-const RIGHT = 1
-const UP = -1
-const DOWN = 1
 
-var lookX = RIGHT;
-var lookY = 0;
 @onready var shieldBar = $PlayerShieldBar
 @onready var healthBar = $PlayerHealthBar
 @onready var upgradeMenu = $UpgradeMenu
@@ -153,7 +147,8 @@ func _ready():
 	
 
 func _process(delta):
-	$ShotPosition.set_position(Vector2(lookX, lookY))
+	$ShotPosition.look_at(get_global_mouse_position())
+	
 	
 	
 func _physics_process(delta: float) -> void:
@@ -162,20 +157,6 @@ func _physics_process(delta: float) -> void:
 	var horizontal_dir := Input.get_action_strength(controls.move_right) - Input.get_action_strength(controls.move_left)
 	var vertical_dir := Input.get_action_strength(controls.move_down) - Input.get_action_strength(controls.move_up)
 
-	if horizontal_dir > 0:
-		lookX = RIGHT
-	elif horizontal_dir < 0:
-		lookX = LEFT
-	elif vertical_dir != 0:
-		lookX = 0
-		
-	if vertical_dir > 0:
-		lookY = DOWN
-	elif vertical_dir < 0:
-		lookY = UP
-	elif horizontal_dir != 0:
-		lookY = 0
-	
 	velocity.x = horizontal_dir * speed
 	velocity.y = vertical_dir * speed
 		
@@ -259,10 +240,11 @@ func shoot_magic_bullet():
 		mb.speed = mod_weapon_speed("Ice Blast", mb.speed)
 		get_tree().current_scene.add_child(mb)
 		#add_child(mb)
-		mb.set_position($ShotPosition.position)
+		mb.position = $ShotPosition/Marker2d.global_position
 
-		mb.set_rotation(atan2(lookX, lookY))
-		#mb.look_at(get_global_mouse_position())
+		var mb_rotation = $ShotPosition.global_position.direction_to(get_global_mouse_position()).angle()
+		mb.rotation = mb_rotation
+		mb.look_at(get_global_mouse_position())
 
 func _on_magic_bullet_timer_timeout():
 	shoot_magic_bullet()

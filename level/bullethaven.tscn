@@ -85,13 +85,13 @@ position = Vector2(-12, 45)
 controls = ExtResource("5_3uys6")
 
 [node name="Camera2d" type="Camera2D" parent="Player"]
-visible = false
 
 [node name="Player1" parent="." instance=ExtResource("4_x0qla")]
+position = Vector2(108, 4)
 controls = ExtResource("5_3uys6")
 
 [node name="Player2" parent="." instance=ExtResource("4_x0qla")]
-position = Vector2(100, 0)
+position = Vector2(196, 4)
 controls = ExtResource("6_7bqjg")
 
 [node name="Skeleton Spawn Timer" type="Timer" parent="."]
@@ -109,5 +109,3 @@ autoplay = true
 
 [connection signal="timeout" from="Skeleton Spawn Timer" to="." method="_on_skeleton_spawn_timer_timeout"]
 [connection signal="timeout" from="Zombie Spawn Timer" to="." method="_on_zombie_spawn_timer_timeout"]
-
-[editable path="Player1"]

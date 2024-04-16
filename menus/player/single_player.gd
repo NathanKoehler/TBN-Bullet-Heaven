@@ -10,13 +10,14 @@ signal died
 @onready var healthBar = $PlayerHealthBar
 @onready var upgradeMenu = $UpgradeMenu
 @onready var playerLevelBar = $UpgradeMenu/LevelBarHolder/PlayerLevelBar
+@export var lives = 3
 @export var speed = 100 : 
 	set(value):
 		speed = value 
 	get:
 		return speed
 @export var currPosition = position
-@export var hp_max = 100 : 
+@export var hp_max = 10 : 
 	set(value):
 		if value != hp_max:
 			hp_max = max(0, value)
@@ -26,7 +27,7 @@ signal died
 			self.hp = hp
 	get:
 		return hp_max
-@export var hp = 100 : 
+@export var hp = 100: 
 	set(value):
 		if value != hp:
 			hp = clamp(value, 0, hp_max)
@@ -216,8 +217,12 @@ func _on_hurtbox_area_entered(hitbox):
 
 
 func _on_player_died():
-	get_tree().quit()
+	#get_tree().quit()
+	lives -= 1
+	hp_max += 100
 	print("player has died")
+	if (lives == 0):
+		get_tree().change_scene_to_file("res://menus/MainMenu/DeathScreen.tscn")
 	
 
 func _on_dmg_timer_timeout():

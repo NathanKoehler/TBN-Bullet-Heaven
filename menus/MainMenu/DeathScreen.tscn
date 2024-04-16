@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://chnbicsj73yd3"]
+
+[ext_resource type="Script" path="res://menus/MainMenu/mainmenu.gd" id="1_aeew2"]
+[ext_resource type="Texture2D" uid="uid://dayt3hxv1i8ew" path="res://menus/MainMenu/arcade-game-world-pixel-scene_24640-45908.jpg" id="2_l6wsu"]
+[ext_resource type="Theme" uid="uid://do3kk0x7114o" path="res://menus/MainMenu/GUI/mainmenu.tres" id="3_ijuet"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aeew2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1165.0
+offset_bottom = 713.0
+texture = ExtResource("2_l6wsu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -48.5
+offset_right = 119.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_ijuet")
+theme_override_font_sizes/font_size = 55
+text = "YOU DIED"
+
+[node name="RestartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_ijuet")
+theme_override_font_sizes/font_size = 28
+text = "RETRY"
+
+[node name="MenuButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_ijuet")
+theme_override_font_sizes/font_size = 28
+text = "Menu"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_ijuet")
+text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/RestartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

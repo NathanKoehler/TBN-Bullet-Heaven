@@ -257,11 +257,11 @@ func shoot_magic_bullet():
 		
 		mb.damage = mod_weapon_damage("Ice Blast", mb)
 		mb.speed = mod_weapon_speed("Ice Blast", mb.speed)
-		get_tree().current_scene.add_child(mb)
+		get_tree().current_scene.get_node("Control/ArenaSubViewport/Arena").add_child(mb)
 		#add_child(mb)
-		mb.set_position($ShotPosition.position)
+		mb.set_position($".".get_global_position())
 
-		mb.set_rotation(atan2(lookX, lookY))
+		mb.set_rotation(atan2(lookY, lookX))
 		#mb.look_at(get_global_mouse_position())
 
 func _on_magic_bullet_timer_timeout():

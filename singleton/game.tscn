@@ -473,3 +473,4 @@ fit_content = true
 [node name="Arena" parent="Control/ArenaSubViewport" instance=ExtResource("1_ln1ln")]
 
 [editable path="Control/ArenaSubViewport/Arena"]
+[editable path="Control/ArenaSubViewport/Arena/Player1"]

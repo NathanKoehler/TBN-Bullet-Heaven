@@ -36,7 +36,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MultiplayerSVPContainer" type="HBoxContainer" parent="Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,36 +45,38 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="Player1SVPContainer" type="SubViewportContainer" parent="Control/MultiplayerSVPContainer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="Control/MultiplayerSVPContainer/Player1SVPContainer"]
+[node name="SubViewport" type="SubViewport" parent="Control/HBoxContainer/SubViewportContainer"]
 disable_3d = true
 handle_input_locally = false
 size = Vector2i(574, 648)
 render_target_update_mode = 4
 
-[node name="Camera2D" type="Camera2D" parent="Control/MultiplayerSVPContainer/Player1SVPContainer/SubViewport"]
+[node name="Arena" parent="Control/HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_ln1ln")]
 
-[node name="ColorRect" type="ColorRect" parent="Control/MultiplayerSVPContainer"]
+[node name="Camera2D" type="Camera2D" parent="Control/HBoxContainer/SubViewportContainer/SubViewport"]
+
+[node name="ColorRect" type="ColorRect" parent="Control/HBoxContainer"]
 custom_minimum_size = Vector2(4, 0)
 layout_mode = 2
 color = Color(0.12549, 0.12549, 0.12549, 1)
 
-[node name="Player2SVPContainer" type="SubViewportContainer" parent="Control/MultiplayerSVPContainer"]
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="Control/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="Control/MultiplayerSVPContainer/Player2SVPContainer"]
+[node name="SubViewport" type="SubViewport" parent="Control/HBoxContainer/SubViewportContainer2"]
 disable_3d = true
 handle_input_locally = false
 size = Vector2i(574, 648)
 render_target_update_mode = 4
 
-[node name="Camera2D" type="Camera2D" parent="Control/MultiplayerSVPContainer/Player2SVPContainer/SubViewport"]
+[node name="Camera2D" type="Camera2D" parent="Control/HBoxContainer/SubViewportContainer2/SubViewport"]
 
 [node name="HUDMargin" type="MarginContainer" parent="Control"]
 layout_mode = 1
@@ -91,11 +93,11 @@ theme_override_constants/margin_bottom = 20
 [node name="PlayerSeperator" type="HBoxContainer" parent="Control/HUDMargin"]
 layout_mode = 2
 
-[node name="Player1HUD" type="Control" parent="Control/HUDMargin/PlayerSeperator"]
+[node name="Control" type="Control" parent="Control/HUDMargin/PlayerSeperator"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-
+[node name="P1Level" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control"]
 clip_contents = true
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 1
@@ -108,13 +110,13 @@ grow_vertical = 0
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="P1LevelText" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1Level"]
+[node name="P1LevelText" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Control/P1Level"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Level: 0
 "
 
-[node name="P1LevelXPBar" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1Level" instance=ExtResource("3_w37tk")]
+[node name="P1LevelXPBar" parent="Control/HUDMargin/PlayerSeperator/Control/P1Level" instance=ExtResource("3_w37tk")]
 custom_minimum_size = Vector2(250, 20)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -125,7 +127,7 @@ texture_under = null
 texture_over = SubResource("GradientTexture1D_m73fa")
 texture_progress = SubResource("GradientTexture1D_fevro")
 
-[node name="P1ItemsExample" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD"]
+[node name="P1ItemsExample" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -134,49 +136,49 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ExampleContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1ItemsExample"]
+[node name="ExampleContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control/P1ItemsExample"]
 layout_mode = 2
 
-[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1ItemsExample/ExampleContainer"]
+[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control/P1ItemsExample/ExampleContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 texture = ExtResource("4_md7sm")
 
-[node name="Label" type="Label" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1ItemsExample/ExampleContainer"]
+[node name="Label" type="Label" parent="Control/HUDMargin/PlayerSeperator/Control/P1ItemsExample/ExampleContainer"]
 modulate = Color(0.596078, 0.85098, 0.898039, 0.843137)
 layout_mode = 2
 text = "1"
 label_settings = SubResource("LabelSettings_n6e7i")
 horizontal_alignment = 1
 
-[node name="ExampleGrid" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1ItemsExample"]
+[node name="ExampleGrid" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control/P1ItemsExample"]
 layout_mode = 2
 
-[node name="ImageGrid" type="GridContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1ItemsExample/ExampleGrid"]
+[node name="ImageGrid" type="GridContainer" parent="Control/HUDMargin/PlayerSeperator/Control/P1ItemsExample/ExampleGrid"]
 layout_mode = 2
 columns = 2
 
-[node name="ItemImage1" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1ItemsExample/ExampleGrid/ImageGrid"]
+[node name="ItemImage1" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control/P1ItemsExample/ExampleGrid/ImageGrid"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 texture = ExtResource("4_md7sm")
 expand_mode = 4
 
-[node name="ItemImage2" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1ItemsExample/ExampleGrid/ImageGrid"]
+[node name="ItemImage2" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control/P1ItemsExample/ExampleGrid/ImageGrid"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 texture = ExtResource("4_md7sm")
 expand_mode = 4
 
-[node name="Label" type="Label" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1ItemsExample/ExampleGrid"]
+[node name="Label" type="Label" parent="Control/HUDMargin/PlayerSeperator/Control/P1ItemsExample/ExampleGrid"]
 modulate = Color(0.596078, 0.85098, 0.898039, 0.843137)
 layout_mode = 2
 text = "1"
 label_settings = SubResource("LabelSettings_n6e7i")
 horizontal_alignment = 1
 
-[node name="P1ItemBar" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD"]
+[node name="P1ItemBar" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -184,7 +186,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="P1UpgradeMenu" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD"]
+[node name="P1UpgradeMenu" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -193,95 +195,95 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Items" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu"]
+[node name="Items" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu"]
 custom_minimum_size = Vector2(300, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Item1" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items"]
+[node name="Item1" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item1"]
+[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item1"]
 layout_mode = 2
 size_flags_vertical = 0
 texture = ExtResource("5_vffhe")
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item1"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item1"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Item_1" type="Button" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item1/VBoxContainer"]
+[node name="Item_1" type="Button" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item1/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Option 1"
 
-[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item1/VBoxContainer"]
+[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item1/VBoxContainer"]
 clip_contents = false
 layout_mode = 2
 theme = ExtResource("6_t3c38")
 text = "description "
 fit_content = true
 
-[node name="Item2" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items"]
+[node name="Item2" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item2"]
+[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item2"]
 layout_mode = 2
 size_flags_vertical = 0
 texture = ExtResource("5_vffhe")
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item2"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Item_2" type="Button" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item2/VBoxContainer"]
+[node name="Item_2" type="Button" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item2/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Option 1"
 
-[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item2/VBoxContainer"]
+[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item2/VBoxContainer"]
 clip_contents = false
 layout_mode = 2
 theme = ExtResource("6_t3c38")
 text = "description "
 fit_content = true
 
-[node name="Item3" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items"]
+[node name="Item3" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item3"]
+[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item3"]
 layout_mode = 2
 size_flags_vertical = 0
 texture = ExtResource("5_vffhe")
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item3"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Item_3" type="Button" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item3/VBoxContainer"]
+[node name="Item_3" type="Button" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item3/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Option 1"
 
-[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item3/VBoxContainer"]
+[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu/Items/Item3/VBoxContainer"]
 clip_contents = false
 layout_mode = 2
 theme = ExtResource("6_t3c38")
 text = "description "
 fit_content = true
 
-[node name="Player2HUD" type="Control" parent="Control/HUDMargin/PlayerSeperator"]
+[node name="Control2" type="Control" parent="Control/HUDMargin/PlayerSeperator"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="P2Level" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD"]
+[node name="P2Level" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2"]
 clip_contents = true
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 1
@@ -298,14 +300,14 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 alignment = 2
 
-[node name="P2LevelText" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2Level"]
+[node name="P2LevelText" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Control2/P2Level"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Level: 0"
 text_direction = 2
 
-[node name="P2LevelXPBar" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2Level" instance=ExtResource("3_w37tk")]
+[node name="P2LevelXPBar" parent="Control/HUDMargin/PlayerSeperator/Control2/P2Level" instance=ExtResource("3_w37tk")]
 custom_minimum_size = Vector2(250, 20)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -316,7 +318,7 @@ texture_under = null
 texture_over = SubResource("GradientTexture1D_m73fa")
 texture_progress = SubResource("GradientTexture1D_fevro")
 
-[node name="P2ItemsExample" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD"]
+[node name="P2ItemsExample" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -325,49 +327,49 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ExampleContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2ItemsExample"]
+[node name="ExampleContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2/P2ItemsExample"]
 layout_mode = 2
 
-[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2ItemsExample/ExampleContainer"]
+[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control2/P2ItemsExample/ExampleContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 texture = ExtResource("4_md7sm")
 
-[node name="Label" type="Label" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2ItemsExample/ExampleContainer"]
+[node name="Label" type="Label" parent="Control/HUDMargin/PlayerSeperator/Control2/P2ItemsExample/ExampleContainer"]
 modulate = Color(0.596078, 0.85098, 0.898039, 0.843137)
 layout_mode = 2
 text = "1"
 label_settings = SubResource("LabelSettings_n6e7i")
 horizontal_alignment = 1
 
-[node name="ExampleGrid" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2ItemsExample"]
+[node name="ExampleGrid" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2/P2ItemsExample"]
 layout_mode = 2
 
-[node name="ImageGrid" type="GridContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2ItemsExample/ExampleGrid"]
+[node name="ImageGrid" type="GridContainer" parent="Control/HUDMargin/PlayerSeperator/Control2/P2ItemsExample/ExampleGrid"]
 layout_mode = 2
 columns = 2
 
-[node name="ItemImage1" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2ItemsExample/ExampleGrid/ImageGrid"]
+[node name="ItemImage1" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control2/P2ItemsExample/ExampleGrid/ImageGrid"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 texture = ExtResource("4_md7sm")
 expand_mode = 4
 
-[node name="ItemImage2" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2ItemsExample/ExampleGrid/ImageGrid"]
+[node name="ItemImage2" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control2/P2ItemsExample/ExampleGrid/ImageGrid"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 texture = ExtResource("4_md7sm")
 expand_mode = 4
 
-[node name="Label" type="Label" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2ItemsExample/ExampleGrid"]
+[node name="Label" type="Label" parent="Control/HUDMargin/PlayerSeperator/Control2/P2ItemsExample/ExampleGrid"]
 modulate = Color(0.596078, 0.85098, 0.898039, 0.843137)
 layout_mode = 2
 text = "1"
 label_settings = SubResource("LabelSettings_n6e7i")
 horizontal_alignment = 1
 
-[node name="P2ItemBar" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD"]
+[node name="P2ItemBar" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -375,7 +377,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="P2UpgradeMenu" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD"]
+[node name="P2UpgradeMenu" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -384,92 +386,86 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Items" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu"]
+[node name="Items" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu"]
 custom_minimum_size = Vector2(300, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Item1" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items"]
+[node name="Item1" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item1"]
+[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item1"]
 layout_mode = 2
 size_flags_vertical = 0
 texture = ExtResource("5_vffhe")
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item1"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item1"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Item_1" type="Button" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item1/VBoxContainer"]
+[node name="Item_1" type="Button" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item1/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Option 1"
 
-[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item1/VBoxContainer"]
+[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item1/VBoxContainer"]
 clip_contents = false
 layout_mode = 2
 theme = ExtResource("6_t3c38")
 text = "description "
 fit_content = true
 
-[node name="Item2" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items"]
+[node name="Item2" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item2"]
+[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item2"]
 layout_mode = 2
 size_flags_vertical = 0
 texture = ExtResource("5_vffhe")
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item2"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Item_2" type="Button" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item2/VBoxContainer"]
+[node name="Item_2" type="Button" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item2/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Option 1"
 
-[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item2/VBoxContainer"]
+[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item2/VBoxContainer"]
 clip_contents = false
 layout_mode = 2
 theme = ExtResource("6_t3c38")
 text = "description "
 fit_content = true
 
-[node name="Item3" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items"]
+[node name="Item3" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item3"]
+[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item3"]
 layout_mode = 2
 size_flags_vertical = 0
 texture = ExtResource("5_vffhe")
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item3"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Item_3" type="Button" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item3/VBoxContainer"]
+[node name="Item_3" type="Button" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item3/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Option 1"
 
-[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item3/VBoxContainer"]
+[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu/Items/Item3/VBoxContainer"]
 clip_contents = false
 layout_mode = 2
 theme = ExtResource("6_t3c38")
 text = "description "
 fit_content = true
-
-[node name="ArenaSubViewport" type="SubViewport" parent="Control"]
-
-[node name="Arena" parent="Control/ArenaSubViewport" instance=ExtResource("1_ln1ln")]
-
-[editable path="Control/ArenaSubViewport/Arena"]

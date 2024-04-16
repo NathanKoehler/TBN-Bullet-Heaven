@@ -1,27 +1,12 @@
 extends Node
 
-@onready var players := {
-	"1": {
-		viewport = $Control/HBoxContainer/SubViewportContainer/SubViewport,
-		camera = $Control/HBoxContainer/SubViewportContainer/SubViewport/Camera2D,
-		player = $Control/HBoxContainer/SubViewportContainer/SubViewport/Arena/Player1,
-		levelText = $Control/HUDMargin/PlayerSeperator/Control/P1Level/P1LevelText,
-		levelXPBar = $Control/HUDMargin/PlayerSeperator/Control/P1Level/P1LevelXPBar,
-		upgradeMenu = $Control/HUDMargin/PlayerSeperator/Control/P1UpgradeMenu,
-		itemBar = $Control/HUDMargin/PlayerSeperator/Control/P1ItemBar,
-		items = items,
-	},
-	"2": {
-		viewport = $Control/HBoxContainer/SubViewportContainer2/SubViewport,
-		camera = $Control/HBoxContainer/SubViewportContainer2/SubViewport/Camera2D,
-		player = $Control/HBoxContainer/SubViewportContainer/SubViewport/Arena/Player2,
-		levelText = $Control/HUDMargin/PlayerSeperator/Control2/P2Level/P2LevelText,
-		levelXPBar = $Control/HUDMargin/PlayerSeperator/Control2/P2Level/P2LevelXPBar,
-		upgradeMenu = $Control/HUDMargin/PlayerSeperator/Control2/P2UpgradeMenu,
-		itemBar = $Control/HUDMargin/PlayerSeperator/Control2/P2ItemBar,
-		items = items,
-	}
-}
+@onready var arena := $Control/ArenaSubViewport/Arena
+
+@onready var player1HUD := $Control/HUDMargin/PlayerSeperator/Player1HUD
+@onready var player1SVP := $Control/MultiplayerSVPContainer/Player1SVPContainer/SubViewport
+
+@onready var player2HUD := $Control/HUDMargin/PlayerSeperator/Player2HUD
+@onready var player2SVP := $Control/MultiplayerSVPContainer/Player2SVPContainer/SubViewport
 
 @export var items = [
 	{name = "Bone Tooth", count = 0, texture = load("res://menus/UpgradeItems/Bonetooth.png"), description = "Slightly increases health of the hero"},
@@ -48,9 +33,32 @@ extends Node
 	{name = "Blood Leaf", count = 0, texture = load("res://menus/UpgradeItems/BloodLeaf.png"), description = "Attacks have a chance to heal the hero - lifesteal"},
 ]
 
+@onready var players := {
+	"1": {
+		viewport = player1SVP,
+		camera = player1SVP.get_node("Camera2D"),
+		player = arena.get_node("Player1"),
+		levelText = player1HUD.get_node("P1Level/P1LevelText"),
+		levelXPBar = player1HUD.get_node("P1Level/P1LevelXPBar"),
+		upgradeMenu = player1HUD.get_node("P1UpgradeMenu"),
+		itemBar = player1HUD.get_node("P1ItemBar"),
+		items = items,
+	},
+	"2": {
+		viewport = player2SVP,
+		camera = player2SVP.get_node("Camera2D"),
+		player = arena.get_node("Player2"),
+		levelText = player2HUD.get_node("P2Level/P2LevelText"),
+		levelXPBar = player2HUD.get_node("P2Level/P2LevelXPBar"),
+		upgradeMenu = player2HUD.get_node("P2UpgradeMenu"),
+		itemBar = player2HUD.get_node("P2ItemBar"),
+		items = items,
+	}
+}
+
 func _ready() -> void:
-	players["2"].viewport.get_viewport().world_2d = players["1"].viewport.get_viewport().world_2d
 	for node in players.values():
+		node.viewport.get_viewport().world_2d = arena.get_world_2d()
 		var remote_transform := RemoteTransform2D.new()
 		remote_transform.remote_path = node.camera.get_path()
 		node.player.add_child(remote_transform)

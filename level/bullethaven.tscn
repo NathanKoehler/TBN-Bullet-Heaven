@@ -83,56 +83,10 @@ layer_0/tile_data = PackedInt32Array(-786464, 131072, 5, -720928, 131072, 5, -65
 
 [node name="Multiplayer1" parent="." instance=ExtResource("4_x0qla")]
 controls = ExtResource("5_3uys6")
-speed = null
-hp_max = null
-hp = null
-shield_regen_rate = null
-shield_regen_delay = null
-shield_max = null
-shield = null
-defense = null
-level = null
-xp = null
-xp_max = null
-crit_bonus = null
-crit_chance = null
-crit_mod = null
-attack_speed = null
-proj_attack_speed = null
-lifesteal_chance = null
-lifesteal_mod = null
-effect_hit = null
-effect_death = null
-magic_bullet = null
-lightning = null
-wind_slash = null
 
 [node name="Multiplayer2" parent="." instance=ExtResource("4_x0qla")]
 position = Vector2(100, 0)
 controls = ExtResource("6_7bqjg")
-speed = null
-hp_max = null
-hp = null
-shield_regen_rate = null
-shield_regen_delay = null
-shield_max = null
-shield = null
-defense = null
-level = null
-xp = null
-xp_max = null
-crit_bonus = null
-crit_chance = null
-crit_mod = null
-attack_speed = null
-proj_attack_speed = null
-lifesteal_chance = null
-lifesteal_mod = null
-effect_hit = null
-effect_death = null
-magic_bullet = null
-lightning = null
-wind_slash = null
 
 [node name="Skeleton Spawn Timer" type="Timer" parent="."]
 wait_time = 1.8

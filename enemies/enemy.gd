@@ -91,14 +91,14 @@ func _on_hurtbox_area_entered(hitbox):
 	
 func drop_xp():
 	var xp_drop = xp.instantiate()
-	get_tree().current_scene.call_deferred("add_child", xp_drop)
-	xp_drop.call_deferred("set_global_position", self.global_position)
+	game_controller.arena.add_child(xp_drop)
+	xp_drop.set_position(position)
 	
 func spawn_effect(EFFECT: PackedScene, effect_pos: Vector2=global_position):
 	if EFFECT:
 		var effect = EFFECT.instantiate()
-		get_tree().current_scene.add_child(effect)
-		effect.global_position = effect_pos
+		game_controller.arena.add_child(effect)
+		effect.set_position(effect_pos)
 		return effect
 		
 func spawn_dmg_indicator(damage: int, is_crit: bool=false):

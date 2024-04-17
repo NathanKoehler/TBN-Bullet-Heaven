@@ -26,7 +26,7 @@ func _process(delta):
 func add_item_to_list():
 	for child in $ItemHBoxContainer.get_children():
 		child.queue_free()
-	for item in game_controller.items:
+	for item in game_controller.items_dict.values():
 		if (item.count > 1):
 			var ui_elem = $ExampleHBoxContainer/ExampleGrid.duplicate()
 			ui_elem.get_child(0).get_child(0).texture = item.texture

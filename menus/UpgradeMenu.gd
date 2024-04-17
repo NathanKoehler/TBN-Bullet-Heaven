@@ -8,12 +8,15 @@ var paused = 0
 
 var game_controller
 
+var player_id
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var root = get_tree().root
 	game_controller = root.get_child(root.get_child_count() - 1)
 	$HBoxContainer.hide()
-	add_item_to_list()
+	$ExampleHBoxContainer.hide()
+	add_item_to_list(game_controller.items_dict)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -23,10 +26,12 @@ func _process(delta):
 		get_tree().paused = false
 		paused = 0
 
-func add_item_to_list():
+func add_item_to_list(item_dict):
+
 	for child in $ItemHBoxContainer.get_children():
 		child.queue_free()
-	for item in game_controller.items_dict.values():
+	
+	for item in item_dict.values():
 		if (item.count > 1):
 			var ui_elem = $ExampleHBoxContainer/ExampleGrid.duplicate()
 			ui_elem.get_child(0).get_child(0).texture = item.texture
@@ -42,9 +47,10 @@ func add_item_to_list():
 			$ItemHBoxContainer.add_child(ui_elem)
 
 func selected_upgrade(item):
-	item.count = item.count + 1
-	add_item_to_list()
-	emit_signal("upgrade", item)
+	item.value.count = item.value.count + 1
+	game_controller.get_player_prop(player_id, "playerNode").handle_upgrade(item.name, item.value)
+	add_item_to_list(game_controller.get_player_prop(player_id, "items"))
+	player_id = null
 	close()
 
 func _on_item_1_pressed():
@@ -75,10 +81,10 @@ func close():
 	paused = 2
 	$HBoxContainer.hide()
 	
-func open(level):
+func open(playerId, level):
+	player_id = playerId
 	
 	$HBoxContainer.show()
-	$LevelText.text = "Level : " + str(level)
 	paused = 1
 	
 	$HBoxContainer/Items/Item1.grab_focus()
@@ -87,11 +93,11 @@ func open(level):
 	offered.clear()
 	var item_key_list = game_controller.items_dict.keys()
 	for num in rand_dict:
-		var item = item_key_list[num]
-		offered.append(game_controller.items[num])
+		var item = game_controller.items_dict[item_key_list[num]]
+		offered.append({ "name": item_key_list[num], "value": game_controller.get_player_prop(player_id, "items")[item_key_list[num]] })
 		var ui_item = $HBoxContainer/Items.get_child(loaded)
 		ui_item.get_child(0).texture = item["texture"]
-		ui_item.get_child(1).get_child(0).text = item["name"]
+		ui_item.get_child(1).get_child(0).text = item_key_list[num]
 		ui_item.get_child(1).get_child(1).text = item["description"]
 		loaded += 1
 

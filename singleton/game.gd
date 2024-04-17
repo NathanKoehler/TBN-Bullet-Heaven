@@ -44,7 +44,6 @@ extends Node
 		levelText = players1HUD.get_node("P1Level/P1LevelText"),
 		levelXPBar = players1HUD.get_node("P1Level/P1LevelXPBar"),
 		upgradeMenu = players1HUD.get_node("P1UpgradeMenu"),
-		itemBar = players1HUD.get_node("P1ItemBar"),
 		items = items_dict.duplicate(),
 		lives = players1HUD.get_node("P1Lives"),
 		active = true,
@@ -56,7 +55,6 @@ extends Node
 		levelText = players2HUD.get_node("P2Level/P2LevelText"),
 		levelXPBar = players2HUD.get_node("P2Level/P2LevelXPBar"),
 		upgradeMenu = players2HUD.get_node("P2UpgradeMenu"),
-		itemBar = players2HUD.get_node("P2ItemBar"),
 		items = items_dict.duplicate(),
 		lives = players2HUD.get_node("P2Lives"),
 		active = true,
@@ -68,6 +66,12 @@ func get_arena():
 
 func get_player_list():
 	return players.values().filter(func(player): return player.active) 
+
+func get_player_prop(player_id, prop):
+	return players[str(player_id)][prop]
+
+func set_player_prop(player_id, prop, value):
+	players[str(player_id)][prop] = value
 
 func _ready() -> void:
 	var player_values = players.values()
@@ -86,9 +90,9 @@ func decrease_lives() -> void:
 	players["1"].lives.text = "Lives: " + str(lives)
 	players["2"].lives.text = "    Lives: " + str(lives)
 	if lives == 0:
-		get_tree().change_scene_to_file("res://menus/MainMenu/DeathScreen.tscn")
+		get_tree().call_deferred("change_scene_to_file", "res://menus/MainMenu/DeathScreen.tscn")
 		print("player has died")
 		
-func level_text_update(id, level) -> void:
-	var player_id = str(id)
-	players[player_id].levelText.text = "Level: " + str(level)
+# func level_text_update(id, level) -> void:
+# 	var player_id = str(id)
+# 	players[player_id].levelText.text = "Level: " + str(level)

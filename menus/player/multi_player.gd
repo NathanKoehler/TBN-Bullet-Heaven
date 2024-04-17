@@ -17,8 +17,6 @@ var lookY = 0;
 
 @onready var shieldBar = $PlayerShieldBar
 @onready var healthBar = $PlayerHealthBar
-@onready var upgradeMenu = $UpgradeMenu
-@onready var playerLevelBar = $UpgradeMenu/LevelBarHolder/PlayerLevelBar
 @export var speed = 100 : 
 	set(value):
 		speed = value 
@@ -29,7 +27,6 @@ var lookY = 0;
 	set(value):
 		if value != hp_max:
 			hp_max = max(0, value)
-			emit_signal("hp_max_changed", hp_max)
 			healthBar.max_value = hp_max
 			healthBar.get_child(0).text = str(round(hp)) + " / " + str(hp_max)
 			self.hp = hp
@@ -39,7 +36,6 @@ var lookY = 0;
 	set(value):
 		if value != hp:
 			hp = clamp(value, 0, hp_max)
-			emit_signal("hp_changed", hp)
 			
 			_dmg_timer.start()
 			
@@ -113,7 +109,6 @@ var lightning_enabled = false
 var spikeskin_enabled = false
 var spikeskin_damage = 0
 var windslash_enabled = false
-@onready var item_array = $UpgradeMenu.items
 
 # Scene references
 @export var effect_hit = preload("res://effects/hit_effect.tscn")
@@ -129,7 +124,6 @@ var windslash_enabled = false
 # general vars
 var rng = RandomNumberGenerator.new()
 var is_paused = false
-var item_dict
 
 var _dmg_timer := Timer.new()
 var _shield_timer := Timer.new()
@@ -161,6 +155,7 @@ func _ready():
 
 #func _process(delta):
 	#$ShotPosition.set_position(Vector2(lookX, lookY))
+	
 	
 	
 func _physics_process(delta: float) -> void:
@@ -202,6 +197,12 @@ func _physics_process(delta: float) -> void:
 #func get_position():
 	#return position
 
+func set_items(items):
+	game_controller.set_player_prop(id, "items", items)
+
+
+func get_items():
+	return game_controller.get_player_prop(id, "items")
 
 func receive_damage(base_damage):
 	var actual_damage = base_damage
@@ -214,10 +215,9 @@ func receive_damage(base_damage):
 	else:
 		hp -= actual_damage
 	if hp <= 0:
-		if "Second Wind" in item_dict:
-			if (item_dict["Second Wind"].count > 0):
-				item_dict["Second Wind"].count = item_dict["Second Wind"].count - 1
-				hp = max(100, hp_max)
+		if (get_items()["Second Wind"].count > 0):
+			get_items()["Second Wind"].count = get_items()["Second Wind"].count - 1
+			hp = max(100, hp_max)
 	if hp == 0:
 		emit_signal("died")
 	print(hp)
@@ -231,10 +231,10 @@ func _on_hurtbox_area_entered(hitbox):
 		enemy.spawn_effect(effect_hit)
 		enemy.spawn_dmg_indicator(actual_damage, false)
 		
-	if "Luck Leaf" in item_dict:
+	if get_items()["Luck Leaf"].count > 0:
 		var rng = RandomNumberGenerator.new()
 		var num = rng.randi_range(0, 100)
-		if (num > item_dict["Luck Leaf"].count * 5):
+		if (num > get_items()["Luck Leaf"].count * 5):
 			receive_damage(hitbox.damage)
 	else:
 		receive_damage(hitbox.damage)
@@ -311,8 +311,8 @@ func _on_wind_slash_timer_timeout():
 	
 func mod_weapon_damage(name: String, weapon):
 	var new_damage = weapon.damage
-	if name in item_dict:
-		new_damage += item_dict[name].count * item_dict[name].mod
+	if get_items()[name].count > 0:
+		new_damage += get_items()[name].count * get_items()[name].mod
 	
 	if (crit_chance > 100 and crit_chance >= rng.randi_range(0, 200)):
 		new_damage = new_damage * crit_mod * 4 + crit_bonus
@@ -326,8 +326,7 @@ func mod_weapon_damage(name: String, weapon):
 	
 func mod_weapon_speed(name: String, speed: float):
 	var new_speed = speed
-	if "Horns" in item_dict:
-		new_speed += item_dict["Horns"].count * item_dict[name].speed_mod * 2
+	new_speed += get_items()["Horns"].count * get_items()[name].speed_mod * 2
 	return new_speed
 	
 func _on_collectionbox_area_entered(hitbox):
@@ -342,7 +341,7 @@ func receive_xp(hitbox):
 		hitbox.queue_free()
 		#increases xp
 		xp += 1
-		playerLevelBar.value = xp
+		game_controller.get_player_prop(id, "levelXPBar").value = xp
 		print(xp)
 		#checks if ready to level up
 		if xp == xp_max:
@@ -354,12 +353,13 @@ func level_up():
 	level += 1
 	xp = 0
 	xp_max += 2
-	playerLevelBar.max_value = xp_max
-	playerLevelBar.value = xp
 	print("LEVEL UP!")
-	game_controller.level_text_update(id, level)
+	game_controller.get_player_prop(id, "levelXPBar").max_value = xp_max
+	game_controller.get_player_prop(id, "levelXPBar").value = xp
+	game_controller.get_player_prop(id, "levelText").text = "Level: " + str(level)
+	game_controller.get_player_prop(id, "upgradeMenu").open(id, level)
+	
 
-	$UpgradeMenu.open(level)
 	
 	
 
@@ -370,8 +370,8 @@ func lifesteal(amount: float):
 func health_boost(amount: float):
 	hp += ceil(amount)
 	
-func improve_weapon(item):
-	print("Upgraded weapon: " + item.name)
+func improve_weapon(name, item):
+	print("Upgraded weapon: " + name)
 	
 func improve_attack_speeds(amount: int, type: int = 0):
 	match(type):
@@ -381,32 +381,32 @@ func improve_attack_speeds(amount: int, type: int = 0):
 			proj_attack_speed += amount
 		_:
 			pass
-	if "Wind Slash" in item_dict:
-		$wind_slash_timer.wait_time = (item_dict["Wind Slash"].attk_speed 
-		* pow(item_dict["Wind Slash"].speed_mod, -0.5 * (attack_speed + proj_attack_speed)))
+	if get_items()["Wind Slash"].count > 0:
+		$wind_slash_timer.wait_time = (get_items()["Wind Slash"].attk_speed 
+		* pow(get_items()["Wind Slash"].speed_mod, -0.5 * (attack_speed + proj_attack_speed)))
 		print("New Wind Slash attack speed: " + str($wind_slash_timer.wait_time))
-	if "Lightning" in item_dict:
-		$lightning_timer.wait_time = (item_dict["Lightning"].attk_speed 
-		* pow(item_dict["Lightning"].speed_mod, -0.5 * attack_speed))
+	if get_items()["Lightning"].count > 0:
+		$lightning_timer.wait_time = (get_items()["Lightning"].attk_speed 
+		* pow(get_items()["Lightning"].speed_mod, -0.5 * attack_speed))
 		print("New Lightning attack speed: " + str($lightning_timer.wait_time))
-	if "Ice Blast" in item_dict:
-		$magic_bullet_timer.wait_time = (item_dict["Ice Blast"].attk_speed 
-		* pow(item_dict["Ice Blast"].speed_mod, -0.5 * (attack_speed + proj_attack_speed)))
+	if get_items()["Ice Blast"].count > 0:
+		$magic_bullet_timer.wait_time = (get_items()["Ice Blast"].attk_speed 
+		* pow(get_items()["Ice Blast"].speed_mod, -0.5 * (attack_speed + proj_attack_speed)))
 		print("New Ice Blast attack speed: " + str($magic_bullet_timer.wait_time))
 
-func _on_upgrade_menu_upgrade(item):
-	item_dict[item.name] = item
-	print("recieved a " + item.name)
-	match (item.name):
+func handle_upgrade(name, item):
+	get_items()[name] = item
+	print("recieved a " + name)
+	match (name):
 		"Health":
 			health_boost(50)
 		"Lightning":
 			if !lightning_enabled:
 				lightning_enabled = true
 			else: 
-				improve_weapon(item)
+				improve_weapon(name, item)
 		"Ice Blast":
-			improve_weapon(item)
+			improve_weapon(name, item)
 		"Speed":
 			speed *= 1.5
 		"Bronze Plate":
@@ -429,18 +429,18 @@ func _on_upgrade_menu_upgrade(item):
 		"Spike Skin":
 			if !spikeskin_enabled:
 				spikeskin_enabled = true
-			spikeskin_damage += 1 + 4 * item_dict[item.name].count
+			spikeskin_damage += 1 + 4 * get_items()[name].count
 		"Scale Catalyst":
-			shield_regen_rate = log(item_dict[item.name].count + 1) * 10 + item_dict[item.name].count/5
+			shield_regen_rate = log(get_items()[name].count + 1) * 10 + get_items()[name].count/5
 		"Ichor of Dionysus":
-			shield_regen_delay = max(4 - pow(2, 2 - item_dict[item.name].count / 4), 1)
+			shield_regen_delay = max(4 - pow(2, 2 - get_items()[name].count / 4), 1)
 		"Grow Scales":
 			shield_max += 20
 		"Wind Slash":
 			if !windslash_enabled:
 				windslash_enabled = true
 			else: 
-				improve_weapon(item)
+				improve_weapon(name, item)
 		"Spike Circle":
 			lifesteal_chance += 5
 			lifesteal_mod += 0.1

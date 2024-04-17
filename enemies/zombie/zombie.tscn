@@ -1,11 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://nbhpwwwasgih"]
+[gd_scene load_steps=16 format=3 uid="uid://nbhpwwwasgih"]
 
 [ext_resource type="Script" path="res://enemies/zombie/zombie.gd" id="1_h5y5c"]
+[ext_resource type="Shader" path="res://enemies/zombie/zombie.gdshader" id="1_qr4xr"]
 [ext_resource type="Texture2D" uid="uid://cevxfgswdfxk4" path="res://enemies/zombie/big_zombie_run_anim_f0.png" id="3_5i22f"]
 [ext_resource type="Texture2D" uid="uid://b87a38sikan5" path="res://enemies/zombie/big_zombie_run_anim_f1.png" id="4_je76c"]
 [ext_resource type="Texture2D" uid="uid://ck0ptfr5j4qxf" path="res://enemies/zombie/big_zombie_run_anim_f2.png" id="5_y7qjr"]
 [ext_resource type="Texture2D" uid="uid://dih8es6v3mjy5" path="res://enemies/zombie/big_zombie_run_anim_f3.png" id="6_1rhpg"]
 [ext_resource type="PackedScene" uid="uid://dklg66lqw2ckt" path="res://Hitbox.tscn" id="6_wb6ao"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_764s6"]
+shader = ExtResource("1_qr4xr")
+shader_parameter/hit_opacity = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x3rfs"]
 animations = [{
@@ -45,7 +50,7 @@ tracks/0/path = NodePath("AnimatedSprite2d:material:shader_parameter/hit_opacity
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.296513),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.0, 0.0]
@@ -65,16 +70,13 @@ _data = {
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_h5y5c")
-hp = 30
-hp_max = 30
 metadata/_edit_horizontal_guides_ = [-47.0]
 
 [node name="AnimatedSprite2d" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_764s6")
 position = Vector2(-1, -5)
 sprite_frames = SubResource("SpriteFrames_x3rfs")
 autoplay = "default"
-frame = 3
-frame_progress = 0.897279
 
 [node name="Hurtbox" type="Area2D" parent="." groups=["enemy"]]
 collision_layer = 4

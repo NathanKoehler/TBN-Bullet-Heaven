@@ -103,11 +103,17 @@ autoplay = true
 
 [node name="enemy" parent="." instance=ExtResource("9_nv3ye")]
 position = Vector2(9, 69)
+defense = null
+level = null
+receives_knockback = null
+knockback_modifier = null
+effect_hit = null
+effect_death = null
+xp = null
+indicator_damage = null
 
 [node name="zombie" parent="." instance=ExtResource("8_em5ec")]
 position = Vector2(-37, 65)
-hp = 10
-hp_max = 10
 
 [connection signal="timeout" from="Skeleton Spawn Timer" to="." method="_on_skeleton_spawn_timer_timeout"]
 [connection signal="timeout" from="Zombie Spawn Timer" to="." method="_on_zombie_spawn_timer_timeout"]

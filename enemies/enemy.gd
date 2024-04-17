@@ -11,8 +11,8 @@ class_name Enemy
 @export var knockback_modifier = 1
 
 #Scene references
-@export var effect_hit = load ("res://effects/hit_effect.tscn")
-@export var effect_death = load ("res://effects/death_effect.tscn")
+@export var effect_hit = preload ("res://effects/hit_effect.tscn")
+@export var effect_death = preload ("res://effects/death_effect.tscn")
 @export var xp = preload ("res://xp/xp.tscn")
 
 @export var indicator_damage = preload ("res://effects/damage_indicator.tscn")
@@ -27,7 +27,7 @@ var player_list
 
 func _ready():
 	var root = get_tree().root
-	game_controller = root.get_child(root.get_child_count() - 1)  
+	game_controller = root.get_child(root.get_child_count() - 1)
 	player_list = game_controller.get_player_list()
 
 func die():
@@ -35,7 +35,7 @@ func die():
 	spawn_effect(effect_death)
 	queue_free()
 
-func _process(delta):
+func _process(_delta):
 	if game_controller.lives > 0:
 		var closest_player_index = -1
 		var closest_distance = 1000000
@@ -46,10 +46,10 @@ func _process(delta):
 			if distance < closest_distance:
 				closest_distance = distance
 				closest_player_index = player_index
-
-		var closest_player_position = player_list[closest_player_index]["playerNode"].get_global_position()
-
-		position += (closest_player_position - position).normalized() * speed
+				
+		if closest_player_index != -1:	
+			var closest_player_position = player_list[closest_player_index]["playerNode"].get_global_position()
+			position += (closest_player_position - position).normalized() * speed
 
 func receive_damage(base_damage):
 	hitflash.play("hitflash")

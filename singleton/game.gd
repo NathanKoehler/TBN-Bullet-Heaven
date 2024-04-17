@@ -1,6 +1,6 @@
 extends Node
 
-@export var lives = 0
+@export var lives = 4
 
 @onready var arena := $Control/ArenaSubViewport/Arena
 

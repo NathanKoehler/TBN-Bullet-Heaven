@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+class_name Enemy
 
 @export var hp = 10
 @export var hp_max = 10
@@ -9,18 +10,15 @@ extends CharacterBody2D
 @export var receives_knockback = true
 @export var knockback_modifier = 1
 
-
 #Scene references
-@export var effect_hit = preload("res://effects/hit_effect.tscn")
-@export var effect_death = preload("res://effects/death_effect.tscn")
-@export var xp = preload("res://xp/xp.tscn")
+@export var effect_hit = load ("res://effects/hit_effect.tscn")
+@export var effect_death = load ("res://effects/death_effect.tscn")
+@export var xp = preload ("res://xp/xp.tscn")
 
-@export var indicator_damage = preload("res://effects/damage_indicator.tscn")
+@export var indicator_damage = preload ("res://effects/damage_indicator.tscn")
 
 #Node references
 @onready var hitflash = $AnimationPlayer
-
-
 
 var rng = RandomNumberGenerator.new()
 var spawn_position
@@ -29,27 +27,29 @@ var player_list
 
 func _ready():
 	var root = get_tree().root
-	game_controller = root.get_child(root.get_child_count() - 1)
+	game_controller = root.get_child(root.get_child_count() - 1)  
 	player_list = game_controller.get_player_list()
-
 
 func die():
 	drop_xp()
 	spawn_effect(effect_death)
 	queue_free()
 
-
-func _physics_process(delta):
+func _process(delta):
 	if game_controller.lives > 0:
-		var central_position = player_list.reduce(
-			func(acc, player): 
-				if acc != Vector2.ZERO:
-					acc = (acc + player.playerNode.position) / 2
-				else:
-					acc = player.playerNode.position
-		, Vector2.ZERO)
-		position += (central_position - position).normalized() * speed
-	
+		var closest_player_index = -1
+		var closest_distance = 1000000
+
+		for player_index in player_list.size():
+			var playerNode = player_list[player_index]["playerNode"]
+			var distance = global_position.distance_to(playerNode.get_global_position())
+			if distance < closest_distance:
+				closest_distance = distance
+				closest_player_index = player_index
+
+		var closest_player_position = player_list[closest_player_index]["playerNode"].get_global_position()
+
+		position += (closest_player_position - position).normalized() * speed
 
 func receive_damage(base_damage):
 	hitflash.play("hitflash")
@@ -68,7 +68,6 @@ func receive_damage(base_damage):
 	print(str(name) + " received " + str(actual_damage) + " damage")
 	return actual_damage
 
-
 func receive_knockback(damage_source_pos: Vector2, received_damage: int):
 	if receives_knockback:
 		var knockback_direction = damage_source_pos.direction_to(self.global_position)
@@ -76,7 +75,6 @@ func receive_knockback(damage_source_pos: Vector2, received_damage: int):
 		var knockback = knockback_direction * knockback_strength
 		
 		global_position += knockback
-
 
 func _on_hurtbox_area_entered(hitbox):
 	var actual_damage = receive_damage(hitbox.damage)
@@ -91,20 +89,19 @@ func _on_hurtbox_area_entered(hitbox):
 	spawn_effect(effect_hit)
 	spawn_dmg_indicator(actual_damage, hitbox.is_crit)
 	
-	
 func drop_xp():
 	var xp_drop = xp.instantiate()
 	get_tree().current_scene.call_deferred("add_child", xp_drop)
 	xp_drop.call_deferred("set_global_position", self.global_position)
 	
-func spawn_effect(EFFECT: PackedScene, effect_pos: Vector2 = global_position):
+func spawn_effect(EFFECT: PackedScene, effect_pos: Vector2=global_position):
 	if EFFECT:
 		var effect = EFFECT.instantiate()
 		get_tree().current_scene.add_child(effect)
 		effect.global_position = effect_pos
 		return effect
 		
-func spawn_dmg_indicator(damage: int, is_crit: bool = false):
+func spawn_dmg_indicator(damage: int, is_crit: bool=false):
 	var indicator = spawn_effect(indicator_damage)
 	if indicator:
 		indicator.label.text = str(damage)

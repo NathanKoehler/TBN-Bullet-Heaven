@@ -1,12 +1,13 @@
 extends Control
 
-@onready var ResOptionButton = $HBoxContainer/OptionButton
+@onready var ResOptionButton = $VBoxContainer/OptionButton
 
 var Resolutions: Dictionary = {"1152x648":Vector2(1152, 648),
 								"1280x720":Vector2(1280, 720),
 								"1366x768":Vector2(1366, 768),
 								"1536x864":Vector2(1536, 864),
-								"1600x900":Vector2(1600, 900)}
+								"1600x900":Vector2(1600, 900),
+								"1920x1080":Vector2(1920, 1080)}
 
 func _ready():
 	addResolutions()

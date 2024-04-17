@@ -12,6 +12,9 @@ const DOWN = 1
 
 var lookX = RIGHT;
 var lookY = 0;
+
+@export var id = -1
+
 @onready var shieldBar = $PlayerShieldBar
 @onready var healthBar = $PlayerHealthBar
 @onready var upgradeMenu = $UpgradeMenu
@@ -22,7 +25,7 @@ var lookY = 0;
 	get:
 		return speed
 @export var currPosition = position
-@export var hp_max = 100 : 
+@export var hp_max = 5 : 
 	set(value):
 		if value != hp_max:
 			hp_max = max(0, value)
@@ -359,6 +362,7 @@ func level_up():
 	playerLevelBar.max_value = xp_max
 	playerLevelBar.value = xp
 	print("LEVEL UP!")
+	game_controller.level_text_update(id, level)
 
 	$UpgradeMenu.open(level)
 	

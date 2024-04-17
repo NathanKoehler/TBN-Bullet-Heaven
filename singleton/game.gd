@@ -69,7 +69,10 @@ func get_player_list():
 	return players.values().filter(func(player): return player.active) 
 
 func _ready() -> void:
-	for player in players.values():
+	var player_values = players.values()
+	for i in player_values.size():
+		var player = player_values[i]
+		player.playerNode.id = i + 1
 		player.viewport.get_viewport().world_2d = arena.get_world_2d()
 		var remote_transform := RemoteTransform2D.new()
 		remote_transform.remote_path = player.camera.get_path()
@@ -84,3 +87,7 @@ func decrease_lives() -> void:
 	if lives == 0:
 		get_tree().change_scene_to_file("res://menus/MainMenu/DeathScreen.tscn")
 		print("player has died")
+		
+func level_text_update(id, level) -> void:
+	var player_id = str(id)
+	players[player_id].levelText = "Level: " + level

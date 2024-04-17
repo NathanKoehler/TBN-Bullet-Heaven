@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bm6i76d5ro807"]
+[gd_scene load_steps=11 format=3 uid="uid://bm6i76d5ro807"]
 
 [ext_resource type="Script" path="res://singleton/game.gd" id="1_gxq1j"]
 [ext_resource type="PackedScene" uid="uid://dtsrhhlwucwp3" path="res://level/bullethaven.tscn" id="1_ln1ln"]
 [ext_resource type="PackedScene" uid="uid://s58lmw02rvoq" path="res://UI/healthbar/player/PlayerHealthBar.tscn" id="3_w37tk"]
 [ext_resource type="Texture2D" uid="uid://dpqrsqakymgxm" path="res://menus/UpgradeItems/IceBlast.png" id="4_md7sm"]
-[ext_resource type="Texture2D" uid="uid://blcncoj16sfcm" path="res://Bonetooth.png" id="5_vffhe"]
-[ext_resource type="Theme" uid="uid://0fxkf7mur6ad" path="res://menus/MainMenu/GUI/description.tres" id="6_t3c38"]
+[ext_resource type="PackedScene" uid="uid://dqmeotsgpmaq5" path="res://menus/UpgradeMenu.tscn" id="4_unqgj"]
 
 [sub_resource type="Gradient" id="Gradient_6j68d"]
 colors = PackedColorArray(0, 0, 0, 0.0901961, 0, 0, 0, 0.0901961)
@@ -53,7 +52,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="Control/MultiplayerSVPContainer/Player1SVPContainer"]
 disable_3d = true
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(574, 648)
 render_target_update_mode = 4
 
 [node name="Camera2D" type="Camera2D" parent="Control/MultiplayerSVPContainer/Player1SVPContainer/SubViewport"]
@@ -71,7 +70,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="Control/MultiplayerSVPContainer/Player2SVPContainer"]
 disable_3d = true
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(574, 648)
 render_target_update_mode = 4
 
 [node name="Camera2D" type="Camera2D" parent="Control/MultiplayerSVPContainer/Player2SVPContainer/SubViewport"]
@@ -83,28 +82,26 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PlayerSeperator" type="HBoxContainer" parent="Control/HUDMargin"]
+layout_mode = 2
+
+[node name="Player1HUD" type="MarginContainer" parent="Control/HUDMargin/PlayerSeperator"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="PlayerSeperator" type="HBoxContainer" parent="Control/HUDMargin"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD"]
 layout_mode = 2
-
-[node name="Player1HUD" type="Control" parent="Control/HUDMargin/PlayerSeperator"]
-layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 
 [node name="P1Level" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD"]
 clip_contents = true
 custom_minimum_size = Vector2(200, 60)
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -60.0
-offset_right = 250.0
-grow_vertical = 0
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
@@ -126,13 +123,7 @@ texture_over = SubResource("GradientTexture1D_m73fa")
 texture_progress = SubResource("GradientTexture1D_fevro")
 
 [node name="P1ItemsExample" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
 [node name="ExampleContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1ItemsExample"]
 layout_mode = 2
@@ -177,123 +168,24 @@ label_settings = SubResource("LabelSettings_n6e7i")
 horizontal_alignment = 1
 
 [node name="P1ItemBar" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="P1UpgradeMenu" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Items" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu"]
-custom_minimum_size = Vector2(300, 75)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
-[node name="Item1" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items"]
+[node name="P1UpgradeMenu" parent="Control/HUDMargin/PlayerSeperator/Player1HUD" instance=ExtResource("4_unqgj")]
+z_index = 0
 layout_mode = 2
-size_flags_vertical = 0
 
-[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item1"]
-layout_mode = 2
-size_flags_vertical = 0
-texture = ExtResource("5_vffhe")
-stretch_mode = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item1"]
+[node name="Player2HUD" type="MarginContainer" parent="Control/HUDMargin/PlayerSeperator"]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="Item_1" type="Button" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item1/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Option 1"
-
-[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item1/VBoxContainer"]
-clip_contents = false
-layout_mode = 2
-theme = ExtResource("6_t3c38")
-text = "description "
-fit_content = true
-
-[node name="Item2" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items"]
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item2"]
-layout_mode = 2
-size_flags_vertical = 0
-texture = ExtResource("5_vffhe")
-stretch_mode = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item2"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Item_2" type="Button" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item2/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Option 1"
-
-[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item2/VBoxContainer"]
-clip_contents = false
-layout_mode = 2
-theme = ExtResource("6_t3c38")
-text = "description "
-fit_content = true
-
-[node name="Item3" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items"]
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item3"]
-layout_mode = 2
-size_flags_vertical = 0
-texture = ExtResource("5_vffhe")
-stretch_mode = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item3"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Item_3" type="Button" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item3/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Option 1"
-
-[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Player1HUD/P1UpgradeMenu/Items/Item3/VBoxContainer"]
-clip_contents = false
-layout_mode = 2
-theme = ExtResource("6_t3c38")
-text = "description "
-fit_content = true
-
-[node name="Player2HUD" type="Control" parent="Control/HUDMargin/PlayerSeperator"]
-layout_mode = 2
-size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
 [node name="P2Level" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD"]
 clip_contents = true
 custom_minimum_size = Vector2(200, 60)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -250.0
-offset_top = -60.0
-grow_horizontal = 0
-grow_vertical = 0
+layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 alignment = 2
@@ -317,13 +209,7 @@ texture_over = SubResource("GradientTexture1D_m73fa")
 texture_progress = SubResource("GradientTexture1D_fevro")
 
 [node name="P2ItemsExample" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
 [node name="ExampleContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2ItemsExample"]
 layout_mode = 2
@@ -368,105 +254,11 @@ label_settings = SubResource("LabelSettings_n6e7i")
 horizontal_alignment = 1
 
 [node name="P2ItemBar" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="P2UpgradeMenu" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Items" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu"]
-custom_minimum_size = Vector2(300, 75)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
-[node name="Item1" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items"]
+[node name="P2UpgradeMenu" parent="Control/HUDMargin/PlayerSeperator/Player2HUD" instance=ExtResource("4_unqgj")]
+z_index = 0
 layout_mode = 2
-size_flags_vertical = 0
-
-[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item1"]
-layout_mode = 2
-size_flags_vertical = 0
-texture = ExtResource("5_vffhe")
-stretch_mode = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item1"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Item_1" type="Button" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item1/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Option 1"
-
-[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item1/VBoxContainer"]
-clip_contents = false
-layout_mode = 2
-theme = ExtResource("6_t3c38")
-text = "description "
-fit_content = true
-
-[node name="Item2" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items"]
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item2"]
-layout_mode = 2
-size_flags_vertical = 0
-texture = ExtResource("5_vffhe")
-stretch_mode = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item2"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Item_2" type="Button" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item2/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Option 1"
-
-[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item2/VBoxContainer"]
-clip_contents = false
-layout_mode = 2
-theme = ExtResource("6_t3c38")
-text = "description "
-fit_content = true
-
-[node name="Item3" type="HBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items"]
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="ItemImage" type="TextureRect" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item3"]
-layout_mode = 2
-size_flags_vertical = 0
-texture = ExtResource("5_vffhe")
-stretch_mode = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item3"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Item_3" type="Button" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item3/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Option 1"
-
-[node name="Description" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Player2HUD/P2UpgradeMenu/Items/Item3/VBoxContainer"]
-clip_contents = false
-layout_mode = 2
-theme = ExtResource("6_t3c38")
-text = "description "
-fit_content = true
 
 [node name="ArenaSubViewport" type="SubViewport" parent="Control"]
 

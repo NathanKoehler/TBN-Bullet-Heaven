@@ -1,32 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://dqmeotsgpmaq5"]
+[gd_scene load_steps=6 format=3 uid="uid://dqmeotsgpmaq5"]
 
 [ext_resource type="Script" path="res://menus/UpgradeMenu.gd" id="1_feus4"]
 [ext_resource type="Texture2D" uid="uid://blcncoj16sfcm" path="res://Bonetooth.png" id="2_gs1lf"]
 [ext_resource type="Texture2D" uid="uid://dpqrsqakymgxm" path="res://menus/UpgradeItems/IceBlast.png" id="2_qhrlq"]
 [ext_resource type="Theme" uid="uid://0fxkf7mur6ad" path="res://menus/MainMenu/GUI/description.tres" id="4_22rbx"]
-[ext_resource type="PackedScene" uid="uid://s58lmw02rvoq" path="res://UI/healthbar/player/PlayerHealthBar.tscn" id="5_blmtq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_m2dod"]
 font_size = 8
 shadow_size = 0
 
-[sub_resource type="Gradient" id="Gradient_6j68d"]
-colors = PackedColorArray(0, 0, 0, 0.0901961, 0, 0, 0, 0.0901961)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_56c7o"]
-gradient = SubResource("Gradient_6j68d")
-
-[sub_resource type="Gradient" id="Gradient_8pcxi"]
-offsets = PackedFloat32Array(0, 0.995708, 1)
-colors = PackedColorArray(1.39579e-06, 0.399536, 0.526939, 1, 0.308895, 0.773608, 0.951273, 1, 0.344366, 0.816563, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_y7v0x"]
-gradient = SubResource("Gradient_8pcxi")
-width = 32
-
 [node name="UpgradeMenu" type="Control"]
 process_mode = 3
-z_index = 10
 z_as_relative = false
 layout_mode = 3
 anchors_preset = 15
@@ -37,16 +21,6 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_feus4")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.662745, 0.937255, 0.964706, 0.0705882)
 
 [node name="ExampleHBoxContainer" type="HBoxContainer" parent="."]
 visible = false
@@ -105,7 +79,6 @@ anchor_right = 1.0
 grow_horizontal = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 390.0
 offset_top = 249.0
@@ -197,44 +170,6 @@ clip_contents = false
 layout_mode = 2
 theme = ExtResource("4_22rbx")
 text = "description "
-fit_content = true
-
-[node name="LevelBarHolder" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -91.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="PlayerLevelBar" parent="LevelBarHolder" instance=ExtResource("5_blmtq")]
-custom_minimum_size = Vector2(1000, 30)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-max_value = 1.0
-nine_patch_stretch = true
-texture_under = null
-texture_over = SubResource("GradientTexture1D_56c7o")
-texture_progress = SubResource("GradientTexture1D_y7v0x")
-
-[node name="LevelText" type="RichTextLabel" parent="."]
-clip_contents = false
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -150.0
-offset_top = -167.0
-offset_right = 150.0
-grow_horizontal = 2
-grow_vertical = 0
-bbcode_enabled = true
-text = " [center] Level : 0 [/center]"
 fit_content = true
 
 [connection signal="pressed" from="HBoxContainer/Items/Item1/VBoxContainer/Item_1" to="." method="_on_item_1_pressed"]

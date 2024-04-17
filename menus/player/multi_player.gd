@@ -111,7 +111,6 @@ var spikeskin_enabled = false
 var spikeskin_damage = 0
 var windslash_enabled = false
 @onready var item_array = $UpgradeMenu.items
-@onready var item_dict = {}
 
 # Scene references
 @export var effect_hit = preload("res://effects/hit_effect.tscn")
@@ -127,6 +126,7 @@ var windslash_enabled = false
 # general vars
 var rng = RandomNumberGenerator.new()
 var is_paused = false
+var item_dict
 
 var _dmg_timer := Timer.new()
 var _shield_timer := Timer.new()
@@ -138,9 +138,7 @@ func _ready():
 	
 	rng.randomize()
 	pause_menu.hide()
-	
-	for item in item_array:
-		item_dict[item.name] = item
+
 	
 	add_child(_dmg_timer)
 	_dmg_timer.connect("timeout", Callable(self, "_on_dmg_timer_timeout"))

@@ -94,7 +94,10 @@ layout_mode = 2
 size_flags_horizontal = 6
 
 [node name="P1Lives" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Player1HUD"]
-layout_mode = 2
+layout_mode = 0
+offset_left = 400.0
+offset_right = 457.0
+offset_bottom = 40.0
 text = "Lives: 4"
 fit_content = true
 scroll_active = false

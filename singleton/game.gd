@@ -45,6 +45,7 @@ extends Node
 		upgradeMenu = players1HUD.get_node("P1UpgradeMenu"),
 		itemBar = players1HUD.get_node("P1ItemBar"),
 		items = items,
+		lives = players1HUD.get_node("P1Lives"),
 		active = true,
 	},
 	"2": {
@@ -56,6 +57,7 @@ extends Node
 		upgradeMenu = players2HUD.get_node("P2UpgradeMenu"),
 		itemBar = players2HUD.get_node("P2ItemBar"),
 		items = items,
+		lives = players2HUD.get_node("P2Lives"),
 		active = true,
 	}
 }
@@ -73,4 +75,12 @@ func _ready() -> void:
 		remote_transform.remote_path = player.camera.get_path()
 		player.playerNode.add_child(remote_transform)
 		
-		
+func decrease_lives() -> void:
+	lives -= 1
+	
+	
+	players["1"].lives.text = "Lives: " + str(lives)
+	players["2"].lives.text = "    Lives: " + str(lives)
+	if lives == 0:
+		get_tree().change_scene_to_file("res://menus/MainMenu/DeathScreen.tscn")
+		print("player has died")

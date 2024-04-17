@@ -131,8 +131,14 @@ var is_paused = false
 var _dmg_timer := Timer.new()
 var _shield_timer := Timer.new()
 
+var game_controller
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var root = get_tree().root
+	game_controller = root.get_child(root.get_child_count() - 1)  
+	
 	if not controls:
 		set_physics_process(false)
 	
@@ -235,8 +241,10 @@ func _on_hurtbox_area_entered(hitbox):
 
 
 func _on_player_died():
-	get_tree().change_scene_to_file("res://menus/MainMenu/DeathScreen.tscn")
-	print("player has died")
+	game_controller.decrease_lives()
+	
+	
+	
 	
 
 func _on_dmg_timer_timeout():

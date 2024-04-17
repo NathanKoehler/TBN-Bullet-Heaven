@@ -22,7 +22,7 @@ var lookY = 0;
 	get:
 		return speed
 @export var currPosition = position
-@export var hp_max = 100 : 
+@export var hp_max = 5 : 
 	set(value):
 		if value != hp_max:
 			hp_max = max(0, value)
@@ -235,7 +235,7 @@ func _on_hurtbox_area_entered(hitbox):
 
 
 func _on_player_died():
-	get_tree().quit()
+	get_tree().change_scene_to_file("res://menus/MainMenu/DeathScreen.tscn")
 	print("player has died")
 	
 

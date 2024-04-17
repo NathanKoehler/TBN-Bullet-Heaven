@@ -90,4 +90,4 @@ func decrease_lives() -> void:
 		
 func level_text_update(id, level) -> void:
 	var player_id = str(id)
-	players[player_id].levelText = "Level: " + level
+	players[player_id].levelText.text = "Level: " + str(level)

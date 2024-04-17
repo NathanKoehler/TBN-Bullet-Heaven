@@ -247,9 +247,6 @@ func _on_player_died():
 	hp += (hp_max/2)
 	game_controller.decrease_lives()
 	
-	
-	
-	
 
 func _on_dmg_timer_timeout():
 	if (shield < shield_max and shield_max > 0):

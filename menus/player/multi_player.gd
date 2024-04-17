@@ -12,6 +12,9 @@ const DOWN = 1
 
 var lookX = RIGHT;
 var lookY = 0;
+
+@export var id = -1
+
 @onready var shieldBar = $PlayerShieldBar
 @onready var healthBar = $PlayerHealthBar
 @onready var upgradeMenu = $UpgradeMenu
@@ -131,8 +134,14 @@ var item_dict
 var _dmg_timer := Timer.new()
 var _shield_timer := Timer.new()
 
+var game_controller
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var root = get_tree().root
+	game_controller = root.get_child(root.get_child_count() - 1)  
+	
 	if not controls:
 		set_physics_process(false)
 	
@@ -233,8 +242,8 @@ func _on_hurtbox_area_entered(hitbox):
 
 
 func _on_player_died():
-	get_tree().change_scene_to_file("res://menus/MainMenu/DeathScreen.tscn")
-	print("player has died")
+	hp += (hp_max/2)
+	game_controller.decrease_lives()
 	
 
 func _on_dmg_timer_timeout():
@@ -348,6 +357,7 @@ func level_up():
 	playerLevelBar.max_value = xp_max
 	playerLevelBar.value = xp
 	print("LEVEL UP!")
+	game_controller.level_text_update(id, level)
 
 	$UpgradeMenu.open(level)
 	

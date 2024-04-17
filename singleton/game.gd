@@ -46,6 +46,7 @@ extends Node
 		upgradeMenu = players1HUD.get_node("P1UpgradeMenu"),
 		itemBar = players1HUD.get_node("P1ItemBar"),
 		items = items_dict.duplicate(),
+		lives = players1HUD.get_node("P1Lives"),
 		active = true,
 	},
 	"2": {
@@ -57,6 +58,7 @@ extends Node
 		upgradeMenu = players2HUD.get_node("P2UpgradeMenu"),
 		itemBar = players2HUD.get_node("P2ItemBar"),
 		items = items_dict.duplicate(),
+		lives = players2HUD.get_node("P2Lives"),
 		active = true,
 	}
 }
@@ -68,10 +70,25 @@ func get_player_list():
 	return players.values().filter(func(player): return player.active) 
 
 func _ready() -> void:
-	for player in players.values():
+	var player_values = players.values()
+	for i in player_values.size():
+		var player = player_values[i]
+		player.playerNode.id = i + 1
 		player.viewport.get_viewport().world_2d = arena.get_world_2d()
 		var remote_transform := RemoteTransform2D.new()
 		remote_transform.remote_path = player.camera.get_path()
 		player.playerNode.add_child(remote_transform)
 		
+func decrease_lives() -> void:
+	lives -= 1
+	
+	
+	players["1"].lives.text = "Lives: " + str(lives)
+	players["2"].lives.text = "    Lives: " + str(lives)
+	if lives == 0:
+		get_tree().change_scene_to_file("res://menus/MainMenu/DeathScreen.tscn")
+		print("player has died")
 		
+func level_text_update(id, level) -> void:
+	var player_id = str(id)
+	players[player_id].levelText.text = "Level: " + str(level)

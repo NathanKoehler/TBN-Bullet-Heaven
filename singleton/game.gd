@@ -88,7 +88,7 @@ func decrease_lives() -> void:
 	
 	
 	players["1"].lives.text = "Lives: " + str(lives)
-	players["2"].lives.text = "    Lives: " + str(lives)
+	players["2"].lives.text = "Lives: " + str(lives)
 	if lives == 0:
 		get_tree().call_deferred("change_scene_to_file", "res://menus/MainMenu/DeathScreen.tscn")
 		print("player has died")

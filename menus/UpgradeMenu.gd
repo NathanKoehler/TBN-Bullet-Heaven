@@ -27,7 +27,7 @@ func _process(delta):
 		paused = 0
 
 func add_item_to_list(item_dict):
-
+	print("adding item to player", player_id)
 	for child in $ItemHBoxContainer.get_children():
 		child.queue_free()
 	
@@ -50,6 +50,7 @@ func selected_upgrade(item):
 	item.value.count = item.value.count + 1
 	game_controller.get_player_prop(player_id, "playerNode").handle_upgrade(item.name, item.value)
 	add_item_to_list(game_controller.get_player_prop(player_id, "items"))
+	print("player ", player_id)
 	player_id = null
 	close()
 

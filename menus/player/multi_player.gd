@@ -23,7 +23,7 @@ var lookY = 0;
 	get:
 		return speed
 @export var currPosition = position
-@export var hp_max = 5 : 
+@export var hp_max = 100: 
 	set(value):
 		if value != hp_max:
 			hp_max = max(0, value)

@@ -94,10 +94,8 @@ layout_mode = 2
 size_flags_horizontal = 6
 
 [node name="P1Lives" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Player1HUD"]
-layout_mode = 0
-offset_left = 400.0
-offset_right = 457.0
-offset_bottom = 40.0
+layout_mode = 2
+size_flags_horizontal = 8
 text = "Lives: 4"
 fit_content = true
 scroll_active = false
@@ -140,7 +138,8 @@ theme_override_constants/margin_bottom = 20
 
 [node name="P2Lives" type="RichTextLabel" parent="Control/HUDMargin/PlayerSeperator/Player2HUD"]
 layout_mode = 2
-text = "	Lives: 4"
+size_flags_horizontal = 8
+text = "Lives: 4"
 fit_content = true
 autowrap_mode = 0
 

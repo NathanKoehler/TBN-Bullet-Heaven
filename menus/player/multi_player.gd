@@ -13,6 +13,9 @@ const DOWN = 1
 var lookX = RIGHT;
 var lookY = 0;
 
+var shootX = RIGHT;
+var shootY = 0
+
 @export var id = -1
 
 @onready var shieldBar = $PlayerShieldBar
@@ -163,7 +166,29 @@ func _physics_process(delta: float) -> void:
 	
 	var horizontal_dir := Input.get_action_strength(controls.move_right) - Input.get_action_strength(controls.move_left)
 	var vertical_dir := Input.get_action_strength(controls.move_down) - Input.get_action_strength(controls.move_up)
+	
+	var horizontal_shoot := Input.get_action_strength(controls.aim_right) - Input.get_action_strength(controls.aim_left)
+	var vertical_shoot := Input.get_action_strength(controls.aim_up) - Input.get_action_strength(controls.aim_down)
+	
+	shootX = horizontal_shoot
+	shootY = vertical_shoot
+	
+	#shooting controls
+	if horizontal_shoot > 0:
+		shootX = RIGHT
+	elif horizontal_shoot < 0:
+		shootX = LEFT
+	elif vertical_shoot != 0:
+		shootX = 0
+		
+	if vertical_shoot > 0:
+		shootY = UP
+	elif vertical_shoot < 0:
+		shootY = DOWN
+	elif horizontal_shoot != 0:
+		shootY = 0
 
+#movement controls
 	if horizontal_dir > 0:
 		lookX = RIGHT
 	elif horizontal_dir < 0:
@@ -267,7 +292,7 @@ func shoot_magic_bullet():
 		get_tree().current_scene.get_node("Control/ArenaSubViewport/Arena").add_child(mb)
 		mb.set_position($".".get_global_position())
 
-		mb.set_rotation(atan2(lookY, lookX))
+		mb.set_rotation(atan2(shootY, shootX))
 
 func _on_magic_bullet_timer_timeout():
 	shoot_magic_bullet()

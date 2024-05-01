@@ -17,6 +17,7 @@ signal died
 
 @onready var shieldBar = $PlayerShieldBar
 @onready var healthBar = $PlayerHealthBar
+
 @export var speed = 100 : 
 	set(value):
 		speed = value 
@@ -134,7 +135,7 @@ var game_controller
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var root = get_tree().root
-	game_controller = root.get_child(root.get_child_count() - 1)  
+	game_controller = root.get_child(root.get_child_count() - 1)
 	
 	if not controls:
 		set_physics_process(false)
@@ -142,7 +143,6 @@ func _ready():
 	rng.randomize()
 	pause_menu.hide()
 
-	
 	add_child(_dmg_timer)
 	_dmg_timer.connect("timeout", Callable(self, "_on_dmg_timer_timeout"))
 	

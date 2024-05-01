@@ -2,13 +2,22 @@ extends Node
 
 @export var lives = 4
 
+@export var singleplayer = false;
+
+@onready var seperator := $Control/HUDMargin/PlayerSeperator
+
 @onready var arena := $Control/ArenaSubViewport/Arena
 
 @onready var players1HUD := $Control/HUDMargin/PlayerSeperator/Player1HUD
 @onready var players1SVP := $Control/MultiplayerSVPContainer/Player1SVPContainer/SubViewport
+@onready var player1SVPC := $Control/MultiplayerSVPContainer/Player1SVPContainer
 
 @onready var players2HUD := $Control/HUDMargin/PlayerSeperator/Player2HUD
 @onready var players2SVP := $Control/MultiplayerSVPContainer/Player2SVPContainer/SubViewport
+@onready var player2SVPC := $Control/MultiplayerSVPContainer/Player2SVPContainer
+
+@onready var player1Shader := "res://menus/player/player1.gdshader"
+@onready var player2Shader := "res://menus/player/player2.gdshader"
 
 @export var items_dict = {
 	"Bone Tooth": {count = 0, texture = load("res://menus/UpgradeItems/Bonetooth.png"), description = "Slightly increases health of the hero"},
@@ -38,7 +47,9 @@ extends Node
 
 @onready var players := {
 	"1": {
+		hud = players1HUD,
 		viewport = players1SVP,
+		vpcontainer = player1SVPC,
 		camera = players1SVP.get_node("Camera2D"),
 		playerNode = arena.get_node("Multiplayer1"),
 		levelText = players1HUD.get_node("P1Level/P1LevelText"),
@@ -46,10 +57,13 @@ extends Node
 		upgradeMenu = players1HUD.get_node("P1UpgradeMenu"),
 		items = items_dict.duplicate(true),
 		lives = players1HUD.get_node("P1Lives"),
+		shader = player1Shader,
 		active = true,
 	},
 	"2": {
+		hud = players2HUD,
 		viewport = players2SVP,
+		vpcontainer = player2SVPC,
 		camera = players2SVP.get_node("Camera2D"),
 		playerNode = arena.get_node("Multiplayer2"),
 		levelText = players2HUD.get_node("P2Level/P2LevelText"),
@@ -57,11 +71,34 @@ extends Node
 		upgradeMenu = players2HUD.get_node("P2UpgradeMenu"),
 		items = items_dict.duplicate(true),
 		lives = players2HUD.get_node("P2Lives"),
+		shader = player2Shader,
 		active = true,
 	}
 }
 
 @onready var enemies := {}
+
+func add_player(num):
+	players[str(num)].active = true
+	players[str(num)].playerNode.process_mode = 0
+	players[str(num)].hud.process_mode = 0
+	players[str(num)].vpcontainer.process_mode = 0
+
+	players[str(num)].playerNode.show()
+	players[str(num)].hud.show()
+	players[str(num)].vpcontainer.show()
+
+
+func remove_player(num):
+	players[str(num)].active = false
+	players[str(num)].playerNode.process_mode = 4
+	players[str(num)].hud.process_mode = 4
+	players[str(num)].vpcontainer.process_mode = 4
+
+	players[str(num)].playerNode.hide()
+	players[str(num)].hud.hide()
+	players[str(num)].vpcontainer.hide()
+	
 
 func get_enemies():
 	return enemies.values()
@@ -84,6 +121,11 @@ func get_player_prop(player_id, prop):
 func set_player_prop(player_id, prop, value):
 	players[str(player_id)][prop] = value
 
+func _input(event):
+	if event is InputEventKey:
+		if event.pressed and event.keycode == KEY_P:
+			singleplayer = true
+
 func _ready() -> void:
 	var player_values = players.values()
 	for i in player_values.size():
@@ -93,6 +135,11 @@ func _ready() -> void:
 		var remote_transform := RemoteTransform2D.new()
 		remote_transform.remote_path = player.camera.get_path()
 		player.playerNode.add_child(remote_transform)
+		player.playerNode.material.shader = load(player.shader)
+
+	if (singleplayer):
+		remove_player(2)
+		seperator.set_process(false)		
 		
 func decrease_lives() -> void:
 	lives -= 1

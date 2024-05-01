@@ -78,7 +78,7 @@ material = SubResource("ShaderMaterial_jjhh4")
 position = Vector2(-1, -5)
 sprite_frames = SubResource("SpriteFrames_x3rfs")
 autoplay = "default"
-frame_progress = 0.180949
+frame_progress = 0.332877
 
 [node name="Hurtbox" type="Area2D" parent="." groups=["enemy"]]
 collision_layer = 4

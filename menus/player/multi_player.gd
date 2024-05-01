@@ -5,13 +5,14 @@ extends CharacterBody2D
 signal hp_changed(new_hp)
 signal died
 
-#const LEFT = -1
-#const RIGHT = 1
-#const UP = -1
-#const DOWN = 1
-#
-#var lookX = RIGHT;
-#var lookY = 0;
+const LEFT = -1
+const RIGHT = 1
+const UP = -1
+const DOWN = 1
+
+
+var shootX = 0
+var shootY = 0
 
 @export var id = -1
 
@@ -163,20 +164,29 @@ func _physics_process(delta: float) -> void:
 	
 	var horizontal_dir := Input.get_action_strength(controls.move_right) - Input.get_action_strength(controls.move_left)
 	var vertical_dir := Input.get_action_strength(controls.move_down) - Input.get_action_strength(controls.move_up)
+	
+	var horizontal_shoot := Input.get_action_strength(controls.aim_right) - Input.get_action_strength(controls.aim_left)
+	var vertical_shoot := Input.get_action_strength(controls.aim_up) - Input.get_action_strength(controls.aim_down)
+	
+	shootX = horizontal_shoot
+	shootY = vertical_shoot
+	
+	#shooting controls
+	if horizontal_shoot > 0:
+		shootX = RIGHT
+	elif horizontal_shoot < 0:
+		shootX = LEFT
+	elif vertical_shoot != 0:
+		shootX = 0
+		
+	if vertical_shoot > 0:
+		shootY = UP
+	elif vertical_shoot < 0:
+		shootY = DOWN
+	elif horizontal_shoot != 0:
+		shootY = 0
 
-	#if horizontal_dir > 0:
-		#lookX = RIGHT
-	#elif horizontal_dir < 0:
-		#lookX = LEFT
-	#elif vertical_dir != 0:
-		#lookX = 0
-		#
-	#if vertical_dir > 0:
-		#lookY = DOWN
-	#elif vertical_dir < 0:
-		#lookY = UP
-	#elif horizontal_dir != 0:
-		#lookY = 0
+#movement controls
 	
 	velocity.x = horizontal_dir * speed
 	velocity.y = vertical_dir * speed
@@ -280,10 +290,12 @@ func shoot_magic_bullet():
 			mb.speed = mod_weapon_speed("Ice Blast", mb.speed)
 			get_tree().current_scene.get_node("Control/ArenaSubViewport/Arena").add_child(mb)
 			mb.set_position(global_position)
-				
-		
-			var lookat_pos = find_closest_enemy().global_position - global_position
-			mb.set_rotation(atan2(lookat_pos.y, lookat_pos.x))
+			
+			if shootY != 0 and shootX != 0:
+				mb.set_rotation(atan2(shootY, shootX))
+			else:
+				var lookat_pos = find_closest_enemy().global_position - global_position
+				mb.set_rotation(atan2(lookat_pos.y, lookat_pos.x))
 
 func _on_magic_bullet_timer_timeout():
 	shoot_magic_bullet()
@@ -319,10 +331,12 @@ func _on_wind_slash_timer_timeout():
 		ws.damage = mod_weapon_damage("Wind Slash", ws)
 		ws.speed = mod_weapon_speed("Wind Slash", ws.speed)
 		ws.set_position(global_position)
+		if shootY != 0 and shootX != 0:
+			ws.set_rotation(atan2(shootY, shootX))
+		else:
+			var lookat_pos = find_closest_enemy().global_position - global_position
+			ws.set_rotation(atan2(lookat_pos.y, lookat_pos.x))
 
-		var lookat_pos = find_closest_enemy().global_position - global_position
-
-		ws.set_rotation(atan2(lookat_pos.y, lookat_pos.x))
 	
 func mod_weapon_damage(name: String, weapon):
 	var new_damage = weapon.damage

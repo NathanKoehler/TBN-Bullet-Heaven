@@ -44,7 +44,7 @@ extends Node
 		levelText = players1HUD.get_node("P1Level/P1LevelText"),
 		levelXPBar = players1HUD.get_node("P1Level/P1LevelXPBar"),
 		upgradeMenu = players1HUD.get_node("P1UpgradeMenu"),
-		items = items_dict.duplicate(),
+		items = items_dict.duplicate(true),
 		lives = players1HUD.get_node("P1Lives"),
 		active = true,
 	},
@@ -55,11 +55,22 @@ extends Node
 		levelText = players2HUD.get_node("P2Level/P2LevelText"),
 		levelXPBar = players2HUD.get_node("P2Level/P2LevelXPBar"),
 		upgradeMenu = players2HUD.get_node("P2UpgradeMenu"),
-		items = items_dict.duplicate(),
+		items = items_dict.duplicate(true),
 		lives = players2HUD.get_node("P2Lives"),
 		active = true,
 	}
 }
+
+@onready var enemies := {}
+
+func get_enemies():
+	return enemies.values()
+
+func add_enemy(enemy_id, enemy):
+	enemies[enemy_id] = enemy
+
+func remove_enemy(enemy_id):
+	enemies.erase(enemy_id)
 
 func get_arena():
 	return arena

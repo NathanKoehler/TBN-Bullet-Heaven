@@ -5,13 +5,13 @@ extends CharacterBody2D
 signal hp_changed(new_hp)
 signal died
 
-const LEFT = -1
-const RIGHT = 1
-const UP = -1
-const DOWN = 1
-
-var lookX = RIGHT;
-var lookY = 0;
+#const LEFT = -1
+#const RIGHT = 1
+#const UP = -1
+#const DOWN = 1
+#
+#var lookX = RIGHT;
+#var lookY = 0;
 
 @export var id = -1
 
@@ -164,19 +164,19 @@ func _physics_process(delta: float) -> void:
 	var horizontal_dir := Input.get_action_strength(controls.move_right) - Input.get_action_strength(controls.move_left)
 	var vertical_dir := Input.get_action_strength(controls.move_down) - Input.get_action_strength(controls.move_up)
 
-	if horizontal_dir > 0:
-		lookX = RIGHT
-	elif horizontal_dir < 0:
-		lookX = LEFT
-	elif vertical_dir != 0:
-		lookX = 0
-		
-	if vertical_dir > 0:
-		lookY = DOWN
-	elif vertical_dir < 0:
-		lookY = UP
-	elif horizontal_dir != 0:
-		lookY = 0
+	#if horizontal_dir > 0:
+		#lookX = RIGHT
+	#elif horizontal_dir < 0:
+		#lookX = LEFT
+	#elif vertical_dir != 0:
+		#lookX = 0
+		#
+	#if vertical_dir > 0:
+		#lookY = DOWN
+	#elif vertical_dir < 0:
+		#lookY = UP
+	#elif horizontal_dir != 0:
+		#lookY = 0
 	
 	velocity.x = horizontal_dir * speed
 	velocity.y = vertical_dir * speed
@@ -257,17 +257,33 @@ func _on_shield_timer_timeout():
 	else:
 		_shield_timer.stop()
 
+func find_closest_enemy():
+	var enemy_array = game_controller.get_enemies()
+	var closest_enemy = null
+	var closest_distance = INF
+	for enemy in enemy_array:
+		var distance = global_position.distance_to(enemy.global_position)
+		if distance < closest_distance:
+			closest_enemy = enemy
+			closest_distance = distance
+	return closest_enemy
+
 # spell functions
 func shoot_magic_bullet():
 	if magic_bullet:
-		var mb = magic_bullet.instantiate()
+		var nearest_enemy = find_closest_enemy()
 		
-		mb.damage = mod_weapon_damage("Ice Blast", mb)
-		mb.speed = mod_weapon_speed("Ice Blast", mb.speed)
-		get_tree().current_scene.get_node("Control/ArenaSubViewport/Arena").add_child(mb)
-		mb.set_position($".".get_global_position())
-
-		mb.set_rotation(atan2(lookY, lookX))
+		if nearest_enemy:
+			var mb = magic_bullet.instantiate()
+			
+			mb.damage = mod_weapon_damage("Ice Blast", mb)
+			mb.speed = mod_weapon_speed("Ice Blast", mb.speed)
+			get_tree().current_scene.get_node("Control/ArenaSubViewport/Arena").add_child(mb)
+			mb.set_position(global_position)
+				
+		
+			var lookat_pos = find_closest_enemy().global_position - global_position
+			mb.set_rotation(atan2(lookat_pos.y, lookat_pos.x))
 
 func _on_magic_bullet_timer_timeout():
 	shoot_magic_bullet()
@@ -275,8 +291,8 @@ func _on_magic_bullet_timer_timeout():
 func spawn_effect(EFFECT: PackedScene, effect_pos: Vector2 = global_position):
 	if EFFECT:
 		var effect = EFFECT.instantiate()
-		get_tree().current_scene.add_child(effect)
-		effect.global_position = effect_pos
+		get_tree().current_scene.get_node("Control/ArenaSubViewport/Arena").add_child(effect)
+		effect.set_position(effect_pos)
 
 func shoot_lightning(enemy_array):
 	if lightning:
@@ -284,8 +300,8 @@ func shoot_lightning(enemy_array):
 			if enemy.get_node("notifier") != null and enemy.get_node("notifier").is_on_screen():
 				var bolt = lightning.instantiate()
 				bolt.damage = mod_weapon_damage("Lightning", bolt)
-				get_tree().current_scene.add_child(bolt)
-				bolt.global_position = enemy.global_position
+				get_tree().current_scene.get_node("Control/ArenaSubViewport/Arena").add_child(bolt)
+				bolt.set_position(enemy.get_global_position())
 				break
 
 func _on_lightning_timer_timeout():
@@ -298,16 +314,15 @@ func _on_wind_slash_timer_timeout():
 	if windslash_enabled:
 		print("enabled")
 		var ws = wind_slash.instantiate()
-		get_tree().current_scene.add_child(ws)
+		get_tree().current_scene.get_node("Control/ArenaSubViewport/Arena").add_child(ws)
 		#add_child(mb)
 		ws.damage = mod_weapon_damage("Wind Slash", ws)
 		ws.speed = mod_weapon_speed("Wind Slash", ws.speed)
-		ws.position = $ShotPosition/Marker2d.global_position
-		
-		
-		var ws_rotation = $ShotPosition.global_position.direction_to(get_global_mouse_position()).angle()
-		ws.rotation = ws_rotation
-		ws.look_at(get_global_mouse_position())
+		ws.set_position(global_position)
+
+		var lookat_pos = find_closest_enemy().global_position - global_position
+
+		ws.set_rotation(atan2(lookat_pos.y, lookat_pos.x))
 	
 func mod_weapon_damage(name: String, weapon):
 	var new_damage = weapon.damage

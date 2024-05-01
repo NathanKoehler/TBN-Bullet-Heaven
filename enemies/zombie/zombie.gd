@@ -15,7 +15,5 @@ func _ready():
 	for key in enemy_properties:
 		self[key] = enemy_properties[key]
 
-	print(effect_hit)
-	print(effect_death)
 
 	super()

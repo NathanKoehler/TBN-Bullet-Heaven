@@ -28,12 +28,14 @@ var player_list
 func _ready():
 	var root = get_tree().root
 	game_controller = root.get_child(root.get_child_count() - 1)
+	game_controller.add_enemy(get_instance_id(), self)
 	player_list = game_controller.get_player_list()
 
 func die():
 	drop_xp()
 	spawn_effect(effect_death)
 	queue_free()
+	game_controller.remove_enemy(get_instance_id())
 
 func _process(_delta):
 	if game_controller.lives > 0:

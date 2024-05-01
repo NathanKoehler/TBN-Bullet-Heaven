@@ -57,10 +57,8 @@ func selected_upgrade(item):
 func _on_item_1_pressed():
 	selected_upgrade(offered[0])
 
-
 func _on_item_2_pressed():
 	selected_upgrade(offered[1])
-	
 
 func _on_item_3_pressed():
 	selected_upgrade(offered[2])
@@ -95,11 +93,9 @@ func open(playerId, level):
 	var item_key_list = game_controller.items_dict.keys()
 	for num in rand_dict:
 		var item = game_controller.items_dict[item_key_list[num]]
-		offered.append({ "name": item_key_list[num], "value": game_controller.get_player_prop(player_id, "items")[item_key_list[num]] })
+		offered.append({"name": item_key_list[num], "value": game_controller.get_player_prop(player_id, "items")[item_key_list[num]] })
 		var ui_item = $HBoxContainer/Items.get_child(loaded)
 		ui_item.get_child(0).texture = item["texture"]
 		ui_item.get_child(1).get_child(0).text = item_key_list[num]
 		ui_item.get_child(1).get_child(1).text = item["description"]
 		loaded += 1
-
-	

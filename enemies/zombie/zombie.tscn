@@ -8,7 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://dih8es6v3mjy5" path="res://enemies/zombie/big_zombie_run_anim_f3.png" id="6_1rhpg"]
 [ext_resource type="PackedScene" uid="uid://dklg66lqw2ckt" path="res://Hitbox.tscn" id="6_wb6ao"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_764s6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jjhh4"]
+resource_local_to_scene = true
 shader = ExtResource("1_qr4xr")
 shader_parameter/hit_opacity = 0.0
 
@@ -73,10 +74,11 @@ script = ExtResource("1_h5y5c")
 metadata/_edit_horizontal_guides_ = [-47.0]
 
 [node name="AnimatedSprite2d" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_764s6")
+material = SubResource("ShaderMaterial_jjhh4")
 position = Vector2(-1, -5)
 sprite_frames = SubResource("SpriteFrames_x3rfs")
 autoplay = "default"
+frame_progress = 0.180949
 
 [node name="Hurtbox" type="Area2D" parent="." groups=["enemy"]]
 collision_layer = 4

@@ -13,6 +13,7 @@ const DOWN = 1
 
 var shootX = 0
 var shootY = 0
+var is_using_controller = false
 
 @export var id = -1
 
@@ -172,6 +173,13 @@ func _physics_process(delta: float) -> void:
 	shootY = vertical_shoot
 	
 	#shooting controls
+	if not is_using_controller:
+		if horizontal_shoot != 0 and vertical_shoot != 0:
+			is_using_controller = true
+	else:
+		if horizontal_shoot == 0 and vertical_shoot == 0:
+			is_using_controller = false
+
 	if horizontal_shoot > 0:
 		shootX = RIGHT
 	elif horizontal_shoot < 0:
@@ -291,7 +299,7 @@ func shoot_magic_bullet():
 			get_tree().current_scene.get_node("Control/ArenaSubViewport/Arena").add_child(mb)
 			mb.set_position(global_position)
 			
-			if shootY != 0 and shootX != 0:
+			if is_using_controller:
 				mb.set_rotation(atan2(shootY, shootX))
 			else:
 				var lookat_pos = find_closest_enemy().global_position - global_position
@@ -331,7 +339,7 @@ func _on_wind_slash_timer_timeout():
 		ws.damage = mod_weapon_damage("Wind Slash", ws)
 		ws.speed = mod_weapon_speed("Wind Slash", ws.speed)
 		ws.set_position(global_position)
-		if shootY != 0 and shootX != 0:
+		if is_using_controller:
 			ws.set_rotation(atan2(shootY, shootX))
 		else:
 			var lookat_pos = find_closest_enemy().global_position - global_position

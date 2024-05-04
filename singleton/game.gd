@@ -121,10 +121,13 @@ func get_player_prop(player_id, prop):
 func set_player_prop(player_id, prop, value):
 	players[str(player_id)][prop] = value
 
-func _input(event):
-	if event is InputEventKey:
-		if event.pressed and event.keycode == KEY_P:
-			singleplayer = true
+func _process(_delta):
+	if Input.is_key_pressed(KEY_P):
+		singleplayer = true
+	
+	if (singleplayer):
+		remove_player(2)
+		seperator.set_process(false)		
 
 func _ready() -> void:
 	var player_values = players.values()
@@ -137,9 +140,7 @@ func _ready() -> void:
 		player.playerNode.add_child(remote_transform)
 		player.playerNode.material.shader = load(player.shader)
 
-	if (singleplayer):
-		remove_player(2)
-		seperator.set_process(false)		
+	
 		
 func decrease_lives() -> void:
 	lives -= 1

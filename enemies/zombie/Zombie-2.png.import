@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b87a38sikan5"
-path="res://.godot/imported/big_zombie_run_anim_f1.png-1e3069ea0418e526fe8bcb3ac067ffa1.ctex"
+uid="uid://bpc1rmhswywar"
+path="res://.godot/imported/Zombie-2.png-22d39e928c7e8443563c12db82f007ef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemies/zombie/big_zombie_run_anim_f1.png"
-dest_files=["res://.godot/imported/big_zombie_run_anim_f1.png-1e3069ea0418e526fe8bcb3ac067ffa1.ctex"]
+source_file="res://enemies/zombie/Zombie-2.png"
+dest_files=["res://.godot/imported/Zombie-2.png-22d39e928c7e8443563c12db82f007ef.ctex"]
 
 [params]
 

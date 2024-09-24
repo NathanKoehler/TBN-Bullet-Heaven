@@ -52,6 +52,15 @@ func _process(_delta):
 		if closest_player_index != -1:	
 			var closest_player_position = player_list[closest_player_index]["playerNode"].get_global_position()
 			position += (closest_player_position - position).normalized() * speed
+			
+			if (closest_player_position[0] > position[0]):
+				if (!$AnimatedSprite2d.is_flipped_h()):
+					$AnimatedSprite2d.set_flip_h(true);
+			else:
+				if ($AnimatedSprite2d.is_flipped_h()):
+					$AnimatedSprite2d.set_flip_h(false);
+				
+			
 
 func receive_damage(base_damage):
 	hitflash.play("hitflash")

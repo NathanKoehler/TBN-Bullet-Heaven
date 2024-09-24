@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cskry3n62bl0k"
-path="res://.godot/imported/skelet_run_anim_f3.png-6e3fba523606d09354bfd7ad6f512a7a.ctex"
+uid="uid://l034w2gxkw3t"
+path="res://.godot/imported/Zombie-3.png-60ed43fd7a0fb0be2d87c1cd4fd59d35.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemies/skeleton/skelet_run_anim_f3.png"
-dest_files=["res://.godot/imported/skelet_run_anim_f3.png-6e3fba523606d09354bfd7ad6f512a7a.ctex"]
+source_file="res://enemies/zombie/Zombie-3.png"
+dest_files=["res://.godot/imported/Zombie-3.png-60ed43fd7a0fb0be2d87c1cd4fd59d35.ctex"]
 
 [params]
 

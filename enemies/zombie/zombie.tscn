@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://enemies/zombie/zombie.gd" id="1_h5y5c"]
 [ext_resource type="Shader" path="res://enemies/zombie/zombie.gdshader" id="1_qr4xr"]
-[ext_resource type="Texture2D" uid="uid://cevxfgswdfxk4" path="res://enemies/zombie/big_zombie_run_anim_f0.png" id="3_5i22f"]
-[ext_resource type="Texture2D" uid="uid://b87a38sikan5" path="res://enemies/zombie/big_zombie_run_anim_f1.png" id="4_je76c"]
-[ext_resource type="Texture2D" uid="uid://ck0ptfr5j4qxf" path="res://enemies/zombie/big_zombie_run_anim_f2.png" id="5_y7qjr"]
-[ext_resource type="Texture2D" uid="uid://dih8es6v3mjy5" path="res://enemies/zombie/big_zombie_run_anim_f3.png" id="6_1rhpg"]
+[ext_resource type="Texture2D" uid="uid://bbsjrrujbmico" path="res://enemies/zombie/Zombie-1.png" id="3_1vggw"]
+[ext_resource type="Texture2D" uid="uid://bpc1rmhswywar" path="res://enemies/zombie/Zombie-2.png" id="4_3q7co"]
+[ext_resource type="Texture2D" uid="uid://l034w2gxkw3t" path="res://enemies/zombie/Zombie-3.png" id="5_xov0r"]
+[ext_resource type="Texture2D" uid="uid://bkkwjpg2ndbe1" path="res://enemies/zombie/Zombie-4.png" id="6_ohawe"]
 [ext_resource type="PackedScene" uid="uid://dklg66lqw2ckt" path="res://Hitbox.tscn" id="6_wb6ao"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jjhh4"]
@@ -17,16 +17,16 @@ shader_parameter/hit_opacity = 0.0
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_5i22f")
+"texture": ExtResource("3_1vggw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_je76c")
+"texture": ExtResource("4_3q7co")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_y7qjr")
+"texture": ExtResource("5_xov0r")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_1rhpg")
+"texture": ExtResource("6_ohawe")
 }],
 "loop": true,
 "name": &"default",
@@ -78,7 +78,8 @@ material = SubResource("ShaderMaterial_jjhh4")
 position = Vector2(-1, -5)
 sprite_frames = SubResource("SpriteFrames_x3rfs")
 autoplay = "default"
-frame_progress = 0.332877
+frame = 3
+frame_progress = 0.705324
 
 [node name="Hurtbox" type="Area2D" parent="." groups=["enemy"]]
 collision_layer = 4

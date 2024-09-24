@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_r2msa"]
 [ext_resource type="Shader" path="res://enemies/enemy.gdshader" id="2_madkr"]
-[ext_resource type="Texture2D" uid="uid://da05rodc622k8" path="res://enemies/skeleton/skelet_run_anim_f0.png" id="3_6sb2h"]
-[ext_resource type="Texture2D" uid="uid://5hfqbq5cm5bp" path="res://enemies/skeleton/skelet_run_anim_f1.png" id="4_lfs4o"]
-[ext_resource type="Texture2D" uid="uid://bifxpjxfcpk0e" path="res://enemies/skeleton/skelet_run_anim_f2.png" id="5_plaad"]
-[ext_resource type="Texture2D" uid="uid://cskry3n62bl0k" path="res://enemies/skeleton/skelet_run_anim_f3.png" id="6_2i5in"]
+[ext_resource type="Texture2D" uid="uid://dyh2riwfo8u8" path="res://enemies/skeleton/Skeleton-1.png" id="3_fkke3"]
+[ext_resource type="Texture2D" uid="uid://q0cadc7xq40b" path="res://enemies/skeleton/Skeleton-2.png" id="4_s50gg"]
+[ext_resource type="Texture2D" uid="uid://bew7e2krty8sh" path="res://enemies/skeleton/Skeleton-3.png" id="5_ii51q"]
+[ext_resource type="Texture2D" uid="uid://blfjv7t72ve46" path="res://enemies/skeleton/Skeleton-4.png" id="6_gxcae"]
 [ext_resource type="PackedScene" uid="uid://dklg66lqw2ckt" path="res://Hitbox.tscn" id="6_tml30"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b580u"]
@@ -17,16 +17,16 @@ shader_parameter/hit_opacity = 0.0
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_6sb2h")
+"texture": ExtResource("3_fkke3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_lfs4o")
+"texture": ExtResource("4_s50gg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_plaad")
+"texture": ExtResource("5_ii51q")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_2i5in")
+"texture": ExtResource("6_gxcae")
 }],
 "loop": true,
 "name": &"default",
@@ -79,7 +79,8 @@ speed = 0.75
 material = SubResource("ShaderMaterial_b580u")
 sprite_frames = SubResource("SpriteFrames_8sg2w")
 autoplay = "default"
-frame_progress = 0.12223
+frame = 1
+frame_progress = 0.242601
 
 [node name="Hurtbox" type="Area2D" parent="." groups=["enemy"]]
 collision_layer = 4

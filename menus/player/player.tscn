@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dih2x81ekfxh8"]
+[gd_scene load_steps=17 format=3 uid="uid://dih2x81ekfxh8"]
 
 [ext_resource type="Script" path="res://menus/player/multi_player.gd" id="1_qsny1"]
 [ext_resource type="Texture2D" uid="uid://dvf6k75rnnfve" path="res://menus/player/player_sprites/wizzard_f_run_anim_f0.png" id="2_j2e52"]
@@ -8,9 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://s58lmw02rvoq" path="res://UI/healthbar/player/PlayerHealthBar.tscn" id="6_ltucd"]
 [ext_resource type="PackedScene" uid="uid://1p2fjq8tpo64" path="res://UI/PauseMenu/PauseMenu.tscn" id="7_sa7uw"]
 [ext_resource type="PackedScene" uid="uid://dqmeotsgpmaq5" path="res://menus/UpgradeMenu.tscn" id="8_wdxye"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_66c8a"]
-resource_local_to_scene = true
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bgnfc"]
 animations = [{
@@ -58,13 +55,11 @@ font = SubResource("SystemFont_htapy")
 font_size = 8
 
 [node name="Player" type="CharacterBody2D"]
-material = SubResource("ShaderMaterial_66c8a")
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_qsny1")
 
 [node name="AnimatedSprite2d" type="AnimatedSprite2D" parent="."]
-use_parent_material = true
 sprite_frames = SubResource("SpriteFrames_bgnfc")
 autoplay = "default"
 

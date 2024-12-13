@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dih2x81ekfxh8"]
+[gd_scene load_steps=16 format=3 uid="uid://dih2x81ekfxh8"]
 
 [ext_resource type="Script" path="res://menus/player/multi_player.gd" id="1_qsny1"]
 [ext_resource type="Texture2D" uid="uid://dvf6k75rnnfve" path="res://menus/player/player_sprites/wizzard_f_run_anim_f0.png" id="2_j2e52"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://b5a614v0wevk1" path="res://menus/player/player_sprites/wizzard_f_run_anim_f2.png" id="4_2gkfx"]
 [ext_resource type="Texture2D" uid="uid://dgy5gca8kok2m" path="res://menus/player/player_sprites/wizzard_f_run_anim_f3.png" id="5_nw6x2"]
 [ext_resource type="PackedScene" uid="uid://s58lmw02rvoq" path="res://UI/healthbar/player/PlayerHealthBar.tscn" id="6_ltucd"]
-[ext_resource type="PackedScene" uid="uid://1p2fjq8tpo64" path="res://UI/PauseMenu/PauseMenu.tscn" id="7_sa7uw"]
 [ext_resource type="PackedScene" uid="uid://dqmeotsgpmaq5" path="res://menus/UpgradeMenu.tscn" id="8_wdxye"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bgnfc"]
@@ -134,15 +133,6 @@ offset_bottom = 2.0
 text = "1"
 label_settings = SubResource("LabelSettings_ljhii")
 horizontal_alignment = 1
-
-[node name="PauseMenu" parent="." instance=ExtResource("7_sa7uw")]
-process_mode = 3
-visible = false
-offset_left = -198.0
-offset_top = -111.0
-offset_right = 2.0
-offset_bottom = 9.0
-scale = Vector2(2, 2)
 
 [node name="UpgradeMenu" parent="." instance=ExtResource("8_wdxye")]
 visible = false

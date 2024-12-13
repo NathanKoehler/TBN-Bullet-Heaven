@@ -9,6 +9,7 @@ class_name Enemy
 @export var speed = .5
 @export var receives_knockback = true
 @export var knockback_modifier = 1
+@export var notifier: VisibleOnScreenNotifier2D
 
 #Scene references
 @export var effect_hit = preload ("res://effects/hit_effect.tscn")

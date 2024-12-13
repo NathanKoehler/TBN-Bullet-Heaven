@@ -1,12 +1,12 @@
 extends Node
+class_name MasterGame
 
 @export var lives = 4
-
-@export var singleplayer = false;
 
 @onready var seperator := $Control/HUDMargin/PlayerSeperator
 
 @onready var arena := $Control/ArenaSubViewport/Arena
+@onready var pausemenu := $Control/PauseMenu
 
 @onready var players1HUD := $Control/HUDMargin/PlayerSeperator/Player1HUD
 @onready var players1SVP := $Control/MultiplayerSVPContainer/Player1SVPContainer/SubViewport
@@ -18,6 +18,9 @@ extends Node
 
 @onready var player1Shader := "res://menus/player/player1.gdshader"
 @onready var player2Shader := "res://menus/player/player2.gdshader"
+
+
+static var singleplayer = false;
 
 @export var items_dict = {
 	"Bone Tooth": {count = 0, texture = load("res://menus/UpgradeItems/Bonetooth.png"), description = "Slightly increases health of the hero"},
@@ -122,14 +125,16 @@ func set_player_prop(player_id, prop, value):
 	players[str(player_id)][prop] = value
 
 func _process(_delta):
-	if Input.is_key_pressed(KEY_P):
-		singleplayer = true
+	pass
+	
+
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	
 	if (singleplayer):
 		remove_player(2)
 		seperator.set_process(false)		
-
-func _ready() -> void:
+	
 	var player_values = players.values()
 	for i in player_values.size():
 		var player = player_values[i]
@@ -140,7 +145,12 @@ func _ready() -> void:
 		player.playerNode.add_child(remote_transform)
 		player.playerNode.material.shader = load(player.shader)
 
-	
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_cancel"):
+		if PauseMenu.paused:
+			pausemenu.unpause()
+		else:
+			pausemenu.pause()
 		
 func decrease_lives() -> void:
 	lives -= 1

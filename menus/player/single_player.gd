@@ -115,12 +115,10 @@ var windslash_enabled = false
 @export var wind_slash = preload("res://menus/player/player_spells/wind_slash/wind_slash.tscn")
 
 # Node references
-@onready var pause_menu = $PauseMenu
 @onready var upgrade_menu = $UpgradeMenu
 
 # general vars
 var rng = RandomNumberGenerator.new()
-var is_paused = false
 
 var _dmg_timer := Timer.new()
 var _shield_timer := Timer.new()
@@ -131,7 +129,6 @@ func _ready():
 		set_physics_process(false)
 	
 	rng.randomize()
-	pause_menu.hide()
 	
 	for item in item_array:
 		item_dict[item.name] = item
@@ -159,14 +156,6 @@ func _physics_process(delta: float) -> void:
 
 	velocity.x = horizontal_dir * speed
 	velocity.y = vertical_dir * speed
-		
-	if Input.is_key_pressed(KEY_ESCAPE): #Controls the pause menu
-		if is_paused == false:
-			is_paused = true
-			pause_menu.pause()
-		else:
-			is_paused = false
-			pause_menu.unpause()
 	
 	
 	
@@ -424,7 +413,3 @@ func _on_upgrade_menu_upgrade(item):
 			lifesteal_chance += 10
 		_:
 			hp -= 2
-
-
-
-

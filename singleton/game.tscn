@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bm6i76d5ro807"]
+[gd_scene load_steps=10 format=3 uid="uid://bm6i76d5ro807"]
 
 [ext_resource type="Script" path="res://singleton/game.gd" id="1_gxq1j"]
 [ext_resource type="PackedScene" uid="uid://dtsrhhlwucwp3" path="res://level/bullethaven.tscn" id="1_ln1ln"]
 [ext_resource type="PackedScene" uid="uid://s58lmw02rvoq" path="res://UI/healthbar/player/PlayerHealthBar.tscn" id="3_w37tk"]
+[ext_resource type="PackedScene" uid="uid://1p2fjq8tpo64" path="res://UI/PauseMenu/PauseMenu.tscn" id="4_il5e7"]
 [ext_resource type="PackedScene" uid="uid://dqmeotsgpmaq5" path="res://menus/UpgradeMenu.tscn" id="4_unqgj"]
 
 [sub_resource type="Gradient" id="Gradient_6j68d"]
@@ -171,6 +172,14 @@ texture_progress = SubResource("GradientTexture1D_fevro")
 
 [node name="P2UpgradeMenu" parent="Control/HUDMargin/PlayerSeperator/Player2HUD" instance=ExtResource("4_unqgj")]
 layout_mode = 2
+
+[node name="PauseMenu" parent="Control" instance=ExtResource("4_il5e7")]
+process_mode = 3
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 
 [node name="ArenaSubViewport" type="SubViewport" parent="Control"]
 

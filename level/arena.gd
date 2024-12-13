@@ -14,6 +14,8 @@ const y_spawn_distance = 600
 
 
 func _ready():
+	process_mode = Node.PROCESS_MODE_PAUSABLE
+	
 	rng.randomize()
 	player = get_node("Multiplayer1")
 

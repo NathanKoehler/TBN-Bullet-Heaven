@@ -58,6 +58,6 @@ layout_mode = 2
 theme = ExtResource("3_ijuet")
 text = "Quit"
 
-[connection signal="pressed" from="VBoxContainer/RestartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Menu" to="." method="_on_menu_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

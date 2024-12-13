@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var controls: Resource = null
 
+
 signal hp_changed(new_hp)
 signal died
 
@@ -121,12 +122,10 @@ var windslash_enabled = false
 @export var wind_slash = preload("res://menus/player/player_spells/wind_slash/wind_slash.tscn")
 
 # Node references
-@onready var pause_menu = $PauseMenu
 @onready var upgrade_menu = $UpgradeMenu
 
 # general vars
 var rng = RandomNumberGenerator.new()
-var is_paused = false
 
 var _dmg_timer := Timer.new()
 var _shield_timer := Timer.new()
@@ -143,7 +142,6 @@ func _ready():
 		set_physics_process(false)
 	
 	rng.randomize()
-	pause_menu.hide()
 
 	add_child(_dmg_timer)
 	_dmg_timer.connect("timeout", Callable(self, "_on_dmg_timer_timeout"))
@@ -198,16 +196,6 @@ func _physics_process(delta: float) -> void:
 	
 	velocity.x = horizontal_dir * speed
 	velocity.y = vertical_dir * speed
-		
-	if Input.is_key_pressed(KEY_ESCAPE): #Controls the pause menu
-		if is_paused == false:
-			is_paused = true
-			pause_menu.pause()
-		else:
-			is_paused = false
-			pause_menu.unpause()
-	
-	
 	
 	velocity.normalized()
 	move_and_slide()
@@ -317,7 +305,7 @@ func spawn_effect(EFFECT: PackedScene, effect_pos: Vector2 = global_position):
 func shoot_lightning(enemy_array):
 	if lightning:
 		for enemy in enemy_array:
-			if enemy.get_node("notifier") != null and enemy.get_node("notifier").is_on_screen():
+			if enemy.notifier != null and enemy.notifier.is_on_screen():
 				var bolt = lightning.instantiate()
 				bolt.damage = mod_weapon_damage("Lightning", bolt)
 				get_tree().current_scene.get_node("Control/ArenaSubViewport/Arena").add_child(bolt)
@@ -485,7 +473,3 @@ func handle_upgrade(name, item):
 			lifesteal_chance += 10
 		_:
 			hp -= 2
-
-
-
-
